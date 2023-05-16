@@ -1,2 +1,6 @@
 import Navbar from "./Navbar.jsx";
-export {Navbar}
+import Posts from "./Posts.jsx";
+import Footer from "./Footer.jsx";
+import PostContent from "./PostContent.jsx";
+
+export {Navbar, Posts, Footer, PostContent}

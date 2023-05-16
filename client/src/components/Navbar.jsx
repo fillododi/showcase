@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom"
 import {logo, menu, close} from "../assets/index.js"
 
 const Navbar = () => {
@@ -6,10 +7,10 @@ const Navbar = () => {
 
     const handleToggleMenu = ()=> setShowMenu(!showMenu)
 
-    return <div className='w-screen h-[80px] z-10 bg-white fixed drop-shadow-lg'>
+    return <div className='w-full h-[80px] z-10 bg-white fixed drop-shadow-lg relative'>
         <div className='flex justify-between items-center w-full h-full md:max-w-[1240px] m-auto'>
             <div className='flex items-center'>
-                <img src={logo} alt='logo' className='sm:ml-10 ss:ml-10 md:ml-3 opacity-[55%] w-full h-[25px]'/> {/*TODO: REPLACE*/}
+                <Link to={'/'}><img src={logo} alt='logo' className='sm:ml-10 ss:ml-10 md:ml-3 opacity-[55%] w-full h-[25px]'/></Link>
             </div>
             <div className='flex items-center'>
                 <ul className='hidden md:flex'>
