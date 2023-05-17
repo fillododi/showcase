@@ -1,5 +1,5 @@
 import {Routes, Route} from "react-router-dom";
-import {Homepage, PostContentPage} from "./pages/index.js";
+import {Homepage, PostContentPage, BookPage} from "./pages/index.js";
 import useFetch from './hooks/useFetch'
 
 export default function App() {
@@ -10,5 +10,6 @@ export default function App() {
     return <Routes>
         <Route path='/' element={<Homepage posts={data? data: ""}/>}></Route>
         <Route path='/post/:id' element={<PostContentPage posts={data? data: ""}/>}></Route>
+        <Route path='/book' element={<BookPage/>}></Route>
     </Routes>
 }

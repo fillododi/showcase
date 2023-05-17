@@ -14,10 +14,10 @@ const Navbar = () => {
             </div>
             <div className='flex items-center'>
                 <ul className='hidden md:flex'>
-                    <li>Home</li>
-                    <li>Chi Siamo</li>
-                    <li>Contattaci</li>
-                    <li>Prezzi</li>
+                    <Link to={'/'}><li>Home</li></Link>
+                    <Link to={'/book'}><li>Prenota il tuo Video</li></Link>
+                    <li>Galleria</li>
+                    <li>Shop</li>
                 </ul>
             </div>
 
