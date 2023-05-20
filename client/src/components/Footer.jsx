@@ -1,6 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom"
-import {FaFacebook, FaInstagram, FaYoutube, FaTiktok} from "react-icons/fa";
+import {FaFacebook, FaInstagram, FaYoutube, FaTiktok, FaWhatsapp} from "react-icons/fa";
 import {iacodr, moonriver, msc, odon, passidj, poke_experience, scugnizzi} from '../assets'
 
 const Footer = () => {
@@ -73,6 +73,7 @@ const Footer = () => {
             <div className='flex justify-between sm:w-[300px] pt-4 text-2xl gap-2'>
                 <Link to={'https://www.facebook.com/profile.php?id=100090278966698'}><FaFacebook/></Link>
                 <Link to={'https://instagram.com/showcasemantova?igshid=MzRlODBiNWFlZA=='}><FaInstagram/></Link>
+                <Link to={'https://wa.me/message/M4W72FLVTQYLN1'}><FaWhatsapp/></Link>
                 <Link to={'https://www.tiktok.com/@showcasemantova?_t=8cMnmadxlmd&_r=1'}><FaTiktok/></Link>
                 <Link to={'https://youtube.com/@ShowCaseMantova'}><FaYoutube/></Link>
             </div>
