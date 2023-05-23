@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "prenotazioni",
+  "info": {
+    "singularName": "prenotazione",
+    "pluralName": "prenotazioni",
+    "displayName": "Prenotazioni"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "email": {
+      "type": "email"
+    },
+    "inizio": {
+      "type": "datetime"
+    },
+    "descrizione": {
+      "type": "text"
+    },
+    "fine": {
+      "type": "datetime"
+    },
+    "accettata": {
+      "type": "boolean"
+    }
+  }
+}
