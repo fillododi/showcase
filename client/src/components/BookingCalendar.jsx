@@ -1,4 +1,7 @@
 import React, {useState, useEffect} from "react";
+import FullCalendar from "@fullcalendar/react"
+import dayGridPlugin from "@fullcalendar/daygrid"
+
 import useFetch from "../hooks/useFetch";
 const BookingCalendar = () => {
     const [selectedDate, setSelectedDate] = useState('')
@@ -100,56 +103,42 @@ const BookingCalendar = () => {
 
     return <div className='container mx-auto p-4'>
         <h2 className='text-2x1 font-bold mb-4'>Calendario</h2>
-        <div className='flex mb-4'>
-            <div className='mr-4'>
+        <div className='grid grid-cols-7 gap-4 mb-4'>
+            <div>
                 <label className='font-bold'>Data:</label>
                 <input className='block border border-gray-300 p-2 rounded' type="date" value={selectedDate} onChange={handleDateChange}/>
             </div>
-            <div className='mr-4'>
+            <div>
                 <label className='font-bold'>Inizio:</label>
                 <input className='block border border-gray-300 p-2 rounded' type="time" value={startTime} onChange={handleStartTimeChange}/>
             </div>
-            <div className='mr-4'>
+            <div>
                 <label className='font-bold'>Fine:</label>
                 <input className='block border border-gray-300 p-2 rounded' type="time" value={endTime} onChange={handleEndTimeChange}/>
             </div>
-            <div className='mr-4'>
+            <div>
                 <label className='font-bold'>E-Mail:</label>
                 <input className='block border border-gray-300 p-2 rounded' type="email" value={email} onChange={handleEmailChange}/>
             </div>
-            <div className='mr-4'>
+            <div>
                 <label className='font-bold'>Descrizione:</label>
                 <input className='block border border-gray-300 p-2 rounded' type="text" value={description} onChange={handleDescriptionChange}/>
             </div>
         </div>
         <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={handleBookingCreation}>Prenota</button>
-        <div className='grid grid-cols-1 gap-4'>
-            {week?
-                week.map(day=>{
-                    return <div className='mt-8' key={day[0]}>
-                        <div className='font-bold mb-2'>{day[0].toLocaleDateString()}</div>
-                        <div className='grid grid-cols-2 gap-2'>
-                            <div className='font-bold'>Orario</div>
-                            <div className='font-bold'>Prenotazione</div>
-                            {[...Array(24)].map((_, index)=>{
-                                const time = index.toLocaleString().padStart(2, '0' + ':00')
-                                const booking = day[1].find(
-                                    prenotation => prenotation.attributes.inizio.slice(11,)
-                                )
-                                return <React.Fragment>
-                                    <div>{time}</div>
-                                    <div>{booking && parseInt(booking.attributes.inizio.slice(11, 13)) <= parseInt(time) && parseInt(booking.attributes.fine.slice(11, 13)) >= parseInt(time) ? booking.attributes.inizio.slice(11,16): "libero"}</div>
-                                </React.Fragment>
-                            })}
-                        </div>
-                        {day[1].map((prenotation)=>{
-                            return <div className='bg-gray-100 p-2 rounded mb-2'>{prenotation.attributes.descrizione}</div>
-                        })}
-                    </div>
-                }):
-                "loading"
-            }
-        </div>
+        {prenotations?
+            <div>
+                <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridWeek"
+                      events={prenotations.map((prenotation) => ({
+                          title: prenotation.attributes.descrizione,
+                          start: prenotation.attributes.inizio,
+                          end: prenotation.attributes.fine
+                      }))}
+                      dateClick={(dateClickInfo => console.log(dateClickInfo.dateStr))}/>
+
+            </div>
+            : ''
+        }
     </div>
 }
 
