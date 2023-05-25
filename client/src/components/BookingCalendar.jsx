@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import FullCalendar from "@fullcalendar/react"
-import dayGridPlugin from "@fullcalendar/daygrid"
+import timeGridPlugin from "@fullcalendar/timegrid"
 
 import useFetch from "../hooks/useFetch";
 const BookingCalendar = () => {
@@ -128,14 +128,18 @@ const BookingCalendar = () => {
         <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={handleBookingCreation}>Prenota</button>
         {prenotations?
             <div>
-                <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridWeek"
+                <FullCalendar plugins={[timeGridPlugin]} initialView="timeGridWeek" firstDay={1}
                       events={prenotations.map((prenotation) => ({
-                          title: prenotation.attributes.descrizione,
                           start: prenotation.attributes.inizio,
                           end: prenotation.attributes.fine
-                      }))}
-                      dateClick={(dateClickInfo => console.log(dateClickInfo.dateStr))}/>
-
+                      }))} eventBackgroundColor='#ff4030' eventBorderColor='red' displayEventTime={false}
+                      businessHours={[
+                          {daysOfWeek: [1,2,3,4,5], startTime: '13:00', endTime: '14:00'},
+                          {daysOfWeek: [1,2,3,4,5], startTime: '18:30', endTime: '24:00'},
+                          {daysOfWeek: [6, 0], startTime: '08:00', endTime: '24:00'}
+                      ]} allDaySlot={false} slotLabelFormat={{hour: '2-digit', minute: '2-digit', meridiem: false, hour12: false}}
+                      headerToolbar={{start: '', end: 'today prev,next'}} buttonText={{today: 'Oggi'}} locale={'it'}
+                />
             </div>
             : ''
         }
