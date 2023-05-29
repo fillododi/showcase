@@ -1,17 +1,24 @@
 import React, {useState, useEffect} from "react";
-import FullCalendar from "@fullcalendar/react"
-import timeGridPlugin from "@fullcalendar/timegrid"
+import {Calendar, momentLocalizer} from "react-big-calendar";
+import Modal from 'react-modal'
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import './BookingCalendar/styles.css'
+import moment from "moment/min/moment-with-locales";
+
+import calendarToolbar from './CalendarToolbar.jsx'
 
 import useFetch from "../hooks/useFetch";
+import {dateFormat} from "react-big-calendar/lib/utils/propTypes.js";
 const BookingCalendar = () => {
-    const [selectedDate, setSelectedDate] = useState('')
-    const [startTime, setStartTime] = useState('')
-    const [endTime, setEndTime] = useState('')
     const [email, setEmail] = useState('')
     const [description, setDescription] = useState('')
     const [prenotations, setPrenotations] = useState([])
     const [renderDate, setRenderDate] = useState(new Date())
-    const [week, setWeek] = useState([])
+    const [showModal, setShowModal] = useState(false)
+    const [selectedSlots, setSelectedSlots] = useState({start: null, end: null})
+
+    moment.locale('it')
+    const localizer = momentLocalizer(moment)
 
     let {loading, data, error} = useFetch('http://localhost:1337/api/prenotazioni')
     try{
@@ -26,16 +33,7 @@ const BookingCalendar = () => {
                 setPrenotations(data)
             }
         } catch (e) {console.log(e)}
-    }, [data])
-    useEffect(()=>{
-        try{
-            renderWeek()
-        }
-        catch (e) {
-            console.log(e)
-        }
-    }, [prenotations])
-
+    }, [data, prenotations])
 
     const requestBooking = (booking) => {
         fetch('http://localhost:1337/api/prenotazioni', {
@@ -47,22 +45,24 @@ const BookingCalendar = () => {
                 data: {
                     email: booking.email,
                     descrizione: booking.description,
-                    inizio: `${booking.date}T${booking.startTime}:00.000Z`,
-                    fine: `${booking.date}T${booking.endTime}:00.000Z`,
+                    inizio: booking.startTime,
+                    fine: booking.endTime,
                     accettata: 0
                 }
             })
         })
     }
 
-    const handleDateChange = (e) => {
-        setSelectedDate(e.target.value)
-    }
-    const handleStartTimeChange = (e) => {
-        setStartTime(e.target.value)
-    }
-    const handleEndTimeChange = (e) => {
-        setEndTime(e.target.value)
+    const validateBookingTimeSlot = (slot) => {
+        if(slot.getDay() >= 1 && slot.getDay() <= 5 && slot.getHours() < 13 || //Mon-Fri before 13.00
+            slot.getDay() >= 1 && slot.getDay() <= 5 && slot.getHours() > 13 &&
+            (slot.getHours() < 18 || slot.getHours() == 18 && slot.getMinutes() < 30) || //Mon-Fri 14.00-18.30
+            (slot.getDay() == 0 || slot.getDay() == 6) && slot.getHours() < 8 //Sat-Sun before 8.00)
+        ){
+            return false
+        } else {
+            return true
+        }
     }
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
@@ -70,76 +70,92 @@ const BookingCalendar = () => {
     const handleDescriptionChange = (e) => {
         setDescription(e.target.value)
     }
+    const handleNavigate = (action) => {
+        if(action == "PREV"){
+            setRenderDate((prevDate) => {
+                const newWeek = new Date(prevDate)
+                newWeek.setDate(newWeek.getDate()-7)
+                return newWeek
+            })
+        }
+        else if(action == "NEXT"){
+            setRenderDate((prevDate) => {
+                const newWeek = new Date(prevDate)
+                newWeek.setDate(newWeek.getDate()+7)
+                return newWeek
+            })
+        }
+        else if(action == "TODAY"){
+            setRenderDate(new Date())
+        }
+    }
+    const getSlotProps = (slotStart) => {
+        if(!validateBookingTimeSlot(slotStart)){
+            return {
+                style: {
+                    backgroundColor: 'gray',
+                    opacity: 0.3
+                }
+            }
+        }
+        return {}
+    }
+    const handleSlotSelection = (slotInfo) => {
+        if(validateBookingTimeSlot(slotInfo.start)){
+            if(!selectedSlots.start || !(selectedSlots.start.getDate() === slotInfo.start.getDate()) || selectedSlots.start.getHours() >= slotInfo.end.getHours()){
+                setSelectedSlots({start: slotInfo.start, end: null})
+            } else {
+                setSelectedSlots({start: selectedSlots.start, end: slotInfo.end})
+                setShowModal(true)
+            }
+        }
+    }
     const handleBookingCreation = () => {
         const booking = {
-            date: selectedDate,
-            startTime: startTime,
-            endTime: endTime,
+            startTime: selectedSlots.start,
+            endTime: selectedSlots.end,
             email: email,
             description: description
         }
 
         requestBooking(booking)
+        setShowModal(false)
     }
-
-    const renderWeek = () => {
-        const startDate = new Date(renderDate)
-        startDate.setDate(startDate.getDate() - startDate.getDay())
-        const weekInfo = []
-        for(let i = 0; i<7; i++) {
-            const currentDate = new Date(startDate)
-            currentDate.setDate(currentDate.getDate() + i)
-            const dailyBookings = prenotations.filter(
-                prenotation => new Date(prenotation.attributes.inizio).toDateString() === currentDate.toDateString()
-            )
-
-            weekInfo.push([currentDate, dailyBookings])
-        }
-
-        if(!(JSON.stringify(week) == JSON.stringify(weekInfo))){
-            setWeek(weekInfo)
-        }
+    const handleCloseModal = () => {
+        setShowModal(false)
+        setSelectedSlots({start: null, end: null})
+        setEmail('')
+        setDescription('')
     }
 
     return <div className='container mx-auto p-4'>
         <h2 className='text-2x1 font-bold mb-4'>Calendario</h2>
-        <div className='grid grid-cols-7 gap-4 mb-4'>
-            <div>
-                <label className='font-bold'>Data:</label>
-                <input className='block border border-gray-300 p-2 rounded' type="date" value={selectedDate} onChange={handleDateChange}/>
-            </div>
-            <div>
-                <label className='font-bold'>Inizio:</label>
-                <input className='block border border-gray-300 p-2 rounded' type="time" value={startTime} onChange={handleStartTimeChange}/>
-            </div>
-            <div>
-                <label className='font-bold'>Fine:</label>
-                <input className='block border border-gray-300 p-2 rounded' type="time" value={endTime} onChange={handleEndTimeChange}/>
-            </div>
-            <div>
-                <label className='font-bold'>E-Mail:</label>
-                <input className='block border border-gray-300 p-2 rounded' type="email" value={email} onChange={handleEmailChange}/>
-            </div>
-            <div>
-                <label className='font-bold'>Descrizione:</label>
-                <input className='block border border-gray-300 p-2 rounded' type="text" value={description} onChange={handleDescriptionChange}/>
-            </div>
-        </div>
-        <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={handleBookingCreation}>Prenota</button>
         {prenotations?
             <div>
-                <FullCalendar plugins={[timeGridPlugin]} initialView="timeGridWeek" firstDay={1}
-                      events={prenotations.map((prenotation) => ({
-                          start: prenotation.attributes.inizio,
-                          end: prenotation.attributes.fine
-                      }))} eventBackgroundColor='#ff4030' eventBorderColor='red' displayEventTime={false}
-                      businessHours={[
-                          {daysOfWeek: [1,2,3,4,5], startTime: '13:00', endTime: '14:00'},
-                          {daysOfWeek: [1,2,3,4,5], startTime: '18:30', endTime: '24:00'},
-                          {daysOfWeek: [6, 0], startTime: '08:00', endTime: '24:00'}
-                      ]} allDaySlot={false} slotLabelFormat={{hour: '2-digit', minute: '2-digit', meridiem: false, hour12: false}}
-                      headerToolbar={{start: '', end: 'today prev,next'}} buttonText={{today: 'Oggi'}} locale={'it'}
+                {/* Render the React Big Calendar */}
+                <Calendar events={prenotations} localizer={localizer}
+                          startAccessor={prenotation => new Date(prenotation.attributes.inizio)}
+                          endAccessor={prenotation => new Date(prenotation.attributes.fine)}
+                          view={'week'}
+                          components={{
+                              toolbar: (props) => calendarToolbar(handleNavigate)
+                          }}
+                          date={renderDate} selectable='ignoreEvents' onSelectSlot={handleSlotSelection}
+                          slotPropGetter={getSlotProps} dayLayoutAlgorithm='no-overlap'
                 />
+                <Modal isOpen={showModal} onRequestClose={handleCloseModal} contentLabel="Prenota">
+                    <h2>Dettagli della prenotazione</h2>
+                    <div>
+                        <label className='font-bold'>E-Mail:</label>
+                        <input className='block border border-gray-300 p-2 rounded' type="email" value={email} onChange={handleEmailChange}/>
+                    </div>
+                    <div>
+                        <label className='font-bold'>Descrizione:</label>
+                        <input className='block border border-gray-300 p-2 rounded' type="text" value={description} onChange={handleDescriptionChange}/>
+                    </div>
+                    <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={handleBookingCreation}>Prenota</button>
+                    <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'onClick={handleCloseModal}>Chiudi</button>
+                </Modal>
             </div>
             : ''
         }

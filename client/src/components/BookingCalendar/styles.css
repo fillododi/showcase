@@ -1,0 +1,35 @@
+.rbc-event-label {
+    display: none; /* Remove event text */
+}
+
+.rbc-event {
+    background-color: red; /* Change event color */
+    cursor: default;
+}
+
+.rbc-event.rbc-selected{
+    background-color: red;
+}
+
+.rbc-allday-cell {
+    display: none; /* removes allday time slot */
+}
+.rbc-time-view .rbc-header {
+    border-bottom: none;
+}
+
+/* remove dragging animation */
+.rbc-slot-selection{
+    background-color: transparent;
+    cursor: default;
+    display: none;
+}
+.rbc-slot-selecting{
+    cursor: default;
+}
+
+/*avoids hours being greyed out */
+.rbc-time-gutter .rbc-timeslot-group .rbc-time-slot{
+    background-color: inherit !important;
+    opacity: inherit !important;
+}
