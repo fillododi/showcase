@@ -1,6 +1,7 @@
 import {Routes, Route} from "react-router-dom";
 import {Homepage, PostContentPage, BookPage} from "./pages/index.js";
 import useFetch from './hooks/useFetch'
+import GalleryPage from "./pages/GalleryPage.jsx";
 
 export default function App() {
     let {loading, data, error} = useFetch('http://localhost:1337/api/blogs?populate=*')
@@ -11,5 +12,6 @@ export default function App() {
         <Route path='/' element={<Homepage posts={data? data: ""}/>}></Route>
         <Route path='/post/:id' element={<PostContentPage posts={data? data: ""}/>}></Route>
         <Route path='/book' element={<BookPage/>}></Route>
+        <Route path='/gallery' element={<GalleryPage posts={data? data: ""}/>}></Route>
     </Routes>
 }

@@ -3,5 +3,6 @@ import HomeContent from "./HomeContent.jsx";
 import Footer from "./Footer.jsx";
 import PostContent from "./PostContent.jsx";
 import BookingCalendar from "./BookingCalendar.jsx";
+import Gallery from "./Gallery.jsx";
 
-export {Navbar, HomeContent, Footer, PostContent, BookingCalendar}
+export {Navbar, HomeContent, Footer, PostContent, BookingCalendar, Gallery}

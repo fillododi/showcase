@@ -16,7 +16,7 @@ const Navbar = () => {
                 <ul className='hidden md:flex'>
                     <Link to={'/'}><li>Home</li></Link>
                     <Link to={'/book'}><li>Prenota il tuo Video</li></Link>
-                    <li>Galleria</li>
+                    <Link to={'/gallery'}><li>Galleria</li></Link>
                     <li>Shop</li>
                 </ul>
             </div>
