@@ -28,6 +28,12 @@
     },
     "testo": {
       "type": "text"
+    },
+    "clienti": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::cliente.cliente",
+      "inversedBy": "posts"
     }
   }
 }

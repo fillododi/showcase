@@ -1,6 +1,7 @@
 import React from "react";
 import {useParams} from "react-router-dom";
 import {ReactMarkdown} from "react-markdown/lib/react-markdown"
+import {Link} from 'react-router-dom'
 
 const PostContent = ({posts}) => {
     const {id} = useParams()
@@ -17,6 +18,7 @@ const PostContent = ({posts}) => {
                     <img className='h-56 w-full object-cover' src={`http://localhost:1337${post.attributes.immagini.data[0].attributes.url}`}/>
                     <h1 className='font-bold text-2xl my-1 pt-5'>{post.attributes.titolo}</h1>
                     <div className='pt-5'><ReactMarkdown className='line-break'>{post.attributes.testo}</ReactMarkdown></div>
+                    <Link to={`/gallery#client${post.attributes.clienti.data.id}`}><p>Vai al collaboratore</p></Link>
                 </div>
 
                 <div className='w-full grid overflow-hidden gap-y-8 grid-cols-1 col-span-2 md:col-span-1'>

@@ -26,10 +26,10 @@ const Navbar = () => {
             </div>
         </div>
         <ul className={showMenu? 'absolute bg-white w-full px-8 md:hidden': 'hidden'}>
-            <li>Home</li>
-            <li>Chi Siamo</li>
-            <li>Contattaci</li>
-            <li>Prezzi</li>
+            <Link to={'/'}><li>Home</li></Link>
+            <Link to={'/book'}><li>Prenota il tuo Video</li></Link>
+            <Link to={'/gallery'}><li>Galleria</li></Link>
+            <li>Shop</li>
         </ul>
     </div>
 }

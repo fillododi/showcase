@@ -1,10 +1,10 @@
 import React from "react";
 import {Navbar, Footer, Gallery} from '../components'
 
-const GalleryPage = ({posts}) => {
+const GalleryPage = ({clients}) => {
     return <div>
         <Navbar></Navbar>
-        <Gallery posts={posts? posts: ""}></Gallery>
+        <Gallery clients={clients? clients: ""}></Gallery>
         <Footer></Footer>
     </div>
 }
