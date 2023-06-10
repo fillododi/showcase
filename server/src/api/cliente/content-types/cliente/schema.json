@@ -4,7 +4,8 @@
   "info": {
     "singularName": "cliente",
     "pluralName": "clienti",
-    "displayName": "clienti"
+    "displayName": "clienti",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,6 +20,20 @@
       "relation": "oneToMany",
       "target": "api::blog.blog",
       "mappedBy": "clienti"
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "link_insta": {
+      "type": "string"
     }
   }
 }
