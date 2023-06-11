@@ -1,5 +1,6 @@
 import React from "react";
 import {useEffect} from "react";
+import checkMediaType from "../utils/mediatypes.jsx";
 
 const Gallery = ({clients}) => {
     useEffect(()=> {
@@ -23,9 +24,20 @@ const Gallery = ({clients}) => {
                         <h3 className='font-bold text-2xl my-1'>{client.attributes.nome}</h3>
                         <div className='flex gap-12 px-4 items-center'>
                             {client.attributes.posts.data.map(post => (
-                                post.attributes.immagini.data.map(img => <div className='flex flex-col h-48 px-10'>
-                                    <img src={`http://localhost:1337${img.attributes.url}`} className='h-full object-contain'/>
-                                </div>)
+                                post.attributes.immagini.data.map(img => {
+                                    if(checkMediaType(img.attributes.url) === "image"){
+                                        return <div className='flex flex-col h-48 px-10'>
+                                            <img src={`http://localhost:1337${img.attributes.url}`} className='h-full object-contain'/>
+                                        </div>
+                                    }
+                                    else if(checkMediaType(img.attributes.url)[0] === "video"){
+                                        return <div className='flex flex-col h-48 px-10'>
+                                            <video controls className='h-full object-contain'>
+                                                <source src={`http://localhost:1337${img.attributes.url}`} type={`video/${checkMediaType(img.attributes.url)[1]}`}/>
+                                            </video>
+                                        </div>
+                                    }
+                                })
                             ))}
                         </div>
                     </div>)

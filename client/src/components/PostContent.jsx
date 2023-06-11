@@ -2,13 +2,13 @@ import React from "react";
 import {useParams} from "react-router-dom";
 import {ReactMarkdown} from "react-markdown/lib/react-markdown"
 import {Link} from 'react-router-dom'
+import checkMediaType from "../utils/mediatypes.jsx";
 
 const PostContent = ({posts}) => {
     const {id} = useParams()
     let post = posts.data.filter(post=>post.id==id)
     post = post[0]
     let imagesURLs = post.attributes.immagini.data.map(img=>`http://localhost:1337${img.attributes.url}`)
-    console.log(imagesURLs)
 
 
     return <div className='w-full pb-10 bg-[#f9f9f9]'>
@@ -22,9 +22,16 @@ const PostContent = ({posts}) => {
                 </div>
 
                 <div className='w-full grid overflow-hidden gap-y-8 grid-cols-1 col-span-2 md:col-span-1'>
-                    {imagesURLs.map((url)=>
-                        <img className='w-full h-full object-cover mx-auto my-0 drop-shadow-md rounded-xl' src={url}/>
-                        )}
+                    {imagesURLs.map((url)=>{
+                            if(checkMediaType(url) === "image"){
+                                return <img className='w-full h-full object-cover mx-auto my-0 drop-shadow-md rounded-xl' src={url}/>
+                            }
+                            if(checkMediaType(url)[0] === "video"){
+                                return <video controls className='w-full h-full object-cover mx-auto my-0 drop-shadow-md rounded-xl'>
+                                    <source src={url}  type={`video/${checkMediaType(url)[1]}`}/>
+                                </video>
+                            }
+                    })}
                 </div>
             </div>
         </div>
