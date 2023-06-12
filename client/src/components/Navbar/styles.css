@@ -1,0 +1,42 @@
+ul.hidden#big-screen-menu li {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.3s;
+}
+
+ul.hidden#big-screen-menu li:hover{
+    color: rgb(255, 255, 255);
+}
+
+ul#mobile-menu{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: rgb(41,41,49);
+    padding: 8px;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+}
+
+ul#mobile-menu.show-menu{
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+ul#mobile-menu li {
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.3s;
+}
+
+ul#mobile-menu li:hover {
+    color: rgb(255, 255, 255);
+}
