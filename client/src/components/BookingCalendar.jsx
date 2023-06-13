@@ -64,6 +64,28 @@ const BookingCalendar = () => {
             return true
         }
     }
+
+    const isInvalidSlotBetween = (start, end) => {
+        let currentSlot = new Date(start)
+        while (currentSlot < end) {
+            if(!validateBookingTimeSlot(currentSlot)){
+                return true
+            }
+            currentSlot.setMinutes(currentSlot.getMinutes() + 30)
+        }
+        return false
+    }
+
+    const getSlotsBetween = (start, end) => {
+        const timeSlots = []
+        let currentSlot = new Date(start)
+        while (currentSlot < end) {
+            timeSlots.push(new Date(currentSlot))
+            currentSlot.setMinutes(currentSlot.getMinutes() + 30)
+        }
+        return timeSlots
+    }
+
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
     }
@@ -89,6 +111,17 @@ const BookingCalendar = () => {
             setRenderDate(new Date())
         }
     }
+
+    const getHighlightedSlots = () => {
+        if(selectedSlots.start && !selectedSlots.end){
+            return [selectedSlots.start]
+        } else if(selectedSlots.start && selectedSlots.end){
+            return getSlotsBetween(selectedSlots.start, selectedSlots.end)
+        } else {
+            return []
+        }
+    }
+
     const getSlotProps = (slotStart) => {
         if(!validateBookingTimeSlot(slotStart)){
             return {
@@ -98,11 +131,53 @@ const BookingCalendar = () => {
                 }
             }
         }
+        let highlightedSlots = getHighlightedSlots()
+        const toHighlight = highlightedSlots.some((slot) => slot.getTime() === slotStart.getTime())
+        const isFirstSlot = slotStart.getTime() === highlightedSlots[0]?.getTime()
+        const isLastSlot = slotStart.getTime() === highlightedSlots[highlightedSlots.length - 1]?.getTime()
+
+        if(toHighlight){
+            if(isFirstSlot && isLastSlot){
+                return {
+                    style: {
+                        border: '1px solid red'
+                    }
+                }
+            } else if(isFirstSlot){
+                return {
+                    style: {
+                        borderTop: '1px solid red',
+                        borderRight: '1px solid red',
+                        borderLeft: '1px solid red'
+                    }
+                }
+            } else if(isLastSlot){
+                return {
+                    style: {
+                        borderBottom: '1px solid red',
+                        borderRight: '1px solid red',
+                        borderLeft: '1px solid red'
+                    }
+                }
+            } else {
+                return {
+                    style: {
+                        borderLeft: '1px solid red',
+                        borderRight: '1px solid red'
+                    }
+                }
+            }
+        }
+
         return {}
     }
     const handleSlotSelection = (slotInfo) => {
         if(validateBookingTimeSlot(slotInfo.start)){
-            if(!selectedSlots.start || !(selectedSlots.start.getDate() === slotInfo.start.getDate()) || selectedSlots.start.getHours() >= slotInfo.end.getHours()){
+            if(!selectedSlots.start ||
+                !(selectedSlots.start.getDate() === slotInfo.start.getDate()) ||
+                selectedSlots.start.getHours() >= slotInfo.end.getHours() ||
+                isInvalidSlotBetween(selectedSlots.start, slotInfo.end)
+            ){
                 setSelectedSlots({start: slotInfo.start, end: null})
             } else {
                 setSelectedSlots({start: selectedSlots.start, end: slotInfo.end})
@@ -121,6 +196,37 @@ const BookingCalendar = () => {
         requestBooking(booking)
         setShowModal(false)
     }
+
+    const getSelectedDay = () => {
+        return selectedSlots.start?.getDay()
+    }
+
+    const getModalStyle = () => {
+        let dayNumber = getSelectedDay()
+        if(dayNumber === 0) {
+            dayNumber = 7
+        }
+        const calendarWrapper = document.getElementsByClassName('calendar-wrapper')[0]
+        const calendarRect = calendarWrapper?.getBoundingClientRect()
+        const dayWidth = calendarRect?.width/7
+        const modalWidth = 300
+        const modalHeight = 300
+
+        const left = calendarRect?.left + (dayWidth * dayNumber)
+        const maxLeft = calendarRect?.left + calendarRect?.width - modalWidth
+        const adjustedLeft = left > maxLeft? maxLeft: left
+
+        return {
+            content: {
+                top: "50%",
+                left: `${adjustedLeft}px`,
+                width: `${modalWidth}px`,
+                height: `${modalHeight}px`,
+                transform: "translate(0%, -50%)"
+            }
+        }
+    }
+
     const handleCloseModal = () => {
         setShowModal(false)
         setSelectedSlots({start: null, end: null})
@@ -133,17 +239,19 @@ const BookingCalendar = () => {
         {prenotations?
             <div>
                 {/* Render the React Big Calendar */}
-                <Calendar events={prenotations} localizer={localizer}
-                          startAccessor={prenotation => new Date(prenotation.attributes.inizio)}
-                          endAccessor={prenotation => new Date(prenotation.attributes.fine)}
-                          view={'week'}
-                          components={{
-                              toolbar: (props) => calendarToolbar(handleNavigate)
-                          }}
-                          date={renderDate} selectable='ignoreEvents' onSelectSlot={handleSlotSelection}
-                          slotPropGetter={getSlotProps} dayLayoutAlgorithm='no-overlap'
-                />
-                <Modal isOpen={showModal} onRequestClose={handleCloseModal} contentLabel="Prenota">
+                <div className='calendar-wrapper'>
+                    <Calendar events={prenotations} localizer={localizer}
+                              startAccessor={prenotation => new Date(prenotation.attributes.inizio)}
+                              endAccessor={prenotation => new Date(prenotation.attributes.fine)}
+                              view={'week'}
+                              components={{
+                                  toolbar: (props) => calendarToolbar(handleNavigate)
+                              }}
+                              date={renderDate} selectable='ignoreEvents' onSelectSlot={handleSlotSelection}
+                              slotPropGetter={getSlotProps} dayLayoutAlgorithm='no-overlap'
+                    />
+                </div>
+                <Modal isOpen={showModal} onRequestClose={handleCloseModal} contentLabel="Prenota" style={getModalStyle()}>
                     <h2>Dettagli della prenotazione</h2>
                     <div>
                         <label className='font-bold'>E-Mail:</label>

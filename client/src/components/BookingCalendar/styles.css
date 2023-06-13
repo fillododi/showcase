@@ -32,4 +32,5 @@
 .rbc-time-gutter .rbc-timeslot-group .rbc-time-slot{
     background-color: inherit !important;
     opacity: inherit !important;
+    border: none !important;
 }
