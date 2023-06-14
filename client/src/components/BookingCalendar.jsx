@@ -16,6 +16,7 @@ const BookingCalendar = () => {
     const [renderDate, setRenderDate] = useState(new Date())
     const [showModal, setShowModal] = useState(false)
     const [selectedSlots, setSelectedSlots] = useState({start: null, end: null})
+    const [hoveredSlot, setHoveredSlot] = useState(null)
 
     moment.locale('it')
     const localizer = momentLocalizer(moment)
@@ -123,53 +124,56 @@ const BookingCalendar = () => {
     }
 
     const getSlotProps = (slotStart) => {
+        let bgColor = ''
+        let borderTop = ''
+        let borderRight = ''
+        let borderBottom = ''
+        let borderLeft = ''
+
         if(!validateBookingTimeSlot(slotStart)){
-            return {
-                style: {
-                    backgroundColor: 'gray',
-                    opacity: 0.3
-                }
-            }
+            bgColor = 'lightgray'
+        } else {
+            bgColor = 'lightblue'
         }
+
         let highlightedSlots = getHighlightedSlots()
         const toHighlight = highlightedSlots.some((slot) => slot.getTime() === slotStart.getTime())
         const isFirstSlot = slotStart.getTime() === highlightedSlots[0]?.getTime()
         const isLastSlot = slotStart.getTime() === highlightedSlots[highlightedSlots.length - 1]?.getTime()
 
         if(toHighlight){
-            if(isFirstSlot && isLastSlot){
-                return {
-                    style: {
-                        border: '1px solid red'
-                    }
-                }
-            } else if(isFirstSlot){
-                return {
-                    style: {
-                        borderTop: '1px solid red',
-                        borderRight: '1px solid red',
-                        borderLeft: '1px solid red'
-                    }
-                }
-            } else if(isLastSlot){
-                return {
-                    style: {
-                        borderBottom: '1px solid red',
-                        borderRight: '1px solid red',
-                        borderLeft: '1px solid red'
-                    }
-                }
-            } else {
-                return {
-                    style: {
-                        borderLeft: '1px solid red',
-                        borderRight: '1px solid red'
-                    }
-                }
+            borderRight = '1px solid red'
+            borderLeft = '1px solid red'
+            if(isFirstSlot){
+                borderTop = '1px solid red'
+            }
+            if(isLastSlot){
+                borderBottom = '1px solid red'
             }
         }
 
-        return {}
+        if(!selectedSlots.start && slotStart.getTime() === hoveredSlot?.getTime()){
+            borderRight = '1px solid red'
+            borderLeft = '1px solid red'
+            borderTop = '1px solid red'
+            borderBottom = '1px solid red'
+        }
+
+        return {
+            style: {
+                backgroundColor: bgColor,
+                borderTop: borderTop,
+                borderRight: borderRight,
+                borderLeft: borderLeft,
+                borderBottom: borderBottom
+            },
+            onMouseEnter: () => {
+                setHoveredSlot(slotStart)
+            },
+            onMouseLeave: () => {
+                setHoveredSlot(null)
+            }
+        }
     }
     const handleSlotSelection = (slotInfo) => {
         if(validateBookingTimeSlot(slotInfo.start)){
@@ -222,7 +226,7 @@ const BookingCalendar = () => {
                 left: `${adjustedLeft}px`,
                 width: `${modalWidth}px`,
                 height: `${modalHeight}px`,
-                transform: "translate(0%, -50%)"
+                transform: "translate(0%, -50%)",
             }
         }
     }

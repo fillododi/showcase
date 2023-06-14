@@ -34,3 +34,10 @@
     opacity: inherit !important;
     border: none !important;
 }
+
+.rbc-time-slot{
+    z-index: 1
+}
+.ReactModal__Overlay{
+    z-index: 1
+}
