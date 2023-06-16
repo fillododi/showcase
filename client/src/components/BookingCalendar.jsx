@@ -69,7 +69,7 @@ const BookingCalendar = () => {
     const isInvalidSlotBetween = (start, end) => {
         let currentSlot = new Date(start)
         while (currentSlot < end) {
-            if(!validateBookingTimeSlot(currentSlot)){
+            if(!validateBookingTimeSlot(currentSlot) || prenotations.some(prenotation => currentSlot.getTime() === new Date(prenotation.attributes.inizio).getTime())){
                 return true
             }
             currentSlot.setMinutes(currentSlot.getMinutes() + 30)
@@ -111,6 +111,7 @@ const BookingCalendar = () => {
         else if(action == "TODAY"){
             setRenderDate(new Date())
         }
+        setSelectedSlots({start: null, end: null})
     }
 
     const getHighlightedSlots = () => {
@@ -147,7 +148,7 @@ const BookingCalendar = () => {
             if(isFirstSlot){
                 borderTop = '1px solid red'
             }
-            if(isLastSlot){
+            if(isLastSlot && !hoveredSlot){
                 borderBottom = '1px solid red'
             }
         }
@@ -156,6 +157,15 @@ const BookingCalendar = () => {
             borderRight = '1px solid red'
             borderLeft = '1px solid red'
             borderTop = '1px solid red'
+            borderBottom = '1px solid red'
+        }
+        if(selectedSlots.start && !selectedSlots.end && getSlotsBetween(selectedSlots.start, hoveredSlot).some((slot) => slot.getTime() === slotStart.getTime())) {
+            borderRight = '1px solid red'
+            borderLeft = '1px solid red'
+        }
+        if(selectedSlots.start && !selectedSlots.end && slotStart.getTime() === hoveredSlot?.getTime()){
+            borderRight = '1px solid red'
+            borderLeft = '1px solid red'
             borderBottom = '1px solid red'
         }
 
@@ -168,6 +178,7 @@ const BookingCalendar = () => {
                 borderBottom: borderBottom
             },
             onMouseEnter: () => {
+                if(!selectedSlots.start || (!isInvalidSlotBetween(selectedSlots.start, slotStart) && slotStart.getTime() > selectedSlots.start.getTime()))
                 setHoveredSlot(slotStart)
             },
             onMouseLeave: () => {
@@ -176,7 +187,8 @@ const BookingCalendar = () => {
         }
     }
     const handleSlotSelection = (slotInfo) => {
-        if(validateBookingTimeSlot(slotInfo.start)){
+        const now = new Date()
+        if(validateBookingTimeSlot(slotInfo.start) && slotInfo.start.getTime() > now.getTime()){
             if(!selectedSlots.start ||
                 !(selectedSlots.start.getDate() === slotInfo.start.getDate()) ||
                 selectedSlots.start.getHours() >= slotInfo.end.getHours() ||
@@ -198,6 +210,9 @@ const BookingCalendar = () => {
         }
 
         requestBooking(booking)
+        setSelectedSlots({start: null, end: null})
+        setEmail('')
+        setDescription('')
         setShowModal(false)
     }
 

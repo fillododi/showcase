@@ -1,8 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
+import axios from "axios";
+
 import {Link} from "react-router-dom"
 import {FaFacebook, FaInstagram, FaYoutube, FaTiktok, FaWhatsapp} from "react-icons/fa";
 
+
 const Footer = () => {
+    const [email, setEmail] = useState('')
+    const newsletterSignup = async (e) => {
+        e.preventDefault()
+
+        try{
+            const response = await axios.post('http://localhost:1337/api/newsletters', {data: {email}})
+            setEmail('')
+        } catch (e) {
+            console.error(e)
+        }
+
+    }
     return <div className='w-full bg-[#02044A] text-gray-300 py-8 px-2'>
         <div className='max-w-[1240px] mx-auto grid grid-cols-2 md:grid-cols-6 border-b-2 border-gray-600 py-8'>
             <div>
@@ -49,8 +64,8 @@ const Footer = () => {
             <div className='col-span-2 pt-2 md:pt-2'>
                 <p className='font-bold uppercase'>Iscriviti alla Newsletter</p>
                 <p className='py-4'>Riceverai notizie, promozioni e novità da Showcase</p>
-                <form className='flex flex-col sm:flex-row'>
-                    <input className='w-full p-2 mr-4 rounded-md mb-2' type='email' placeholder='Inserisci la tua E-Mail'/>
+                <form className='flex flex-col sm:flex-row' onSubmit={newsletterSignup}>
+                    <input className='w-full p-2 mr-4 rounded-md mb-2' type='email' placeholder='Inserisci la tua E-Mail' value={email} onChange={(e) => setEmail(e.target.value)}/>
                     <button className='p-2 mb-2 bg-[#00B86E]'>Iscriviti</button>
                 </form>
             </div>

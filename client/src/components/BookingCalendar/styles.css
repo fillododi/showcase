@@ -2,9 +2,14 @@
     display: none; /* Remove event text */
 }
 
+.rbc-events-container{
+    width: 100%
+}
+
 .rbc-event {
     background-color: red; /* Change event color */
     cursor: default;
+    z-index: 1;
 }
 
 .rbc-event.rbc-selected{
