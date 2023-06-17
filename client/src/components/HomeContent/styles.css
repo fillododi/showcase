@@ -1,0 +1,33 @@
+.text-container p{
+    font-size: 24px;
+    line-height: 2;
+    font-family: 'Arial', sans-serif;
+    color: #222;
+}
+
+.video-container{
+    position: relative
+}
+
+.overlay-button{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease
+}
+
+.overlay-button.show{
+    opacity: 1;
+}
+/*
+#videosummeredit{
+    filter: greyscale(0);
+    transition: filter 1s ease;
+}
+
+#videosummeredit.finishing{
+    filter: greyscale(100%);
+}*/

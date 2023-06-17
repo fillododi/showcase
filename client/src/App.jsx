@@ -2,6 +2,7 @@ import {Routes, Route} from "react-router-dom";
 import {Homepage, PostContentPage, BookPage, ClientsPage} from "./pages/index.js";
 import useFetch from './hooks/useFetch'
 import GalleryPage from "./pages/GalleryPage.jsx";
+import SummerEditPage from "./pages/SummerEditPage.jsx";
 
 export default function App() {
     let {loading: loadingPosts, data: posts, error: errorPosts} = useFetch('http://localhost:1337/api/blogs?populate=*')
@@ -14,5 +15,6 @@ export default function App() {
         <Route path='/book' element={<BookPage/>}></Route>
         <Route path='/gallery' element={<GalleryPage clients={clients? clients: ""}/>}></Route>
         <Route path='/clients' element={<ClientsPage clients={clients? clients: ""}/>}></Route>
+        <Route path='/summeredit' element={<SummerEditPage/>}></Route>
     </Routes>
 }
