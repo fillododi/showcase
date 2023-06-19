@@ -5,5 +5,6 @@ import PostContent from "./PostContent.jsx";
 import BookingCalendar from "./BookingCalendar.jsx";
 import Gallery from "./Gallery.jsx";
 import ClientList from "./ClientList.jsx"
+import SummerEdit from "./SummerEdit.jsx";
 
-export {Navbar, HomeContent, Footer, PostContent, BookingCalendar, Gallery, ClientList}
+export {Navbar, HomeContent, Footer, PostContent, BookingCalendar, Gallery, ClientList, SummerEdit}
