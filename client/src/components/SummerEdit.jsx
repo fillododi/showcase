@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import axios from "axios";
 import {summereditbg, fotosummeredit} from '../assets/index'
 import Dropzone from "react-dropzone";
 
@@ -13,21 +14,25 @@ const SummerEdit = () => {
         setDescription(e.target.value)
     }
 
-    const requestEdit = (files) => {
+    const requestEdit = async (files) => {
 
-        fetch('http://localhost:1337/api/summer-edits', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                data: {
-                    Richieste: description,
-                    Email: email
-                }
-            })
+        const entryData = new FormData()
+        files.forEach((file) => {
+            entryData.append('files.files', file)
         })
-        //todo: caricare foto
+        const textData = {
+            Email: email,
+            Richieste: description
+        }
+        entryData.append("data", JSON.stringify(textData))
+        console.log(entryData)
+
+        const request = await fetch('http://localhost:1337/api/summer-edits', {
+            method: "POST",
+            body: entryData
+        })
+        const response = await request.json()
+        console.log(response)
         setEmail('')
         setDescription('')
     }
