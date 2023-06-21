@@ -23,7 +23,7 @@ const Footer = () => {
             <div>
                 <h6 className='font-bold uppercase py-2'>Titoletto</h6>
                 <ol>
-                    <li className='py-1'>Oggetto</li>
+                    <li className='py-1'>ciaoo</li>
                     <li className='py-1'>Oggetto</li>
                     <li className='py-1'>Oggetto</li>
                     <li className='py-1'>Oggetto</li>
