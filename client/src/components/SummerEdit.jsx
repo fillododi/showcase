@@ -2,10 +2,13 @@ import React, {useState} from "react";
 import axios from "axios";
 import {summereditbg, fotosummeredit} from '../assets/index'
 import Dropzone from "react-dropzone";
+import {Form} from "react-router-dom";
 
 const SummerEdit = () => {
     const [email, setEmail] = useState("")
     const [description, setDescription] = useState("")
+    const [showDropzone, setShowDropzone] = useState(true)
+    const [showPayment, setShowPayment] = useState(false)
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
@@ -16,13 +19,14 @@ const SummerEdit = () => {
 
     const requestEdit = async (files) => {
 
+        /*METODO 1: CREA LA ENTRY E CARICA L FILE ALLO STESSO TEMPO, MA NON LI LINKA*/
         const entryData = new FormData()
         files.forEach((file) => {
             entryData.append('files.files', file)
         })
         const textData = {
-            Email: email,
-            Richieste: description
+            email: email,
+            richieste: description
         }
         entryData.append("data", JSON.stringify(textData))
         console.log(entryData)
@@ -33,8 +37,11 @@ const SummerEdit = () => {
         })
         const response = await request.json()
         console.log(response)
+
         setEmail('')
         setDescription('')
+        setShowDropzone(false)
+        setShowPayment(true)
     }
 
     return <div className="w-full bg-[#f9f9f9] py-[50px]">
@@ -57,16 +64,21 @@ const SummerEdit = () => {
                             <label className='font-bold'>Descrizione:</label>
                             <input className='block border border-gray-300 p-2 rounded' type="text" value={description} onChange={handleDescriptionChange}/>
                         </div>
-                        <Dropzone onDrop={acceptedFiles => requestEdit(acceptedFiles)}>
-                            {({getRootProps, getInputProps})=>(
-                                <section>
-                                    <div {...getRootProps()} className='my-[10rem] border-dashed border-2 border-gray-300 rounded-md p-4 text-center'>
-                                        <input {...getInputProps()}/>
-                                        <p>Trascina qui dei file, o clicca per selezionare i file</p>
-                                    </div>
-                                </section>
-                            )}
-                        </Dropzone>
+                        {showDropzone &&
+                            <Dropzone onDrop={acceptedFiles => requestEdit(acceptedFiles)}>
+                                {({getRootProps, getInputProps})=>(
+                                    <section>
+                                        <div {...getRootProps()} className='my-[10rem] border-dashed border-2 border-gray-300 rounded-md p-4 text-center'>
+                                            <input {...getInputProps()}/>
+                                            <p>Trascina qui dei file, o clicca per selezionare i file</p>
+                                        </div>
+                                    </section>
+                                )}
+                        </Dropzone>}
+                        {showPayment && <div>
+                            <button>Paga con Paypal</button>
+                            <button>Paga con Nexi</button>
+                        </div>}
                     </div>
                 </div>
             </div>
