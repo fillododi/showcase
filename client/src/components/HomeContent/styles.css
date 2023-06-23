@@ -33,7 +33,9 @@
     width: 67%;
     transition: width 0.3s ease;
 }
-
-/*#videosummeredit:hover{
-    width: 70%;
-}*/
+.video-sfondo{
+    position: fixed;
+    top: 0; left:0;
+    object-fit: cover;
+    z-index: -1;
+}

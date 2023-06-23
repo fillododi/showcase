@@ -10,7 +10,6 @@ const HomeContent = ({posts})=> {
     const [logoScale, setLogoScale] = useState(1)
     const [textTranslation, setTextTranslation] = useState(0)
     const [showButton, setShowButton] = useState(false)
-    const [videoFinishing, setVideoFinishing] = useState(false)
 
     useEffect(()=>{
         const video = document.getElementById('videosummeredit')
@@ -20,20 +19,12 @@ const HomeContent = ({posts})=> {
             const translationValue = Math.max(0, (scrollPosition - 350)*5)
             setLogoScale(scaleFactor)
             setTextTranslation(translationValue)
-
-            const videoPosition = video.getBoundingClientRect()
-            if(videoPosition.top >= 0/* && videoPosition.bottom <= window.innerHeight*/){
-                video.play()
-            }
         }
         window.addEventListener('scroll', handleScroll)
 
         const handleVideoTimeUpdate = () => {
-            if(video.currentTime >= 2){
+            if(video.currentTime >= 1.5){
                 setShowButton(true)
-            }
-            if(video.currentTime >= 20){
-                setVideoFinishing(true)
             }
         }
         video.addEventListener('timeupdate', handleVideoTimeUpdate)
@@ -59,7 +50,7 @@ const HomeContent = ({posts})=> {
                 </p>
             </div>
             <div className='mt-[10px] mb-[100px] flex justify-center video-container'>
-                <video src={videosummeredit} id='videosummeredit' loop className={`rounded-2xl drop-shadow-3xl ${videoFinishing? 'finishing': ''}`}></video>
+                <video src={videosummeredit} id='videosummeredit' autoPlay loop className={`rounded-2xl drop-shadow-3xl`}></video>
                 <Link to={'/summeredit'}><button id='summereditbutton' className={`overlay-button ${showButton? 'show': ''}`}>Scopri di più</button></Link>
             </div>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ss:grid-cols-1 gap-8 px-4 text-black'>
