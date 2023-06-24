@@ -1,8 +1,7 @@
 import React, {useState} from "react";
-import axios from "axios";
 import {summereditbg, fotosummeredit, sfondosummeredit} from '../assets/index'
 import Dropzone from "react-dropzone";
-import {Form} from "react-router-dom";
+import {PayPalPayment} from "./index.js";
 
 const SummerEdit = () => {
     const [email, setEmail] = useState("")
@@ -79,8 +78,7 @@ const SummerEdit = () => {
                                     )}
                             </Dropzone>}
                             {showPayment && <div>
-                                <button>Paga con Paypal</button>
-                                <button>Paga con Nexi</button>
+                                <PayPalPayment></PayPalPayment>
                             </div>}
                         </div>
                     </div>
