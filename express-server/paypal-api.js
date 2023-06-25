@@ -29,7 +29,7 @@ export async function createOrder(data) {
     return handleResponse(response);
 }
 
-export async function capturePayment(orderId) {
+export async function capturePayment(orderId, editId) {
     const accessToken = await generateAccessToken();
     const url = `${base}/v2/checkout/orders/${orderId}/capture`;
     const response = await fetch(url, {
@@ -39,8 +39,15 @@ export async function capturePayment(orderId) {
             Authorization: `Bearer ${accessToken}`,
         },
     });
+
     //db update HERE
-    return handleResponse(response);
+    const entryData = new FormData()
+    entryData.append("data", JSON.stringify({pagato: true}))
+    const dbResponse = await(fetch(`http://localhost:1337/api/summer-edits/${editId}`, {
+        method: 'PUT',
+        body: entryData
+    }))
+    return handleResponse(dbResponse);
 }
 
 export async function generateAccessToken() {

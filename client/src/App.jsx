@@ -23,5 +23,6 @@ export default function App() {
         <Route path='/gallery' element={<GalleryPage clients={clients? clients: ""}/>}></Route>
         <Route path='/clients' element={<ClientsPage clients={clients? clients: ""}/>}></Route>
         <Route path='/summeredit' element={<PayPalScriptProvider options={payPalInitalOptions}><SummerEditPage/></PayPalScriptProvider>}></Route>
+        <Route path='/purchasesummeredit' element={<BookPage/>}></Route>
     </Routes>
 }
