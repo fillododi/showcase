@@ -5,7 +5,7 @@ import {logo} from "../assets/index.js";
 import {videosummeredit} from '../assets/index.js'
 import './HomeContent/styles.css'
 
-const HomeContent = ({posts})=> {
+const HomeContent = ({posts, clients})=> {
 
     const [logoScale, setLogoScale] = useState(1)
     const [textTranslation, setTextTranslation] = useState(0)
@@ -53,17 +53,33 @@ const HomeContent = ({posts})=> {
                 <video src={videosummeredit} id='videosummeredit' autoPlay loop className={`rounded-2xl drop-shadow-3xl`}></video>
                 <Link to={'/summeredit'}><button id='summereditbutton' className={`overlay-button ${showButton? 'show': ''}`}>Scopri di più</button></Link>
             </div>
-            <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ss:grid-cols-1 gap-8 px-4 text-black'>
-                {posts.data.map((post)=>
-                    <Link to={`/post/${post.id}`}>
-                        <div className='bg-white rounded-xl overflow-hidden drop-shadow-md'>
-                            <img className='h-56 w-full object-cover' src={`http://localhost:1337${post.attributes.immagini.data[0].attributes.url}`}/>
-                            <div className='p-8'>
-                                <h3 className='font-bold text-2xl my-1'>{post.attributes.titolo}</h3>
+            <div className='my-[50px]'>
+                <h3 className='text-4xl text-center my-5'>I Nostri Collaboratori</h3>
+                <div className='grid grid-cols-5 gap-x-8 gap-y-8'>
+                    {
+                        clients.data &&
+                        clients.data.map(client => <div className='items-center flex flex-col'>
+                            <Link to={client.attributes.link_insta? client.attributes.link_insta: "#"} className='items-center w-[75%]'>
+                                <img src={`http://localhost:1337${client.attributes.logo.data.attributes.url}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300'/>
+                                <p className='text-center text-lg'>{client.attributes.nome? client.attributes.nome: ""}</p>
+                            </Link>
+                        </div>)
+                    }
+                </div>
+            </div>
+            <div className='my-8'>
+                <h3 className='text-4xl text-center my-8'>I Nostri Lavori</h3>
+                <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 ss:grid-cols-1 gap-8 px-4 text-black'>
+                    {posts.data.slice(0).reverse().map((post)=>
+                        <div className='items-center'>
+                            <div className='w-80 bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
+                                <Link to={`/post/${post.id}`} className='items-center'>
+                                    <img className='w-full rounded-full object-cover aspect-square' src={`http://localhost:1337${post.attributes.immagini.data[0].attributes.url}`}/>
+                                </Link>
                             </div>
                         </div>
-                    </Link>
-                )}
+                    )}
+                </div>
             </div>
         </div>
     </div>

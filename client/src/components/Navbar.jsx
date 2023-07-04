@@ -20,7 +20,6 @@ const Navbar = () => {
                     <Link to={'/book'}><li>Prenota il tuo Video</li></Link>
                     <Link to={'/gallery'}><li>Galleria</li></Link>
                     <li>Shop</li>
-                    <Link to={'/clients'}><li>I Nostri Clienti</li></Link>
                 </ul>
             </div>
 
@@ -33,7 +32,6 @@ const Navbar = () => {
             <Link to={'/book'}><li>Prenota il tuo Video</li></Link>
             <Link to={'/gallery'}><li>Galleria</li></Link>
             <li>Shop</li>
-            <Link to={'/clients'}><li>I Nostri Clienti</li></Link>
         </ul>
     </div>
 }
