@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './BookingCalendar/styles.css'
 import moment from "moment/min/moment-with-locales";
+import {daysInWeekByDay} from "../utils/datetime.jsx";
 
 import calendarToolbar from './CalendarToolbar.jsx'
 
@@ -54,10 +55,8 @@ const BookingCalendar = () => {
     }
 
     const validateBookingTimeSlot = (slot) => {
-        if(slot.getDay() >= 1 && slot.getDay() <= 5 && slot.getHours() < 13 || //Mon-Fri before 13.00
-            slot.getDay() >= 1 && slot.getDay() <= 5 && slot.getHours() > 13 &&
-            (slot.getHours() < 18 || slot.getHours() == 18 && slot.getMinutes() < 30) || //Mon-Fri 14.00-18.30
-            (slot.getDay() == 0 || slot.getDay() == 6) && slot.getHours() < 8 //Sat-Sun before 8.00)
+        if(slot.getHours() > 13 && slot.getHours() < 16 ||
+            new Date(slot) < new Date()                   //already passed
         ){
             return false
         } else {
@@ -125,10 +124,10 @@ const BookingCalendar = () => {
 
     const getSlotProps = (slotStart) => {
         let bgColor = ''
-        let borderTop = ''
-        let borderRight = ''
-        let borderBottom = ''
-        let borderLeft = ''
+        let borderTop = '0'
+        let borderRight = '0'
+        let borderBottom = '0'
+        let borderLeft = '0'
 
         if(!validateBookingTimeSlot(slotStart)){
             bgColor = 'lightgray'
@@ -142,30 +141,31 @@ const BookingCalendar = () => {
         const isLastSlot = slotStart.getTime() === highlightedSlots[highlightedSlots.length - 1]?.getTime()
 
         if(toHighlight){
-            borderRight = '1px solid red'
-            borderLeft = '1px solid red'
+            borderRight = '2px solid yellow'
+            borderLeft = '2px solid yellow'
             if(isFirstSlot){
-                borderTop = '1px solid red'
+                borderTop = '2px solid yellow'
             }
             if(isLastSlot && !hoveredSlot){
-                borderBottom = '1px solid red'
+                borderBottom = '2px solid yellow'
             }
         }
 
         if(!selectedSlots.start && slotStart.getTime() === hoveredSlot?.getTime()){
-            borderRight = '1px solid red'
-            borderLeft = '1px solid red'
-            borderTop = '1px solid red'
-            borderBottom = '1px solid red'
+            console.log('a')
+            borderRight = '2px solid yellow'
+            borderLeft = '2px solid yellow'
+            borderTop = '2px solid yellow'
+            borderBottom = '2px solid yellow'
         }
         if(selectedSlots.start && !selectedSlots.end && getSlotsBetween(selectedSlots.start, hoveredSlot).some((slot) => slot.getTime() === slotStart.getTime())) {
-            borderRight = '1px solid red'
-            borderLeft = '1px solid red'
+            borderRight = '2px solid yellow'
+            borderLeft = '2px solid yellow'
         }
         if(selectedSlots.start && !selectedSlots.end && slotStart.getTime() === hoveredSlot?.getTime()){
-            borderRight = '1px solid red'
-            borderLeft = '1px solid red'
-            borderBottom = '1px solid red'
+            borderRight = '2px solid yellow'
+            borderLeft = '2px solid yellow'
+            borderBottom = '2px solid yellow'
         }
 
         return {
@@ -174,7 +174,7 @@ const BookingCalendar = () => {
                 borderTop: borderTop,
                 borderRight: borderRight,
                 borderLeft: borderLeft,
-                borderBottom: borderBottom
+                borderBottom: borderBottom,
             },
             onMouseEnter: () => {
                 if(!selectedSlots.start || (!isInvalidSlotBetween(selectedSlots.start, slotStart) && slotStart.getTime() > selectedSlots.start.getTime()))
@@ -260,13 +260,18 @@ const BookingCalendar = () => {
                     <Calendar events={prenotations} localizer={localizer}
                               startAccessor={prenotation => new Date(prenotation.attributes.inizio)}
                               endAccessor={prenotation => new Date(prenotation.attributes.fine)}
-                              view={'week'}
+                              view={'week'} min={new Date(0,0,0,9,0,0)}
+                              max={new Date(0,0,0,19,0,0)}
                               components={{
-                                  toolbar: (props) => calendarToolbar(handleNavigate)
+                                  toolbar: (props) => calendarToolbar(handleNavigate, daysInWeekByDay(new Date(renderDate)))
                               }}
                               date={renderDate} selectable='ignoreEvents' onSelectSlot={handleSlotSelection}
                               slotPropGetter={getSlotProps} dayLayoutAlgorithm='no-overlap'
                     />
+                </div>
+                <div>
+                    <br/>
+                    <p>*Gli orari sono personalizzabili all'interno delle richieste</p>
                 </div>
                 <Modal isOpen={showModal} onRequestClose={handleCloseModal} contentLabel="Prenota" style={getModalStyle()}>
                     <h2>Dettagli della prenotazione</h2>
@@ -275,7 +280,7 @@ const BookingCalendar = () => {
                         <input className='block border border-gray-300 p-2 rounded' type="email" value={email} onChange={handleEmailChange}/>
                     </div>
                     <div>
-                        <label className='font-bold'>Descrizione:</label>
+                        <label className='font-bold'>Richieste:</label>
                         <input className='block border border-gray-300 p-2 rounded' type="text" value={description} onChange={handleDescriptionChange}/>
                     </div>
                     <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={handleBookingCreation}>Prenota</button>
