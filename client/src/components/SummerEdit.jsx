@@ -132,7 +132,7 @@ const SummerEdit = () => {
                     <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 ss:grid-cols-1 gap-x-8  text-black flex'>
                         <div className='col-span-4 gap-x-8 h-[900px]'>
                             <video src={summereditthumbnail} loop autoPlay muted className='h-full w-full object-cover'></video>
-                            <button onClick={handleScroll} id="overlay-button" className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>
+                            <button onClick={handleScroll} id="overlay-button" className='font-semibold py-2 px-4 rounded-4xl hover:bg-white'>
                                 Vedi Pacchetti
                             </button>
                         </div>
@@ -144,7 +144,7 @@ const SummerEdit = () => {
                                 <button onClick={()=>{
                                     setSelectedPack(50)
                                     ref2.current?.scrollIntoView({behavior: 'smooth'})
-                                }} className='mt-8'>Acquista Pacchetto</button>
+                                }} className='mt-8 rounded-xl hover:bg-white py-2 px-4'>Acquista Pacchetto</button>
                             </div>
                             <div className='w-[50%] py-8 flex flex-col justify-center items-center'>
                                 <img src={pacchetto80} className='w-[50%]'/>
@@ -153,7 +153,7 @@ const SummerEdit = () => {
                                 <button onClick={()=>{
                                     setSelectedPack(80)
                                     ref2.current?.scrollIntoView({behavior: 'smooth'})
-                                }} className='mt-8'>Acquista Pacchetto</button>
+                                }} className='mt-8 rounded-xl hover:bg-white py-2 px-4'>Acquista Pacchetto</button>
                             </div>
                         </div>
                         <div className='flex flex-row col-span-4 gap-x-4 mx-8' ref={ref2}>

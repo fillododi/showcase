@@ -8,7 +8,6 @@ import moment from "moment/min/moment-with-locales";
 import calendarToolbar from './CalendarToolbar.jsx'
 
 import useFetch from "../hooks/useFetch";
-import {dateFormat} from "react-big-calendar/lib/utils/propTypes.js";
 const BookingCalendar = () => {
     const [email, setEmail] = useState('')
     const [description, setDescription] = useState('')
@@ -254,7 +253,6 @@ const BookingCalendar = () => {
     }
 
     return <div className='container mx-auto p-4'>
-        <h2 className='text-2x1 font-bold mb-4'>Calendario</h2>
         {prenotations?
             <div>
                 {/* Render the React Big Calendar */}
