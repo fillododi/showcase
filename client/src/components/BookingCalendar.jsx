@@ -177,7 +177,7 @@ const BookingCalendar = () => {
                 borderBottom: borderBottom,
             },
             onMouseEnter: () => {
-                if(!selectedSlots.start || (!isInvalidSlotBetween(selectedSlots.start, slotStart) && slotStart.getTime() > selectedSlots.start.getTime()))
+                if(!selectedSlots.start || (!isInvalidSlotBetween(selectedSlots.start, moment(slotStart).add(30, 'm').toDate()) && slotStart.getTime() > selectedSlots.start.getTime()))
                 setHoveredSlot(slotStart)
             },
             onMouseLeave: () => {

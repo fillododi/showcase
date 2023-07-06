@@ -11,22 +11,21 @@ const LegalPage = () => {
                     <li>
                         Termini di utilizzo:
                         <ul className='list-disc'>
-                            <li>Gli utenti devono accettare i termini di utilizzo del sito prima di accedere ai servizi offerti.</li>
-                            <li>L'utilizzo del sito implica l'accettazione di tutte le condizioni e le limitazioni specificate nei termini di utilizzo.</li>
+                            <li>Gli utenti accettano espressamente i termini di utilizzo del sito, accedendo ai servizi offerti.</li>
+                            <li>L'utilizzo del sito implica l'accettazione di tutte le condizioni e le limitazioni specificate nei termini di utilizzo, determinando la conferma di espressa lettura e accettazione dei contenuti e delle modalità di prestazione dei servizi.</li>
                         </ul>
                     </li>
                     <li>
                         Privacy e protezione dei dati:
                         <ul className='list-disc'>
-                            <li>La politica sulla privacy spiega come vengono raccolti, utilizzati e protetti i dati personali degli utenti.</li>
-                            <li>I dati personali verranno trattati nel rispetto delle leggi sulla privacy applicabili.</li>
+                            <li>iIdati personali degli utenti verranno gestiti conservati e protetti nel rispetto del Regolamento Generale Sulla Protezione Dati.</li>
                         </ul>
                     </li>
                     <li>
                         Proprietà intellettuale:
                         <ul className='list-disc'>
                             <li>Tutti i contenuti presenti sul sito, inclusi testi, immagini, video, loghi e grafica, sono di proprietà di "SHOWCASE MANTOVA" o dei suoi collaboratori, e sono protetti dalle leggi sul diritto d'autore.</li>
-                            <li>È vietato copiare, riprodurre o utilizzare i contenuti senza autorizzazione.</li>
+                            <li>È vietato copiare, riprodurre o utilizzare i contenuti senza autorizzazione da parte del titolare che si intende conferita espressamente, con l'invio, a SHOWCASE MANTOVA.</li>
                         </ul>
                     </li>
                     <li>
