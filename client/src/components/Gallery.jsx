@@ -1,14 +1,13 @@
 import React, {useState} from "react";
 import {useEffect} from "react";
-import checkMediaType from "../utils/mediatypes.jsx";
-import {FaChevronUp, FaChevronDown, FaChevronLeft, FaChevronRight} from "react-icons/all.js";
+import {FaChevronUp, FaChevronDown} from "react-icons/all.js";
+import MultipleSlider from "./MultipleSlider.jsx";
 
 import './Gallery/styles.css'
 
 const Gallery = ({clients}) => {
     const [openRow, setOpenRow] = useState(null)
     const [currentMedia, setCurrentMedia] = useState([])
-    const [slidePosition, setSlidePosition] = useState(0)
 
     useEffect(()=> {
         if(window.location.hash){
@@ -28,7 +27,6 @@ const Gallery = ({clients}) => {
             setCurrentMedia([])
         } else {
             setOpenRow(client.id)
-            setSlidePosition(0)
             let newMedia = []
             client.attributes.posts.data.forEach(post =>
                 post.attributes.immagini.data.forEach(
@@ -36,14 +34,6 @@ const Gallery = ({clients}) => {
                 )
             )
             setCurrentMedia(newMedia)
-        }
-    }
-    const handleSlideChange = (direction) => {
-        if(direction === "r"){
-            setSlidePosition(slidePosition+1)
-        }
-        if(direction === "l"){
-            setSlidePosition(slidePosition-1)
         }
     }
 
@@ -67,61 +57,7 @@ const Gallery = ({clients}) => {
                                     </div>
                                 </div>
                                 <div id='row' className={openRow === client.id? 'openedRow': ''}>
-                                        <div className='h-48 flex flex-row justify-between'>
-                                            <div className= 'flex h-48 items-center'>
-                                                <button className={slidePosition == 0 ? 'invisible': 'visible text-xl border-0 text-gray-800 bg-white hover:scale-110 hover:text-black hover:bg-white'} onClick={()=>handleSlideChange('l')}>
-                                                    <FaChevronLeft/>
-                                                </button>
-                                            </div>
-                                            <div className='flex flex-row gap-x-16'>
-                                                <div className='h-48'>
-                                                    {
-                                                        currentMedia[slidePosition] &&
-                                                        (checkMediaType(currentMedia[slidePosition]) === "image"?
-                                                                <img className='h-full' src={`http://localhost:1337${currentMedia[slidePosition]}`}/>:
-                                                                <video controls className='h-full object-contain'>
-                                                                    <source src={`http://localhost:1337${currentMedia[slidePosition]}`} type={`video/${checkMediaType(currentMedia[slidePosition])[1]}`}/>
-                                                                </video>
-                                                        )
-                                                    }
-                                                </div>
-                                                <div className='h-48'>
-                                                    {
-                                                        currentMedia[slidePosition + 1] &&
-                                                        (checkMediaType(currentMedia[slidePosition + 1]) === "image"?
-                                                            <img className='h-full' src={`http://localhost:1337${currentMedia[slidePosition + 1]}`}/>:
-                                                            <video controls className='h-full object-contain'>
-                                                                <source src={`http://localhost:1337${currentMedia[slidePosition + 1]}`} type={`video/${checkMediaType(currentMedia[slidePosition + 1])[1]}`}/>
-                                                            </video>)
-                                                    }
-                                                </div>
-                                                <div className='h-48'>
-                                                    {
-                                                        currentMedia[slidePosition + 2] &&
-                                                        (checkMediaType(currentMedia[slidePosition + 2]) === "image"?
-                                                            <img className='h-full' src={`http://localhost:1337${currentMedia[slidePosition + 2]}`}/>:
-                                                            <video controls className='object-contain h-full'>
-                                                                <source src={`http://localhost:1337${currentMedia[slidePosition + 2]}`} type={`video/${checkMediaType(currentMedia[slidePosition + 2])[1]}`}/>
-                                                            </video>)
-                                                    }
-                                                </div>
-                                                <div className='h-48'>
-                                                    {
-                                                        currentMedia[slidePosition + 3] &&
-                                                        (checkMediaType(currentMedia[slidePosition + 3]) === "image"?
-                                                            <img className='h-full' src={`http://localhost:1337${currentMedia[slidePosition + 3]}`}/>:
-                                                            <video controls className='object-contain h-full'>
-                                                                <source src={`http://localhost:1337${currentMedia[slidePosition + 3]}`} type={`video/${checkMediaType(currentMedia[slidePosition + 3])[1]}`}/>
-                                                            </video>)
-                                                    }
-                                                </div>
-                                            </div>
-                                            <div className='flex items-center h-48'>
-                                                <button className={slidePosition >= currentMedia.length - 4 ? 'invisible': 'visible text-xl border-0 text-gray-800 bg-white hover:scale-110 hover:text-black hover:bg-white'} onClick={()=>handleSlideChange('r')}>
-                                                    <FaChevronRight/>
-                                                </button>
-                                            </div>
-                                        </div>
+                                    <MultipleSlider urls={currentMedia}></MultipleSlider>
                                 </div>
                                 <hr className='border-gray-400 mt-4'/>
                             </div>
