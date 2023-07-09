@@ -177,8 +177,9 @@ const BookingCalendar = () => {
                 borderBottom: borderBottom,
             },
             onMouseEnter: () => {
-                if(!selectedSlots.start || (!isInvalidSlotBetween(selectedSlots.start, moment(slotStart).add(30, 'm').toDate()) && slotStart.getTime() > selectedSlots.start.getTime()))
-                setHoveredSlot(slotStart)
+                if((!selectedSlots.start && validateBookingTimeSlot(slotStart)) || (!isInvalidSlotBetween(selectedSlots.start, moment(slotStart).add(30, 'm').toDate()) && slotStart.getTime() > selectedSlots.start.getTime())){
+                    setHoveredSlot(slotStart)
+                }
             },
             onMouseLeave: () => {
                 setHoveredSlot(null)
@@ -220,27 +221,13 @@ const BookingCalendar = () => {
     }
 
     const getModalStyle = () => {
-        let dayNumber = getSelectedDay()
-        if(dayNumber === 0) {
-            dayNumber = 7
-        }
-        const calendarWrapper = document.getElementsByClassName('calendar-wrapper')[0]
-        const calendarRect = calendarWrapper?.getBoundingClientRect()
-        const dayWidth = calendarRect?.width/7
         const modalWidth = 300
         const modalHeight = 300
-
-        const left = calendarRect?.left + (dayWidth * dayNumber)
-        const maxLeft = calendarRect?.left + calendarRect?.width - modalWidth
-        const adjustedLeft = left > maxLeft? maxLeft: left
-
         return {
             content: {
-                top: "50%",
-                left: `${adjustedLeft}px`,
+                margin: "auto",
                 width: `${modalWidth}px`,
                 height: `${modalHeight}px`,
-                transform: "translate(0%, -50%)",
             }
         }
     }
@@ -274,17 +261,23 @@ const BookingCalendar = () => {
                     <p>*Gli orari sono personalizzabili all'interno delle richieste</p>
                 </div>
                 <Modal isOpen={showModal} onRequestClose={handleCloseModal} contentLabel="Prenota" style={getModalStyle()}>
-                    <h2>Dettagli della prenotazione</h2>
-                    <div>
-                        <label className='font-bold'>E-Mail:</label>
-                        <input className='block border border-gray-300 p-2 rounded' type="email" value={email} onChange={handleEmailChange}/>
+                    <div className='grid grid-cols-1 content-around h-full'>
+                        <div>
+                            <h2 className='font-bold'>Dettagli della prenotazione</h2>
+                        </div>
+                        <div>
+                            <label className='font-bold'>E-Mail:</label>
+                            <input className='block border border-gray-300 p-2 rounded' type="email" value={email} onChange={handleEmailChange}/>
+                        </div>
+                        <div>
+                            <label className='font-bold'>Richieste:</label>
+                            <input className='block border border-gray-300 p-2 rounded' type="text" value={description} onChange={handleDescriptionChange}/>
+                        </div>
+                        <div className='flex flex-row gap-4 mt-4'>
+                            <button className='w-2/3 bg-blue-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded hover:text-white' onClick={handleBookingCreation}>Prenota</button>
+                            <button className='w-1/6 bg-red-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded hover:text-white'onClick={handleCloseModal}>X</button>
+                        </div>
                     </div>
-                    <div>
-                        <label className='font-bold'>Richieste:</label>
-                        <input className='block border border-gray-300 p-2 rounded' type="text" value={description} onChange={handleDescriptionChange}/>
-                    </div>
-                    <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' onClick={handleBookingCreation}>Prenota</button>
-                    <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'onClick={handleCloseModal}>Chiudi</button>
                 </Modal>
             </div>
             : ''
