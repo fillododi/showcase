@@ -6,24 +6,47 @@ import checkMediaType from "../utils/mediatypes.jsx";
 import {FaChevronLeft, FaChevronRight} from "react-icons/all.js";
 
 const MultipleSlider = (urls) => {
-    const settings = {
-        initialSlide: 0,
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        prevArrow: <div className='flex h-48 items-center'>
-            <button className='text-xl border-0 text-gray-800 bg-white hover:scale-110 hover:text-black hover:bg-white'>
-                <FaChevronLeft/>
-            </button>
-        </div>,
-        nextArrow: <div className= 'flex h-48 items-center'>
-            <button className='text-xl border-0 text-gray-800 bg-white hover:scale-110 hover:text-black hover:bg-white'>
-                <FaChevronRight/>
-            </button>
-        </div>
+    let settings = {}
+    if(urls.urls.length >= 3){
+        settings = {
+            initialSlide: 0,
+            dots: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            prevArrow: <div className='flex h-48 items-center'>
+                <button className='text-xl border-0 text-gray-800 bg-white hover:scale-110 hover:text-black hover:bg-white'>
+                    <FaChevronLeft/>
+                </button>
+            </div>,
+            nextArrow: <div className= 'flex h-48 items-center'>
+                <button className='text-xl border-0 text-gray-800 bg-white hover:scale-110 hover:text-black hover:bg-white'>
+                    <FaChevronRight/>
+                </button>
+            </div>
 
+        }
+    } else {
+        settings = {
+            initialSlide: 0,
+            dots: true,
+            infinite: false,
+            speed: 500,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            prevArrow: <div className='flex h-48 items-center'>
+                <button className='text-xl border-0 text-gray-800 bg-white hover:scale-110 hover:text-black hover:bg-white'>
+                    <FaChevronLeft/>
+                </button>
+            </div>,
+            nextArrow: <div className= 'flex h-48 items-center'>
+                <button className='text-xl border-0 text-gray-800 bg-white hover:scale-110 hover:text-black hover:bg-white'>
+                    <FaChevronRight/>
+                </button>
+            </div>
+
+        }
     }
     return <div>
         <Slider {...settings}>

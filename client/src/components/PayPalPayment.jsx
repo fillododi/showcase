@@ -1,9 +1,11 @@
-import React, {useEffect, useState} from "react"
+import React, {useState} from "react"
 import {PayPalButtons} from "@paypal/react-paypal-js";
+import {Navigate} from "react-router-dom";
 
 const PayPalPayment = ({item, id}) => {
 
     const serverUrl = "http://localhost:8888"
+    const [success, setSuccess] = useState(false)
 
     const createOrder = (data) => {
         if(item === "summeredit50") {
@@ -47,14 +49,21 @@ const PayPalPayment = ({item, id}) => {
             })
         }).then((response) => {
             console.log("Payment successful")
-            return response.json()
-        }).then((data) => console.log(data))
+            setSuccess(true)
+        })
 
     }
-    return <PayPalButtons
-        createOrder={(data, actions) => createOrder(data, actions)}
-        onApprove = {(data, actions) => onApprove(data, actions, id)}>
-    </PayPalButtons>
+
+    return <>
+        {success === false ?
+            <PayPalButtons
+                createOrder={(data, actions) => createOrder(data, actions)}
+                onApprove={(data, actions) => onApprove(data, actions, id)}>
+            </PayPalButtons>
+        :
+            <Navigate to={'/thankyou'}/>
+        }
+    </>
 }
 
 export default PayPalPayment

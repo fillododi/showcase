@@ -6,5 +6,6 @@ import BookingCalendar from "./BookingCalendar.jsx";
 import Gallery from "./Gallery.jsx";
 import SummerEdit from "./SummerEdit.jsx";
 import PayPalPayment from "./PayPalPayment.jsx";
+import SummerEditSelectionContent from "./SummerEditSelectionContent.jsx";
 
-export {Navbar, HomeContent, Footer, PostContent, BookingCalendar, Gallery, SummerEdit, PayPalPayment}
+export {Navbar, HomeContent, Footer, PostContent, BookingCalendar, Gallery, SummerEdit, PayPalPayment, SummerEditSelectionContent}

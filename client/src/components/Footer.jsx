@@ -25,6 +25,7 @@ const Footer = () => {
 
         try{
             const response = await axios.post('http://localhost:1337/api/feedbacks', {data: {feedback: feedBack}})
+            setFeedBack('')
         } catch (e) {
             console.error(e)
         }
