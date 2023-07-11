@@ -336,7 +336,7 @@ const BookingCalendar = () => {
         }
     }
 
-    return <div className='container mx-auto p-4 max-w-[1240px]'>
+    return <div className='container mx-auto p-4 max-w-[1240px] mt-[80px]'>
         {prenotations?
             <div>
                 {/* Render the React Big Calendar */}
@@ -354,7 +354,7 @@ const BookingCalendar = () => {
                                   slotPropGetter={getSlotProps} dayLayoutAlgorithm='no-overlap' longPressThreshold={10}
                         />
                         :
-                        <div className='flex flex-col justify-center gap-y-4 h-[35rem]'>
+                        <div className='flex flex-col justify-center gap-y-4 h-[35rem] px-4'>
                             <Calendar localizer={localizer} events={mobileCalendarView === 'day'? prenotations: []}
                                       startAccessor={prenotation => new Date(prenotation.attributes.inizio)}
                                       endAccessor={prenotation => new Date(prenotation.attributes.fine)}
@@ -375,7 +375,7 @@ const BookingCalendar = () => {
                         </div>
                     }
                 </div>
-                <div>
+                <div className='mx-4'>
                     <br/>
                     <p>*Gli orari sono personalizzabili all'interno delle richieste</p>
                 </div>

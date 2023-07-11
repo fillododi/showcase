@@ -43,7 +43,7 @@ const HomeContent = ({posts, clients})=> {
         }
     },[])
 
-    return <div className="w-full bg-[#f9f9f9] py-[50px]">
+    return <div className="w-full bg-[#f9f9f9] py-[50px] mt-[80px]">
         <div className='max-w-[1240px] mx-auto'>
             <div className='logo-container flex justify-center'>
                 <img src={logo} alt='logo' id='logo'
@@ -67,7 +67,7 @@ const HomeContent = ({posts, clients})=> {
                     {
                         clients.data &&
                         clients.data.map(client => <div className='items-center flex flex-col justify-center'>
-                            <Link to={client.attributes.link_insta? client.attributes.link_insta: "#"} className='flex flex-col items-center justify-center w-[75%]'>
+                            <Link to={client.attributes.link_insta? client.attributes.link_insta: "#"} className='flex flex-col items-center justify-center w-[75%] gap-y-2'>
                                 <img src={`http://localhost:1337${client.attributes.logo.data.attributes.url}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300'/>
                                 <p className='text-center text-xs xs:text-base sm:text-lg'>{client.attributes.nome? client.attributes.nome: ""}</p>
                             </Link>

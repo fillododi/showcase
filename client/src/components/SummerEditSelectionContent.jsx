@@ -5,6 +5,7 @@ import {useDropzone} from "react-dropzone";
 import checkMediaType from "../utils/mediatypes.jsx";
 import {FiMusic, AiOutlinePlus} from "react-icons/all.js";
 import {PayPalPayment} from "./index.js";
+import useWindowDimensions from "../hooks/useWindowDimensions.js";
 
 const SummerEditSelectionContent = () => {
     const [email, setEmail] = useState("")
@@ -14,6 +15,7 @@ const SummerEditSelectionContent = () => {
     const [editId, setEditId] = useState(null)
 
     const {type} = useParams()
+    const {width, height} = useWindowDimensions()
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
@@ -120,7 +122,7 @@ const SummerEditSelectionContent = () => {
         })
         return <section className='container'>
             {selectedFiles.length === 0?
-                <div {...getRootProps({className: 'dropzone my-[10rem] border-dashed border-2 border-gray-300 rounded-md p-4 text-center hover:border-solid'})}>
+                <div {...getRootProps({className: `dropzone ${width>=1240? 'sm:my-[10rem]':'my-8'} border-dashed border-2 border-gray-300 rounded-md p-4 text-center hover:border-solid`})}>
                     <input {...getInputProps()} />
                     {type === '50' && <p>Trascina qui il video e la traccia audio (opzionale), o clicca per selezionarlo</p>}
                     {type === '80' && <p>Trascina qui il video, le foto (fino a 8) e la traccia audio, o clicca per selezionarli</p>}
@@ -128,7 +130,7 @@ const SummerEditSelectionContent = () => {
                 :
                 <div className='flex flex-col gap-y-4'>
                     <p className='font-bold text-xl'>File(s) selezionati:</p>
-                    <div className='grid grid-cols-5 gap-y-8'>
+                    <div className={`${width < 1240? 'grid grid-cols-1 xs:grid-cols-2 sm:!grid-cols-4': 'grid grid-cols-3 xl:grid-cols-5'} gap-y-8'`}>
                         {selectedFiles.map(file => <div className='rounded-lg border border-gray-400 w-[8rem] h-[8rem] overflow-hidden flex items-center justify-center'>
                             {checkMediaType(file.name) === 'image' && <img src={file.preview} className='object-cover' onLoad={()=>{URL.revokeObjectURL(file.preview)}}/>}
                             {checkMediaType(file.name)[0] === 'video' && <video className='object-cover' autoPlay loop muted onLoad={()=>{URL.revokeObjectURL(file.preview)}}>
@@ -143,11 +145,72 @@ const SummerEditSelectionContent = () => {
         </section>
     }
 
-    return <div className="w-full">
+    return <div className="w-full mt-[80px]">
         <div className='mx-auto  pb-[50px] p-16'>
             {checkout === false ?
-                <div className='gap-x-16 text-black flex flex-row justify-between'>
-                    <div className='border-2 border-gray-400 rounded-lg w-1/2'>
+                width >= 1240?
+                    <div className='gap-x-16 text-black flex flex-row justify-between'>
+                        <div className='border-2 border-gray-400 rounded-lg w-1/2'>
+                            <p className='m-4 text-justify'>
+                                Politica di Servizio di Editing Video e Rimborso<br/><br/>
+                                1.	Servizio di Editing Video:<br/>
+                                Offro un servizio professionale di editing video, in cui accetto materiale video/fotografico fornito dai clienti per elaborarlo secondo le loro richieste specifiche.<br/>
+                                2.	Processo di Lavorazione:<br/>
+                                2.1. Iniziale Consultazione: Prima di iniziare il lavoro di editing, discuteremo in dettaglio le tue aspettative, preferenze e requisiti specifici per assicurarci che io abbia una comprensione chiara delle tue richieste.<br/>
+                                2.2. Consegna del Materiale: Dovrai fornirmi il materiale video/fotografico completo e tutti i dettagli aggiuntivi necessari per il tuo progetto. Opzionale l’aggiunta di una traccia audio<br/>
+                                2.3. Lavoro di Editing: Effettuerò l’editing del materiale secondo le tue specifiche, applicando le mie competenze e la mia esperienza professionale per creare un prodotto finale di alta qualità.<br/>
+                                3.	Revisioni e Modifiche:<br/>
+                                3.1. Anteprima del Prodotto: Ti fornirò un’anteprima del prodotto finale, in genere sotto forma di un video privato o un set di immagini, per consentirti di valutare il lavoro svolto.<br/>
+                                3.2. Feedback e Modifiche: Se il prodotto finale non soddisfa le tue aspettative, sarai in grado di fornirmi un feedback specifico sulle modifiche richieste. Mi impegno a lavorare con te per apportare le modifiche necessarie al fine di raggiungere il risultato desiderato.<br/>
+                                4.	Rimborso:<br/>
+                                4.1. Soddisfazione Garantita: Cerco di garantire la tua completa soddisfazione con il servizio di editing video. Se non sei soddisfatto del prodotto finale, hai diritto a richiedere un rimborso completo.<br/>
+                                4.2. Richiesta di Rimborso: Per richiedere un rimborso, dovrai inviarmi una comunicazione scritta entro 2 giorni dalla ricezione del prodotto finale. Spiega dettagliatamente le ragioni per cui non sei soddisfatto e fornisci tutti i feedback specifici sulle modifiche richieste.<br/>
+                                4.3. Risoluzione Alternativa: Prima di procedere con un rimborso completo, mi impegnerò a risolvere le tue preoccupazioni e a cercare una soluzione alternativa che possa soddisfarti. Ciò può includere ulteriori modifiche o un ulteriore round di revisioni.<br/>
+                                5.	Diritti di Utilizzo:<br/>
+                                Tieni presente che, a meno che non sia diversamente concordato, il diritto di utilizzo del materiale video/fotografico fornito dai clienti rimarrà di tua proprietà. Non utilizzerò o divulgherò il tuo materiale senza il tuo consenso.<br/><br/>
+                                Firma: Showcasemantova
+                            </p>
+                        </div>
+                        <div className='flex flex-col w-1/2 gap-y-8'>
+                            <div className='flex flex-col ml-16 gap-y-4 w-1/3'>
+                                <label className='font-bold text-xl'>Email:</label>
+                                <Input className='border-gray-400' type='email' label='Inserisci qui la tua E-Mail' value={email} onChange={handleEmailChange}/>
+                            </div>
+                            <div className='flex flex-col ml-16 gap-y-4'>
+                                <label className='font-bold text-xl'>Inserisci le tue richieste:</label>
+                                <Textarea label='Scrivi qui quello che dobbiamo fare' className='border-gray-400' type='text' value={description} onChange={handleDescriptionChange}/>
+                            </div>
+                            <div className='ml-16'>
+                                <Dropzone/>
+                            </div>
+                            <div className='ml-16 flex justify-center'>
+                                <button className={`mt-8 rounded-lg py-2 px-4 ${selectedFiles.length === 0? 'bg-gray-400 border-gray-400 hover:bg-gray-400 hover:text-white hover:cursor-default': 'hover:bg-white'}`} onClick={handleCheckout}>Acquista Ora</button>
+                            </div>
+                        </div>
+                    </div>
+                    :
+                    <div className='flex flex-col'>
+                        <div className='gap-x-16 text-black flex flex-col justify-between'>
+                            <div className='flex flex-col gap-y-4 justify-center' >
+                                <div className='flex flex-col gap-y-4'>
+                                    <label className='font-bold text-xl'>Email:</label>
+                                    <Input className='border-gray-400' type='email' label='Inserisci qui la tua E-Mail' value={email} onChange={handleEmailChange}/>
+                                </div>
+                                <div className='flex flex-col gap-y-4'>
+                                    <label className='font-bold text-xl'>Inserisci le tue richieste:</label>
+                                    <Textarea label='Scrivi qui quello che dobbiamo fare' className='border-gray-400' type='text' value={description} onChange={handleDescriptionChange}/>
+                                </div>
+                            </div>
+                            <div className='flex flex-col'>
+                                <div>
+                                    <Dropzone/>
+                                </div>
+                                <div className='flex justify-center'>
+                                    <button className={`mt-8 rounded-lg py-2 px-4 ${selectedFiles.length === 0? 'bg-gray-400 border-gray-400 hover:bg-gray-400 hover:text-white hover:cursor-default': 'hover:bg-white'}`} onClick={handleCheckout}>Acquista Ora</button>
+                                </div>
+                            </div>
+                        </div>
+                        <hr className='mt-8 border-gray-600'/>
                         <p className='m-4 text-justify'>
                             Politica di Servizio di Editing Video e Rimborso<br/><br/>
                             1.	Servizio di Editing Video:<br/>
@@ -168,23 +231,7 @@ const SummerEditSelectionContent = () => {
                             Firma: Showcasemantova
                         </p>
                     </div>
-                    <div className='flex flex-col w-1/2 gap-y-8'>
-                        <div className='flex flex-col ml-16 gap-y-4 w-1/3'>
-                            <label className='font-bold text-xl'>Email:</label>
-                            <Input className='border-gray-400' type='email' label='Inserisci qui la tua E-Mail' value={email} onChange={handleEmailChange}/>
-                        </div>
-                        <div className='flex flex-col ml-16 gap-y-4'>
-                            <label className='font-bold text-xl'>Inserisci le tue richieste:</label>
-                            <Textarea label='Scrivi qui quello che dobbiamo fare' className='border-gray-400' type='text' value={description} onChange={handleDescriptionChange}/>
-                        </div>
-                        <div className='ml-16'>
-                            <Dropzone/>
-                        </div>
-                        <div className='ml-16 flex justify-center'>
-                            <button className={`mt-8 rounded-lg py-2 px-4 ${selectedFiles.length === 0? 'bg-gray-400 border-gray-400 hover:bg-gray-400 hover:text-white hover:cursor-default': 'hover:bg-white'}`} onClick={handleCheckout}>Acquista Ora</button>
-                        </div>
-                    </div>
-                </div>
+
                 :
                 <div className='max-w-[720px] mx-auto py-8 gap-y-8 flex flex-col text-center'>
                     <h3 className='text-4xl my-4 text-center'>Riepilogo</h3>
