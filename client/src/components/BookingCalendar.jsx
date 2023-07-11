@@ -9,14 +9,19 @@ import {daysInWeekByDay} from "../utils/datetime.jsx";
 import calendarToolbar from './CalendarToolbar.jsx'
 
 import useFetch from "../hooks/useFetch";
+import useWindowDimensions from "../hooks/useWindowDimensions.js";
 const BookingCalendar = () => {
     const [email, setEmail] = useState('')
     const [description, setDescription] = useState('')
     const [prenotations, setPrenotations] = useState([])
     const [renderDate, setRenderDate] = useState(new Date())
     const [showModal, setShowModal] = useState(false)
+    const [canCloseModal, setCanCloseModal] = useState(false)
     const [selectedSlots, setSelectedSlots] = useState({start: null, end: null})
     const [hoveredSlot, setHoveredSlot] = useState(null)
+    const [mobileCalendarView, setMobileCalendarView] = useState('month')
+
+    const {width, height} = useWindowDimensions()
 
     moment.locale('it')
     const localizer = momentLocalizer(moment)
@@ -55,7 +60,7 @@ const BookingCalendar = () => {
     }
 
     const validateBookingTimeSlot = (slot) => {
-        if(slot.getHours() > 13 && slot.getHours() < 16 ||
+        if(slot.getHours() < 9 || slot.getHours() > 18 || slot.getHours() > 13 && slot.getHours() < 16 ||
             new Date(slot) < new Date()                   //already passed
         ){
             return false
@@ -91,7 +96,7 @@ const BookingCalendar = () => {
     const handleDescriptionChange = (e) => {
         setDescription(e.target.value)
     }
-    const handleNavigate = (action) => {
+    const handleNavigateWeek = (action) => {
         if(action == "PREV"){
             setRenderDate((prevDate) => {
                 const newWeek = new Date(prevDate)
@@ -110,6 +115,48 @@ const BookingCalendar = () => {
             setRenderDate(new Date())
         }
         setSelectedSlots({start: null, end: null})
+    }
+    const handleNavigate = (action) => {
+        if(mobileCalendarView === 'day'){
+            if(action == "PREV"){
+                setRenderDate((prevDate) => {
+                    const newDay = new Date(prevDate)
+                    newDay.setDate(newDay.getDate()-1)
+                    return newDay
+                })
+            }
+            else if(action == "NEXT"){
+                setRenderDate((prevDate) => {
+                    const newDay = new Date(prevDate)
+                    newDay.setDate(newDay.getDate()+1)
+                    return newDay
+                })
+            }
+            else if(action == "TODAY"){
+                setRenderDate(new Date())
+            }
+            setSelectedSlots({start: null, end: null})
+        }
+        if(mobileCalendarView === 'month'){
+            if(action == "PREV"){
+                setRenderDate((prevDate) => {
+                    const newMonth = new Date(prevDate)
+                    newMonth.setMonth(newMonth.getMonth()-1)
+                    return newMonth
+                })
+            }
+            else if(action == "NEXT"){
+                setRenderDate((prevDate) => {
+                    const newMonth = new Date(prevDate)
+                    newMonth.setMonth(newMonth.getMonth()+1)
+                    return newMonth
+                })
+            }
+            else if(action == "TODAY"){
+                setRenderDate(new Date())
+            }
+            setSelectedSlots({start: null, end: null})
+        }
     }
 
     const getHighlightedSlots = () => {
@@ -186,6 +233,38 @@ const BookingCalendar = () => {
             }
         }
     }
+
+    const getMonthProps = (daySlot) => {
+        let bgColor = ''
+        if(daySlot < new Date() - 1){
+            bgColor = 'lightgray'
+        } else {
+            let isValid = false
+            let currentSlot = new Date(daySlot)
+            let nextDay = new Date(daySlot)
+            nextDay.setDate(nextDay.getDate() + 1)
+            nextDay.setHours(0)
+            nextDay.setMinutes(0)
+            while(currentSlot <= nextDay){
+                if(validateBookingTimeSlot(new Date(currentSlot)) && !prenotations.some(prenotation => new Date(prenotation.attributes.inizio) <= currentSlot && currentSlot < new Date(prenotation.attributes.fine))){
+                    isValid = true
+                }
+                currentSlot.setMinutes(currentSlot.getMinutes() + 30)
+            }
+            if(isValid){
+                bgColor = 'lightblue'
+            } else {
+                bgColor = 'lightgray'
+            }
+        }
+        return {
+            style: {
+                backgroundColor: bgColor
+            }
+        }
+
+    }
+
     const handleSlotSelection = (slotInfo) => {
         const now = new Date()
         if(validateBookingTimeSlot(slotInfo.start) && slotInfo.start.getTime() > now.getTime()){
@@ -197,23 +276,39 @@ const BookingCalendar = () => {
                 setSelectedSlots({start: slotInfo.start, end: null})
             } else {
                 setSelectedSlots({start: selectedSlots.start, end: slotInfo.end})
+                setCanCloseModal(false)
                 setShowModal(true)
+                setTimeout(()=>{
+                    setCanCloseModal(true)
+                }, 100) //senza questo quando si apre il modale in una posizione in cui cliccando si chiuderebbe, si apre e si chiude subito
             }
         }
     }
-    const handleBookingCreation = () => {
-        const booking = {
-            startTime: selectedSlots.start,
-            endTime: selectedSlots.end,
-            email: email,
-            description: description
-        }
-
-        requestBooking(booking)
+    const handleDaySelection = (dayInfo) => {
+        setRenderDate(dayInfo.start)
+        setMobileCalendarView('day')
         setSelectedSlots({start: null, end: null})
-        setEmail('')
-        setDescription('')
-        setShowModal(false)
+    }
+    const handleMonthSwitch = () => {
+        setRenderDate(new Date())
+        setMobileCalendarView('month')
+        setSelectedSlots({start: null, end: null})
+    }
+    const handleBookingCreation = () => {
+        if(canCloseModal){
+            const booking = {
+                startTime: selectedSlots.start,
+                endTime: selectedSlots.end,
+                email: email,
+                description: description
+            }
+
+            requestBooking(booking)
+            setSelectedSlots({start: null, end: null})
+            setEmail('')
+            setDescription('')
+            setShowModal(false)
+        }
     }
 
     const getSelectedDay = () => {
@@ -233,28 +328,52 @@ const BookingCalendar = () => {
     }
 
     const handleCloseModal = () => {
-        setShowModal(false)
-        setSelectedSlots({start: null, end: null})
-        setEmail('')
-        setDescription('')
+        if(canCloseModal){
+            setShowModal(false)
+            setSelectedSlots({start: null, end: null})
+            setEmail('')
+            setDescription('')
+        }
     }
 
     return <div className='container mx-auto p-4'>
         {prenotations?
             <div>
                 {/* Render the React Big Calendar */}
-                <div className='calendar-wrapper'>
-                    <Calendar events={prenotations} localizer={localizer}
-                              startAccessor={prenotation => new Date(prenotation.attributes.inizio)}
-                              endAccessor={prenotation => new Date(prenotation.attributes.fine)}
-                              view={'week'} min={new Date(0,0,0,9,0,0)}
-                              max={new Date(0,0,0,19,0,0)}
-                              components={{
-                                  toolbar: (props) => calendarToolbar(handleNavigate, daysInWeekByDay(new Date(renderDate)))
-                              }}
-                              date={renderDate} selectable='ignoreEvents' onSelectSlot={handleSlotSelection}
-                              slotPropGetter={getSlotProps} dayLayoutAlgorithm='no-overlap'
-                    />
+                <div className='calendar-wrapper h-[35rem]'>
+                    {width >= 768?
+                        <Calendar events={prenotations} localizer={localizer}
+                                  startAccessor={prenotation => new Date(prenotation.attributes.inizio)}
+                                  endAccessor={prenotation => new Date(prenotation.attributes.fine)}
+                                  view={"week"} min={new Date(0,0,0,9,0,0)}
+                                  max={new Date(0,0,0,19,0,0)}
+                                  components={{
+                                      toolbar: (props) => calendarToolbar("week", handleNavigateWeek, daysInWeekByDay(new Date(renderDate)))
+                                  }}
+                                  date={renderDate} selectable='ignoreEvents' onSelectSlot={handleSlotSelection}
+                                  slotPropGetter={getSlotProps} dayLayoutAlgorithm='no-overlap' longPressThreshold={10}
+                        />
+                        :
+                        <div className='flex flex-col justify-center gap-y-4 h-[35rem]'>
+                            <Calendar localizer={localizer} events={mobileCalendarView === 'day'? prenotations: []}
+                                      startAccessor={prenotation => new Date(prenotation.attributes.inizio)}
+                                      endAccessor={prenotation => new Date(prenotation.attributes.fine)}
+                                      view={mobileCalendarView} min={new Date(0,0,0,9,0,0)}
+                                      max={new Date(0,0,0,19,0,0)}
+                                      date={renderDate} selectable='ignoreEvents'
+                                      onSelectSlot={mobileCalendarView === 'month'? handleDaySelection: handleSlotSelection}
+                                      longPressThreshold={10}
+                                      dayLayoutAlgorithm='no-overlap'
+                                      components={{
+                                          toolbar: (props) => calendarToolbar(mobileCalendarView, handleNavigate, renderDate)
+                                      }}
+                                      slotPropGetter={getSlotProps} dayPropGetter={getMonthProps}
+                            />
+                            {mobileCalendarView === 'day' &&
+                                <button className='bg-transparent border-gray-400 rounded-none text-black p-1' onClick={handleMonthSwitch}>Torna al mese</button>
+                            }
+                        </div>
+                    }
                 </div>
                 <div>
                     <br/>
@@ -264,6 +383,7 @@ const BookingCalendar = () => {
                     <div className='grid grid-cols-1 content-around h-full'>
                         <div>
                             <h2 className='font-bold'>Dettagli della prenotazione</h2>
+                            <p>{selectedSlots.start?.getHours()}:{selectedSlots.start?.getMinutes().toString().padStart(2, '0')} - {selectedSlots.end?.getHours()}:{selectedSlots.end?.getMinutes().toString().padStart(2, '0')}</p>
                         </div>
                         <div>
                             <label className='font-bold'>E-Mail:</label>
