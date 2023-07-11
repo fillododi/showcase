@@ -4,7 +4,6 @@ import {ReactMarkdown} from "react-markdown/lib/react-markdown"
 import {Carousel, IconButton} from "@material-tailwind/react";
 import checkMediaType from "../utils/mediatypes.jsx";
 import {FaChevronRight, FaChevronLeft} from "react-icons/all.js";
-import {IconBase} from "react-icons";
 
 const PostContent = ({posts}) => {
     const {id} = useParams()

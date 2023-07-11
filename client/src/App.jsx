@@ -20,7 +20,7 @@ export default function App() {
     let {loading: loadingPosts, data: posts, error: errorPosts} = useFetch('http://localhost:1337/api/blogs?populate=*')
     let {loading: loadingClients, data: clients, error: errorClients} = useFetch('http://localhost:1337/api/clienti?populate=deep,3')
     if(loadingPosts) return <p>Caricando</p>
-    if(errorPosts) return <p>Errore</p>
+    if(errorPosts) return <p>a</p>
     return <ScrollToTop><Routes>
         <Route path='/' element={<Homepage posts={posts? posts: ""} clients={clients? clients: ""}/>}></Route>
         <Route path='/post/:id' element={<PostContentPage posts={posts? posts: ""}/>}></Route>

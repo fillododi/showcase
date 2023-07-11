@@ -5,15 +5,16 @@ import "slick-carousel/slick/slick-theme.css"
 import checkMediaType from "../utils/mediatypes.jsx";
 import {FaChevronLeft, FaChevronRight} from "react-icons/all.js";
 
-const MultipleSlider = (urls) => {
+const MultipleSlider = ({urls, imageNumber}) => {
+    console.log(imageNumber)
     let settings = {}
-    if(urls.urls.length >= 3){
+    if(urls.length >= imageNumber){
         settings = {
             initialSlide: 0,
             dots: true,
             infinite: true,
             speed: 500,
-            slidesToShow: 3,
+            slidesToShow: imageNumber,
             slidesToScroll: 1,
             prevArrow: <div className='flex h-48 items-center'>
                 <button className='text-xl border-0 text-gray-800 bg-white hover:scale-110 hover:text-black hover:bg-white'>
@@ -33,7 +34,7 @@ const MultipleSlider = (urls) => {
             dots: true,
             infinite: false,
             speed: 500,
-            slidesToShow: 3,
+            slidesToShow: imageNumber,
             slidesToScroll: 1,
             prevArrow: <div className='flex h-48 items-center'>
                 <button className='text-xl border-0 text-gray-800 bg-white hover:scale-110 hover:text-black hover:bg-white'>
@@ -50,7 +51,7 @@ const MultipleSlider = (urls) => {
     }
     return <div>
         <Slider {...settings}>
-            {urls.urls.map(url => <div>
+            {urls.map(url => <div>
                 {checkMediaType(url) === "image" && <img className='mx-auto h-48' src={`http://localhost:1337${url}`}/>}
                 {checkMediaType(url)[0] === "video" && <video controls className='mx-auto h-48'>
                     <source src={`http://localhost:1337${url}`} type={`video/${checkMediaType(url)[1]}`}/>

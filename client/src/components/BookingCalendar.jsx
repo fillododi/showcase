@@ -336,7 +336,7 @@ const BookingCalendar = () => {
         }
     }
 
-    return <div className='container mx-auto p-4'>
+    return <div className='container mx-auto p-4 max-w-[1240px]'>
         {prenotations?
             <div>
                 {/* Render the React Big Calendar */}
