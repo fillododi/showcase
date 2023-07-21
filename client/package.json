@@ -12,6 +12,7 @@
   "dependencies": {
     "@material-tailwind/react": "^2.0.5",
     "@paypal/react-paypal-js": "^8.0.0",
+    "@strapi-newsletter/react": "^1.0.0",
     "axios": "^0.21.4",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
