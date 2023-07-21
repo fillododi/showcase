@@ -4,7 +4,6 @@ import axios from "axios";
 import {Link} from "react-router-dom"
 import {FaFacebook, FaInstagram, FaYoutube, FaTiktok, FaWhatsapp} from "react-icons/fa";
 
-import { subscribeUser } from "@strapi-newsletter/react";
 
 const Footer = () => {
     const [email, setEmail] = useState('')
@@ -12,7 +11,7 @@ const Footer = () => {
         e.preventDefault()
 
         try{
-            const response = await subscribeUser(email, "http://localhost:1337");
+            const response = await axios.post('http://localhost:1337/api/newsletters', {data: {email}})
             setEmail('')
         } catch (e) {
             console.error(e)
