@@ -43,7 +43,7 @@ const HomeContent = ({posts, clients})=> {
         }
     },[])
 
-    return <div className="w-full bg-[#f9f0c4] py-[50px] mt-[80px]">
+    return <div className="w-full bg-[#eee] py-[50px] mt-[80px]">
         <div className='max-w-[1240px] mx-auto'>
             <div className='logo-container flex justify-center'>
                 <img src={logo} alt='logo' id='logo'
@@ -54,7 +54,7 @@ const HomeContent = ({posts, clients})=> {
 
             <div className='px-4 pt-4 pb-8 my-4 text-center text-container'>
                 <p className='text-xs sm:text-sm md:!text-2xl font-bold' style={{transform: `translateY(${textTranslation*(-1)}px) scale(${textScale})`, fontFamily: 'Montserrat'}}>
-                    Benvenuti nel nostro mondo di videomaker e fotografia! Siamo un team appassionato di giovani talenti con oltre 6 anni di esperienza nel settore. La nostra mission è semplice: rendere accessibile a tutte le attività la possibilità di avere contenuti professionali e curati per le loro pagine social. Trasforma la tua presenza online in un vero spettacolo visivo con la creatività e la competenza di Showcase!
+                    Benvenuti nel nostro mondo di videomaker e fotografia! Siamo un team di giovani appassionati e talentuosi con oltre 6 anni di esperienza nel settore. La nostra missione è semplice: rendere accessibile a tutte le attività la possibilità di avere contenuti professionali e curati per le loro pagine social. Trasforma la tua presenza online in un vero spettacolo visivo con la creatività e la competenza di Showcase!
                 </p>
             </div>
             <div className='mt-2.5 mb-28 flex justify-center video-container'>

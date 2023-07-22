@@ -11,7 +11,7 @@ const SummerEdit = () => {
         ref.current?.scrollIntoView({behavior: 'smooth'})
     }
 
-    return <div className='mt-[80px] bg-[#f9f0c4]'>
+    return <div className='mt-[80px] '>
         <div className='relative flex justify-center'>
             <video src={summereditthumbnail} loop autoPlay muted className='h-screen md:h-auto md:w-auto md:min-w-full md:min-h-full max-w-none'></video>
             <button className='absolute py-2 px-4 rounded-4xl hover:bg-white top-[70%] mx-auto z-10 text-xs xs:text-sm sm:text-base ' onClick={handleScroll}>Vedi Pacchetti</button>

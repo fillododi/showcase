@@ -18,12 +18,12 @@ const MultipleSlider = ({urls, imageNumber}) => {
             slidesToShow: imageNumber,
             slidesToScroll: 1,
             prevArrow: <div className='flex h-48 items-center'>
-                <button className='text-xl border-0 text-gray-800 bg-[#f9f0c4] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
+                <button className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
                     <FaChevronLeft/>
                 </button>
             </div>,
             nextArrow: <div className= 'flex h-48 items-center'>
-                <button className='text-xl border-0 text-gray-800 bg-[#f9f0c4] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
+                <button className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
                     <FaChevronRight/>
                 </button>
             </div>
@@ -38,12 +38,12 @@ const MultipleSlider = ({urls, imageNumber}) => {
             slidesToShow: imageNumber,
             slidesToScroll: 1,
             prevArrow: <div className='flex h-48 items-center'>
-                <button className='text-xl border-0 text-gray-800 bg-[#f9f0c4] hover:scale-110 hover:text-black hover:bg-[#f9f0c4]'>
+                <button className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:bg-[#f9f0c4]'>
                     <FaChevronLeft/>
                 </button>
             </div>,
             nextArrow: <div className= 'flex h-48 items-center'>
-                <button className='text-xl border-0 text-gray-800 bg-[#f9f0c4] hover:scale-110 hover:text-black hover:bg-[#f9f0c4]'>
+                <button className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:bg-[#f9f0c4]'>
                     <FaChevronRight/>
                 </button>
             </div>

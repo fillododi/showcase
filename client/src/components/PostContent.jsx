@@ -14,7 +14,7 @@ const PostContent = ({posts}) => {
     let imagesURLs = post.attributes.immagini.data.map(img=>`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}${img.attributes.url}`)
 
 
-    return <div className='w-full pb-10 bg-[#f9f0c4] mt-[80px]'>
+    return <div className='w-full pb-10  mt-[80px]'>
         <div className='max-w-[1240px] mx-auto'>
             <div className='gap-x-8 gap-y-8 px-4 pt-20 text-black'>
                 <div className='col-span-2 gap-x-8'>

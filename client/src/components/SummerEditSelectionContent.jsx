@@ -145,7 +145,7 @@ const SummerEditSelectionContent = () => {
         </section>
     }
 
-    return <div className="w-full mt-[80px] bg-[#f9f0c4]">
+    return <div className="w-full mt-[80px] ">
         <div className='mx-auto  pb-[50px] p-16'>
             {checkout === false ?
                 width >= 1240?

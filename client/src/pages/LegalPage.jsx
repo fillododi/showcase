@@ -4,7 +4,7 @@ import {Footer, Navbar} from "../components/index.js";
 const LegalPage = () => {
     return <div>
         <Navbar/>
-        <div className='w-full  bg-[#f9f0c4] py-[50px] my-[80px]'>
+        <div className='w-full  py-[50px] my-[80px]'>
             <div className='max-w-[1240px] mx-auto gap-y-12'>
                 <p className='text-4xl text-center'>Termini Legali di Showcase Mantova</p>
                 <ol className='list-decimal mt-4'>

@@ -48,13 +48,12 @@ const Footer = () => {
                         </div>
                     </div>
                 </div>
-                <div className='text-center pb-4'>
+                {/*<div className='text-center pb-4'>
                     <p>Dove siamo</p>
                     <div className='text-lg'>
-                        <p className='px-1 pt-2 pb-1'>Via Teatro Vecchio, 12</p>
-                        <p className='px-1'>Mantova 46100</p>
+                        <p className='px-1 py-2'>Mantova 46100</p>
                     </div>
-                </div>
+                </div>*/}
             </div>
             <div className='col-span-1 flex flex-col gap-y-4 text-2xl justify-evenly'>
                 <div className='flex flex-row gap-x-3 justify-center'>
