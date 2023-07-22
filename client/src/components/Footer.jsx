@@ -96,8 +96,11 @@ const Footer = () => {
         </div>
 
         <div className='flex flex-col max-w-[1240px] px-2 py-4 m-auto justify-between sm:flex-row text-center text-gray-500 items-center'>
-            <p className='pt-4'>2023 Showcase Mantova. Tutti i diritti riservati</p>
-            <Link to='/legal' className='hover:underline'>Termini legali</Link>
+            <p className='pt-4 sm:mr-48'>2023 Showcase Mantova. Tutti i diritti riservati</p>
+            <Link to='/privacy' className='hover:underline pt-4'>Privacy Policy</Link>
+            <Link to='/refund' className='hover:underline pt-4'>Refund Policy</Link>
+            <Link to='/legal' className='hover:underline pt-4'>Termini legali</Link>
+            <Link to='/support' className='hover:underline pt-4'>Customer Support Policy</Link>
         </div>
     </div>
 }

@@ -8,6 +8,9 @@ import {PayPalScriptProvider} from "@paypal/react-paypal-js";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import SelectionPage from "./pages/SelectionPage.jsx"
 import ThankYouPage from "./pages/ThankYouPage.jsx"
+import PrivacyPage from "./pages/PrivacyPage.jsx";
+import RefundPage from "./pages/RefundPage.jsx";
+import SupportPage from "./pages/SupportPage.jsx";
 
 export default function App() {
 
@@ -29,6 +32,9 @@ export default function App() {
         <Route path='/summeredit' element={<SummerEditPage/>}></Route>
         <Route path='/purchasesummeredit/:type' element={<PayPalScriptProvider options={payPalInitalOptions}><SelectionPage/></PayPalScriptProvider>}></Route>
         <Route path='/legal' element={<LegalPage/>}></Route>
+        <Route path='/privacy' element={<PrivacyPage/>}></Route>
+        <Route path='/refund' element={<RefundPage/>}></Route>
+        <Route path='/support' element={<SupportPage/>}></Route>
         <Route path='/thankyou' element={<ThankYouPage/>}></Route>
     </Routes></ScrollToTop>
 }
