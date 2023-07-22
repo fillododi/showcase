@@ -10,7 +10,7 @@ const Navbar = () => {
     const handleToggleMenu = ()=> setShowMenu(!showMenu)
 
     return <div className='w-full h-[80px] z-[999] bg-[#636363] fixed top-0 drop-shadow-lg'>
-        <div className='flex justify-between items-center w-full h-full md:max-w-[1240px]'>
+        <div className='flex justify-between items-center w-full h-full md:max-w-[1240px] mx-auto'>
             <div className='flex items-center'>
                 <Link to={'/'}><img src={logo} alt='logo' className='ml-6 opacity-[55%] w-full h-[25px]'/></Link>
             </div>

@@ -13,7 +13,7 @@ const Footer = () => {
         e.preventDefault()
 
         try{
-            const response = await subscribeUser(email, "http://localhost:1337");
+            const response = await subscribeUser(email, `${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}`);
             setEmail('')
         } catch (e) {
             console.error(e)
@@ -25,7 +25,7 @@ const Footer = () => {
         e.preventDefault()
 
         try{
-            const response = await axios.post('http://localhost:1337/api/feedbacks', {data: {feedback: feedBack}})
+            const response = await axios.post(`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}/api/feedbacks`, {data: {feedback: feedBack}})
             setFeedBack('')
         } catch (e) {
             console.error(e)

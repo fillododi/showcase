@@ -68,7 +68,7 @@ const SummerEditSelectionContent = () => {
         entryData.append("data", JSON.stringify(textData))
         console.log(entryData)
 
-        const request = await fetch('http://localhost:1337/api/summer-edits', {
+        const request = await fetch(`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}/api/summer-edits`, {
             method: "POST",
             body: entryData
         })

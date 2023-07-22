@@ -14,6 +14,7 @@
     "@paypal/react-paypal-js": "^8.0.0",
     "@strapi-newsletter/react": "^1.0.0",
     "axios": "^0.21.4",
+    "dotenv": "^16.3.1",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "react": "^18.2.0",

@@ -2,7 +2,7 @@ import "dotenv/config"; // loads variables from .env file
 import express from "express";
 import * as paypal from "./paypal-api.js";
 import cors from "cors"
-const {PORT = 8888} = process.env;
+const {PORT, BASE_URL} = process.env;
 
 const app = express();
 
@@ -30,5 +30,5 @@ app.post("/my-server/capture-paypal-order", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`Server listening at http://localhost:${PORT}/`);
+    console.log(`Server listening at ${BASE_URL}:${PORT}/`);
 });

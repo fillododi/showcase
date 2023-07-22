@@ -26,7 +26,7 @@ const BookingCalendar = () => {
     moment.locale('it')
     const localizer = momentLocalizer(moment)
 
-    let {loading, data, error} = useFetch('http://localhost:1337/api/prenotazioni')
+    let {loading, data, error} = useFetch(`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}/api/prenotazioni`)
     try{
         data = data.data.filter(prenotation => prenotation.attributes.accettata == 1)
     } catch (e){
@@ -42,7 +42,7 @@ const BookingCalendar = () => {
     }, [data, prenotations])
 
     const requestBooking = (booking) => {
-        fetch('http://localhost:1337/api/prenotazioni', {
+        fetch(`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}/api/prenotazioni`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

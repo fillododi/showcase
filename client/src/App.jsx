@@ -12,13 +12,13 @@ import ThankYouPage from "./pages/ThankYouPage.jsx"
 export default function App() {
 
     const payPalInitalOptions = {
-        clientId: "AU-kxcST_U76pll4RgLiXtZp-lGWWV6DlpdWeAzdN_e9HRO7sdNQtrNIdDFr4rhiLEkRQa_rT7PeFcxX",
+        clientId: import.meta.env.VITE_PAYPALCLIENTID,
         currency: "EUR",
         intent: "capture"
     }
 
-    let {loading: loadingPosts, data: posts, error: errorPosts} = useFetch('http://localhost:1337/api/blogs?populate=*')
-    let {loading: loadingClients, data: clients, error: errorClients} = useFetch('http://localhost:1337/api/clienti?populate=deep,3')
+    let {loading: loadingPosts, data: posts, error: errorPosts} = useFetch(`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}/api/blogs?populate=*`)
+    let {loading: loadingClients, data: clients, error: errorClients} = useFetch(`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}/api/clienti?populate=deep,3`)
     if(loadingPosts) return <p>Caricando</p>
     if(errorPosts) return <p>a</p>
     return <ScrollToTop><Routes>

@@ -68,7 +68,7 @@ const HomeContent = ({posts, clients})=> {
                         clients.data &&
                         clients.data.map(client => <div className='items-center flex flex-col justify-center'>
                             <Link to={client.attributes.link_insta? client.attributes.link_insta: "#"} className='flex flex-col items-center justify-center w-[75%] gap-y-2'>
-                                <img src={`http://localhost:1337${client.attributes.logo.data.attributes.url}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300'/>
+                                <img src={`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}${client.attributes.logo.data.attributes.url}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300'/>
                                 <p className='text-center text-xs xs:text-base sm:text-lg'>{client.attributes.nome? client.attributes.nome: ""}</p>
                             </Link>
                         </div>)
@@ -82,7 +82,7 @@ const HomeContent = ({posts, clients})=> {
                         <div className='flex justify-center'>
                             <div className='w-full md:w-[80%] bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
                                 <Link to={`/post/${post.id}`} className='items-center'>
-                                    <img className='w-full rounded-full object-cover aspect-square' src={`http://localhost:1337${post.attributes.immagini.data[0].attributes.url}`}/>
+                                    <img className='w-full rounded-full object-cover aspect-square' src={`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}${post.attributes.immagini.data[0].attributes.url}`}/>
                                 </Link>
                             </div>
                         </div>

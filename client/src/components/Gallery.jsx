@@ -53,7 +53,7 @@ const Gallery = ({clients}) => {
                                 <div className='flex flex-col md:flex-row gap-y-4 my-auto justify-stretch h-48 px-12 mb-4 md:m-0'>
                                     <div className='h-48 md:w-1/2 flex items-center justify-center'>
                                         <img className='col-span-3 rounded-full w-36 h-36 xs:w-48 xs:h-48 object-cover'
-                                             src={`http://localhost:1337${client.attributes.logo.data? client.attributes.logo.data.attributes.url: ""}`}/>
+                                             src={`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}${client.attributes.logo.data? client.attributes.logo.data.attributes.url: ""}`}/>
                                     </div>
                                     <div className='gap-x-8 flex flex-row md:w-1/2 justify-center md:justify-end'>
                                         <p className='md:text-4xl ml-4 md:ml-0 md:text-right text-3xl my-auto text-gray-800t'>

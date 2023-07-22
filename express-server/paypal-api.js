@@ -1,11 +1,10 @@
 import fetch from "node-fetch";
 
-const { CLIENT_ID, APP_SECRET } = process.env;
-const base = "https://api-m.sandbox.paypal.com";
+const { CLIENT_ID, APP_SECRET, PAYPAL_URL, STRAPI_PORT, BASE_URL } = process.env;
 
 export async function createOrder(data) {
     const accessToken = await generateAccessToken();
-    const url = `${base}/v2/checkout/orders`;
+    const url = `${PAYPAL_URL}/v2/checkout/orders`;
     const response = await fetch(url, {
         method: "post",
         headers: {
@@ -31,7 +30,7 @@ export async function createOrder(data) {
 
 export async function capturePayment(orderId, editId) {
     const accessToken = await generateAccessToken();
-    const url = `${base}/v2/checkout/orders/${orderId}/capture`;
+    const url = `${PAYPAL_URL}/v2/checkout/orders/${orderId}/capture`;
     const response = await fetch(url, {
         method: "post",
         headers: {
@@ -43,7 +42,7 @@ export async function capturePayment(orderId, editId) {
     //db update HERE
     const entryData = new FormData()
     entryData.append("data", JSON.stringify({pagato: true}))
-    const dbResponse = await(fetch(`http://localhost:1337/api/summer-edits/${editId}`, {
+    const dbResponse = await(fetch(`${BASE_URL}:${STRAPI_PORT}/api/summer-edits/${editId}`, {
         method: 'PUT',
         body: entryData
     }))
@@ -52,7 +51,7 @@ export async function capturePayment(orderId, editId) {
 
 export async function generateAccessToken() {
     const auth = Buffer.from(CLIENT_ID + ":" + APP_SECRET).toString("base64");
-    const response = await fetch(`${base}/v1/oauth2/token`, {
+    const response = await fetch(`${PAYPAL_URL}/v1/oauth2/token`, {
         method: "post",
         body: "grant_type=client_credentials",
         headers: {

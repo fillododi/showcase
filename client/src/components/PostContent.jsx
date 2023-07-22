@@ -11,7 +11,7 @@ const PostContent = ({posts}) => {
     const {id} = useParams()
     let post = posts.data.filter(post=>post.id==id)
     post = post[0]
-    let imagesURLs = post.attributes.immagini.data.map(img=>`http://localhost:1337${img.attributes.url}`)
+    let imagesURLs = post.attributes.immagini.data.map(img=>`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}${img.attributes.url}`)
 
 
     return <div className='w-full pb-10 bg-[#f9f9f9] mt-[80px]'>
