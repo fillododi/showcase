@@ -120,7 +120,7 @@ const SummerEditSelectionContent = () => {
             }
 
         })
-        return <section className='container bg-[#f9f0c4]'>
+        return <section className='container bg-[#eee]'>
             {selectedFiles.length === 0?
                 <div {...getRootProps({className: `dropzone ${width>=1240? 'sm:my-[10rem]':'my-8'} border-dashed border-2 border-gray-300 rounded-md p-4 text-center hover:border-solid`})}>
                     <input {...getInputProps()} />
