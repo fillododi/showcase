@@ -380,24 +380,24 @@ const BookingCalendar = () => {
                     <p>*Gli orari sono personalizzabili all'interno delle richieste</p>
                 </div>
                 <Modal isOpen={showModal} onRequestClose={handleCloseModal} contentLabel="Prenota" style={getModalStyle()}>
-                    <div className='grid grid-cols-1 content-around h-full'>
-                        <div>
-                            <h2 className='font-bold'>Dettagli della prenotazione</h2>
-                            <p>{selectedSlots.start?.getHours()}:{selectedSlots.start?.getMinutes().toString().padStart(2, '0')} - {selectedSlots.end?.getHours()}:{selectedSlots.end?.getMinutes().toString().padStart(2, '0')}</p>
-                        </div>
-                        <div>
-                            <label className='font-bold'>E-Mail:</label>
-                            <input className='block border border-gray-300 p-2 rounded' type="email" value={email} onChange={handleEmailChange}/>
-                        </div>
-                        <div>
-                            <label className='font-bold'>Richieste:</label>
-                            <input className='block border border-gray-300 p-2 rounded' type="text" value={description} onChange={handleDescriptionChange}/>
-                        </div>
-                        <div className='flex flex-row gap-4 mt-4'>
-                            <button className='w-2/3 bg-blue-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded hover:text-white' onClick={handleBookingCreation}>Prenota</button>
-                            <button className='w-1/6 bg-red-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded hover:text-white'onClick={handleCloseModal}>X</button>
-                        </div>
-                    </div>
+                    <form className='grid grid-cols-1 content-around h-full' onSubmit={handleBookingCreation}>
+                            <div>
+                                <h2 className='font-bold'>Dettagli della prenotazione</h2>
+                                <p>{selectedSlots.start?.getHours()}:{selectedSlots.start?.getMinutes().toString().padStart(2, '0')} - {selectedSlots.end?.getHours()}:{selectedSlots.end?.getMinutes().toString().padStart(2, '0')}</p>
+                            </div>
+                            <div>
+                                <label className='font-bold'>E-Mail:</label>
+                                <input className='block border border-gray-300 p-2 rounded' type="email" value={email} required onChange={handleEmailChange}/>
+                            </div>
+                            <div>
+                                <label className='font-bold'>Richieste:</label>
+                                <input className='block border border-gray-300 p-2 rounded' type="text" value={description} required onChange={handleDescriptionChange}/>
+                            </div>
+                            <div className='flex flex-row gap-4 mt-4'>
+                                <button className='w-2/3 bg-blue-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded hover:text-white' type='submit'>Prenota</button>
+                                <button className='w-1/6 bg-red-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded hover:text-white'onClick={handleCloseModal}>X</button>
+                            </div>
+                    </form>
                 </Modal>
             </div>
             : ''

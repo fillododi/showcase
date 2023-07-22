@@ -171,34 +171,34 @@ const SummerEditSelectionContent = () => {
                                 Firma: Showcasemantova
                             </p>
                         </div>
-                        <div className='flex flex-col w-1/2 gap-y-8'>
+                        <form onSubmit={handleCheckout} className='flex flex-col w-1/2 gap-y-8'>
                             <div className='flex flex-col ml-16 gap-y-4 w-1/3'>
                                 <label className='font-bold text-xl'>Email:</label>
-                                <Input className='border-gray-400' type='email' label='Inserisci qui la tua E-Mail' value={email} onChange={handleEmailChange}/>
+                                <Input className='border-gray-400' type='email' label='Inserisci qui la tua E-Mail' required value={email} onChange={handleEmailChange}/>
                             </div>
                             <div className='flex flex-col ml-16 gap-y-4'>
                                 <label className='font-bold text-xl'>Inserisci le tue richieste:</label>
-                                <Textarea label='Scrivi qui quello che dobbiamo fare' className='border-gray-400' type='text' value={description} onChange={handleDescriptionChange}/>
+                                <Textarea label='Scrivi qui quello che dobbiamo fare' className='border-gray-400' type='text' required value={description} onChange={handleDescriptionChange}/>
                             </div>
                             <div className='ml-16'>
                                 <Dropzone/>
                             </div>
                             <div className='ml-16 flex justify-center'>
-                                <button className={`mt-8 rounded-lg py-2 px-4 ${selectedFiles.length === 0? 'bg-gray-400 border-gray-400 hover:bg-gray-400 hover:text-white hover:cursor-default': 'hover:bg-white'}`} onClick={handleCheckout}>Acquista Ora</button>
+                                <button className={`mt-8 rounded-lg py-2 px-4 bg-blue-700 ${selectedFiles.length === 0? 'bg-gray-400 border-gray-400 hover:bg-gray-400 hover:text-white hover:cursor-default': 'hover:bg-white'}`} type='submit'>Acquista Ora</button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     :
                     <div className='flex flex-col'>
-                        <div className='gap-x-16 text-black flex flex-col justify-between'>
+                        <form className='gap-x-16 text-black flex flex-col justify-between' onSubmit={handleCheckout}>
                             <div className='flex flex-col gap-y-4 justify-center' >
                                 <div className='flex flex-col gap-y-4'>
                                     <label className='font-bold text-xl'>Email:</label>
-                                    <Input className='border-gray-400' type='email' label='Inserisci qui la tua E-Mail' value={email} onChange={handleEmailChange}/>
+                                    <Input className='border-gray-400' required type='email' label='Inserisci qui la tua E-Mail' value={email} onChange={handleEmailChange}/>
                                 </div>
                                 <div className='flex flex-col gap-y-4'>
                                     <label className='font-bold text-xl'>Inserisci le tue richieste:</label>
-                                    <Textarea label='Scrivi qui quello che dobbiamo fare' className='border-gray-400' type='text' value={description} onChange={handleDescriptionChange}/>
+                                    <Textarea label='Scrivi qui quello che dobbiamo fare' required className='border-gray-400' type='text' value={description} onChange={handleDescriptionChange}/>
                                 </div>
                             </div>
                             <div className='flex flex-col'>
@@ -206,10 +206,10 @@ const SummerEditSelectionContent = () => {
                                     <Dropzone/>
                                 </div>
                                 <div className='flex justify-center'>
-                                    <button className={`mt-8 rounded-lg py-2 px-4 ${selectedFiles.length === 0? 'bg-gray-400 border-gray-400 hover:bg-gray-400 hover:text-white hover:cursor-default': 'hover:bg-white'}`} onClick={handleCheckout}>Acquista Ora</button>
+                                    <button className={`mt-8 rounded-lg py-2 px-4 ${selectedFiles.length === 0? 'bg-gray-400 border-gray-400 hover:bg-gray-400 hover:text-white hover:cursor-default': 'hover:bg-white'}`} type='submit'>Acquista Ora</button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                         <hr className='mt-8 border-gray-600'/>
                         <p className='m-4 text-justify'>
                             Politica di Servizio di Editing Video e Rimborso<br/><br/>

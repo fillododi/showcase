@@ -79,7 +79,7 @@ const Footer = () => {
                     <p className='font-bold uppercase'>Iscriviti alla Newsletter</p>
                     <p className='py-4'>Riceverai notizie, promozioni e novità da Showcase</p>
                     <form className='flex flex-col sm:flex-row' onSubmit={newsletterSignup}>
-                        <input className='w-full p-2 mr-4 rounded-md mb-2 text-gray-600' type='email' placeholder='Inserisci la tua E-Mail' value={email} onChange={(e) => setEmail(e.target.value)}/>
+                        <input className='w-full p-2 mr-4 rounded-md mb-2 text-gray-600' required type='email' placeholder='Inserisci la tua E-Mail' value={email} onChange={(e) => setEmail(e.target.value)}/>
                         <button className='p-2 mb-2 bg-[#00B86E]'>Iscriviti</button>
                     </form>
                 </div>
@@ -87,7 +87,7 @@ const Footer = () => {
                     <p className='font-bold uppercase'>Inviaci un Feedback</p>
                     <p className='py-4'>Facci sapere cosa pensi del nostro lavoro!</p>
                     <form className='flex flex-col sm:flex-row' onSubmit={submitFeedback}>
-                        <input className='w-full p-2 mr-4 rounded-md mb-2 text-gray-600' type='text' placeholder='Scrivi qui' value={feedBack} onChange={(e) => setFeedBack(e.target.value)}/>
+                        <input className='w-full p-2 mr-4 rounded-md mb-2 text-gray-600' required type='text' placeholder='Scrivi qui' value={feedBack} onChange={(e) => setFeedBack(e.target.value)}/>
                         <button className='p-2 mb-2 bg-[#00B86E] px-4'>Invia</button>
                     </form>
                 </div>

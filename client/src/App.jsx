@@ -1,4 +1,4 @@
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, Link} from "react-router-dom";
 import {Homepage, PostContentPage, BookPage} from "./pages/index.js";
 import useFetch from './hooks/useFetch'
 import GalleryPage from "./pages/GalleryPage.jsx";
@@ -11,6 +11,7 @@ import ThankYouPage from "./pages/ThankYouPage.jsx"
 import PrivacyPage from "./pages/PrivacyPage.jsx";
 import RefundPage from "./pages/RefundPage.jsx";
 import SupportPage from "./pages/SupportPage.jsx";
+import {CookieConsent} from "react-cookie-consent";
 
 export default function App() {
 
@@ -36,5 +37,12 @@ export default function App() {
         <Route path='/refund' element={<RefundPage/>}></Route>
         <Route path='/support' element={<SupportPage/>}></Route>
         <Route path='/thankyou' element={<ThankYouPage/>}></Route>
-    </Routes></ScrollToTop>
+    </Routes>
+        <CookieConsent buttonText='Ho Capito'>
+            Utilizzare il sito Showcase Mantova comporta l'accettazione dei <sp></sp>
+            <Link to='/legal' className='underline'>Termini Legali</Link>,
+            della <Link to='/refund' className='underline'>Refund Policy</Link>
+            <sp></sp> e della <Link to='/privacy' className='underline'>Privacy Policy</Link>
+        </CookieConsent>
+    </ScrollToTop>
 }
