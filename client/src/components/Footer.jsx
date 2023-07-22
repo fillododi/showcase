@@ -32,7 +32,7 @@ const Footer = () => {
         }
     }
 
-    return <div className='w-full bg-[#02049A] text-gray-300 py-4 px-2'>
+    return <div className='w-full bg-[#cfcebe] text-gray-800 py-4 px-2'>
         <div className='max-w-[1240px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 border-b-2 border-gray-600 py-2 px-2 gap-y-8 justify-center'>
             <div className='col-span-1 flex flex-col gap-y-4 text-2xl justify-evenly items-center'>
                 <div className='pt-1 text-center'>
@@ -95,7 +95,7 @@ const Footer = () => {
 
         </div>
 
-        <div className='flex flex-col max-w-[1240px] px-2 py-4 m-auto justify-between sm:flex-row text-center text-gray-500 items-center'>
+        <div className='flex flex-col max-w-[1240px] px-2 py-4 m-auto justify-between sm:flex-row text-center text-gray-700 items-center'>
             <p className='pt-4 sm:mr-48'>2023 Showcase Mantova. Tutti i diritti riservati</p>
             <Link to='/privacy' className='hover:underline pt-4'>Privacy Policy</Link>
             <Link to='/refund' className='hover:underline pt-4'>Refund Policy</Link>

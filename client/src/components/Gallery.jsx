@@ -40,7 +40,7 @@ const Gallery = ({clients}) => {
         }
     }
 
-    return <div className="w-full bg-[#f9f9f9] py-[50px] mt-[80px]">
+    return <div className="w-full bg-[#f9f0c4] py-[50px] mt-[80px]">
         <div className='max-w-[1240px] mx-auto'>
             <div className='px-4 pt-4 pb-24 text-center'>
                 <p className='text-5xl'></p>

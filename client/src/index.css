@@ -16,5 +16,9 @@
     .line-break {
         white-space: pre-wrap;
     }
+    body{
+        background-color: #f9f0c4;
+    }
+
 }
 
