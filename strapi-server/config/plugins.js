@@ -1,4 +1,4 @@
-module.exports = ({ env }) => ({
+/*module.exports = ({ env }) => ({
   upload: {
     config: {
       provider: 'aws-s3',
@@ -21,4 +21,4 @@ module.exports = ({ env }) => ({
       }
     },
   }
-});
+});*/ //ONLY FOR DEPLOYED VERSION
