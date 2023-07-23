@@ -1,0 +1,9 @@
+#row{
+    opacity: 0;
+    transition: opacity 1s;
+    visibility: collapse;
+}
+#row.openedRow{
+    opacity: 1;
+    visibility: visible;
+}

@@ -10,17 +10,24 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@material-tailwind/react": "^2.0.5",
+    "@paypal/react-paypal-js": "^8.0.0",
+    "@strapi-newsletter/react": "^1.0.0",
     "axios": "^0.21.4",
+    "dotenv": "^16.3.1",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "react": "^18.2.0",
     "react-big-calendar": "^1.6.9",
+    "react-cookie-consent": "^8.0.1",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-icons": "^4.8.0",
     "react-markdown": "^8.0.7",
     "react-modal": "^3.16.1",
-    "react-router-dom": "^6.11.1"
+    "react-router-dom": "^6.11.1",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

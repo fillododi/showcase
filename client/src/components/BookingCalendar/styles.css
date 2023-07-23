@@ -7,13 +7,17 @@
 }
 
 .rbc-event {
-    background-color: red; /* Change event color */
+    background-color: lightgray; /* Change event color */
     cursor: default;
     z-index: 1;
+    border: 0 !important;
+}
+.rbc-current-time-indicator{
+    display: none !important;
 }
 
 .rbc-event.rbc-selected{
-    background-color: red;
+    background-color: lightgray;
 }
 
 .rbc-allday-cell {
@@ -41,8 +45,19 @@
 }
 
 .rbc-time-slot{
-    z-index: 1
+    z-index: 1;
 }
 .ReactModal__Overlay{
     z-index: 1
+}
+.arrowButton{
+    border: 0 !important
+}
+.arrowButton:hover{
+    border: 0 !important;
+    background-color: transparent !important;
+}
+.todayButton:hover{
+    background-color: transparent !important;
+}{
 }

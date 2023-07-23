@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "summer_edits",
+  "info": {
+    "singularName": "summer-edit",
+    "pluralName": "summer-edits",
+    "displayName": "Summer Edits",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "richieste": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "files": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "pagato": {
+      "type": "boolean"
+    }
+  }
+}

@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * newsletter router
+ * summer-edit router
  */
 
 const { createCoreRouter } = require('@strapi/strapi').factories;
 
-module.exports = createCoreRouter('api::newsletter.newsletter');
+module.exports = createCoreRouter('api::summer-edit.summer-edit');

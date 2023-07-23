@@ -4,12 +4,12 @@ ul.hidden#big-screen-menu li {
     padding: 10px;
     margin-right: 10px;
     cursor: pointer;
-    color: rgba(255, 255, 255, 0.8);
+    /*color: rgba(255, 255, 255, 0.8);*/
     transition: color 0.3s;
 }
 
 ul.hidden#big-screen-menu li:hover{
-    color: rgb(255, 255, 255);
+    color: rgb(75, 75, 75);
 }
 
 ul#mobile-menu{
@@ -17,7 +17,7 @@ ul#mobile-menu{
     top: 100%;
     left: 0;
     width: 100%;
-    background-color: rgb(41,41,49);
+    background-color: #cfcebe;
     padding: 8px;
     align-items: center;
     opacity: 0;
@@ -33,10 +33,10 @@ ul#mobile-menu.show-menu{
 }
 
 ul#mobile-menu li {
-    color: rgba(255, 255, 255, 0.8);
+    /*color: rgba(255, 255, 255, 0.8);*/
     transition: color 0.3s;
 }
 
 ul#mobile-menu li:hover {
-    color: rgb(255, 255, 255);
+    color: rgb(75, 75, 75);
 }

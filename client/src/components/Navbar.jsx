@@ -9,18 +9,16 @@ const Navbar = () => {
 
     const handleToggleMenu = ()=> setShowMenu(!showMenu)
 
-    return <div className='w-full h-[80px] z-10 bg-[#292931] fixed drop-shadow-lg relative'>
-        <div className='flex justify-between items-center w-full h-full md:max-w-[1240px] m-auto'>
+    return <div className='w-full h-[80px] z-[999] bg-[#cfcebe] fixed top-0 drop-shadow-lg'>
+        <div className='flex justify-between items-center w-full h-full md:max-w-[1240px] mx-auto'>
             <div className='flex items-center'>
-                <Link to={'/'}><img src={logo} alt='logo' className='sm:ml-10 ss:ml-10 md:ml-3 opacity-[55%] w-full h-[25px]'/></Link>
+                <Link to={'/'}><img src={logo} alt='logo' className='ml-6 opacity-[85%] w-full h-[25px]'/></Link>
             </div>
             <div className='flex items-center'>
                 <ul className='hidden md:flex' id='big-screen-menu'>
                     <Link to={'/'}><li>Home</li></Link>
                     <Link to={'/book'}><li>Prenota il tuo Video</li></Link>
                     <Link to={'/gallery'}><li>Galleria</li></Link>
-                    <li>Shop</li>
-                    <Link to={'/clients'}><li>I Nostri Clienti</li></Link>
                 </ul>
             </div>
 
@@ -32,8 +30,6 @@ const Navbar = () => {
             <Link to={'/'}><li>Home</li></Link>
             <Link to={'/book'}><li>Prenota il tuo Video</li></Link>
             <Link to={'/gallery'}><li>Galleria</li></Link>
-            <li>Shop</li>
-            <Link to={'/clients'}><li>I Nostri Clienti</li></Link>
         </ul>
     </div>
 }
