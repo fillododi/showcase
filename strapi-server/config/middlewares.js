@@ -1,6 +1,6 @@
 module.exports = [
   'strapi::errors',
-  'strapi::security',
+  'strapi::security', //remove when deploying
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::logger',
