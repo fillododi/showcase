@@ -58,7 +58,7 @@ const HomeContent = ({posts, clients})=> {
                 </p>
             </div>
             <div className='mt-2.5 mb-28 flex justify-center video-container'>
-                <video src={videosummeredit} id='videosummeredit' autoPlay loop className={`sm:rounded-2xl drop-shadow-3xl sm:w-2/3`}></video>
+                <video src={videosummeredit} id='videosummeredit' muted autoPlay loop className={`sm:rounded-2xl drop-shadow-3xl sm:w-2/3`}></video>
                 <Link to={'/summeredit'}><button id='summereditbutton' className={`overlay-button text-sm xs:text-base px-2 py-1 xs:px-4 xs:py-2  ${showButton? 'show': ''}`}>Scopri di più</button></Link>
             </div>
             <div className='my-[50px]'>
