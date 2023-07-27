@@ -42,10 +42,12 @@ export async function capturePayment(orderId, editId) {
     //db update HERE
     const entryData = new FormData()
     entryData.append("data", JSON.stringify({pagato: true}))
-    const dbResponse = await(fetch(`${BASE_URL}:${STRAPI_PORT}/api/summer-edits/${editId}`, {
+try{
+    const dbResponse = await(fetch(`${BASE_URL}/strapi/api/summer-edits/${editId}`, {
         method: 'PUT',
         body: entryData
     }))
+} catch (e) {console.log(e)}
     return handleResponse(dbResponse);
 }
 

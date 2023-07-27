@@ -12,12 +12,12 @@ const SummerEdit = () => {
     }
 
     return <div className='mt-[80px] '>
-        <div className='relative flex justify-center'>
-            <video src={summereditthumbnail} loop autoPlay muted className='h-screen md:h-auto md:w-auto md:min-w-full md:min-h-full max-w-none'></video>
+        <div className='relative flex justify-center overflow-hidden'>
+            <video src={summereditthumbnail} preload="auto"  playsInline loop autoPlay muted className='h-screen md:h-auto md:w-auto md:min-w-full md:min-h-full max-w-none'></video>
             <button className='absolute py-2 px-4 rounded-4xl hover:bg-white top-[70%] mx-auto z-10 text-xs xs:text-sm sm:text-base ' onClick={handleScroll}>Vedi Pacchetti</button>
         </div>
-        <div className='relative flex justify-center'>
-            <video ref={ref} src={sfondosummeredit} loop autoPlay muted className='h-screen sm:h-auto sm:w-auto sm:min-w-full sm:min-h-full max-w-none'></video>
+        <div className='relative flex justify-center overflow-hidden'>
+            <video ref={ref} src={sfondosummeredit} preload="auto"  playsInline loop autoPlay muted className='h-screen sm:h-auto sm:w-auto sm:min-w-full sm:min-h-full max-w-none'></video>
             <div className='absolute z-10 pt-16 md:pt-20 sm:pt-0'>
                 <div className='col-span-4 flex flex-col sm:flex-row gap-x-2 mb-64 justify-evenly gap-y-8 items-center'>
                     <div className='w-[40%] flex flex-col justify-evenly items-center gap-y-4 lg:gap-y-8'>

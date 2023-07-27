@@ -44,7 +44,7 @@ const Footer = () => {
                         </div>
                         <div className='flex flex-row gap-x-2 items-center justify-center'>
                             <FaEnvelope/>
-                            <Link to={'mailto:showcasemantova@gmail.com'}>showcasemantova@gmail.com</Link>
+                            <Link to={'mailto:info@showcasemantova.com'}>info@showcasemantova.com</Link>
                         </div>
                     </div>
                 </div>
