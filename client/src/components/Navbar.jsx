@@ -18,17 +18,19 @@ const Navbar = () => {
                 <ul className='hidden md:flex' id='big-screen-menu'>
                     <Link to={'/'}><li>Home</li></Link>
                     <Link to={'/book'}><li>Prenota il tuo Video</li></Link>
+                    <Link to={'/summeredit'}><li>Summer Edit</li></Link>
                     <Link to={'/gallery'}><li>Galleria</li></Link>
                 </ul>
             </div>
 
-            <div className='md:hidden' onClick={handleToggleMenu}>
-                <img src={!showMenu? menu: close} alt='menu' className='w-[28px] h-[28px] object-contain mr-10'/>
+            <div className='md:hidden'>
+                <img src={!showMenu? menu: close} onClick={handleToggleMenu}  alt='menu' className='w-[28px] h-[28px] object-contain mr-10'/>
             </div>
         </div>
         <ul className={showMenu? 'flex flex-col md:hidden show-menu': 'flex flex-col'} id='mobile-menu'>
             <Link to={'/'}><li>Home</li></Link>
             <Link to={'/book'}><li>Prenota il tuo Video</li></Link>
+	    <Link to={'/summeredit'}><li>Summer Edit</li></Link>
             <Link to={'/gallery'}><li>Galleria</li></Link>
         </ul>
     </div>

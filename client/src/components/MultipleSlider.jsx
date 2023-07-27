@@ -53,9 +53,9 @@ const MultipleSlider = ({urls, imageNumber}) => {
     return <div>
         <Slider {...settings}>
             {urls.map(url => <div>
-                {checkMediaType(url) === "image" && <img className='mx-auto h-48' src={`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}${url}`}/>}
+                {checkMediaType(url) === "image" && <img className='mx-auto h-48' src={`${url}`}/>}
                 {checkMediaType(url)[0] === "video" && <video controls className='mx-auto h-48'>
-                    <source src={`${import.meta.env.VITE_BASE_URL}:${import.meta.env.VITE_STRAPI_PORT}${url}`} type={`video/${checkMediaType(url)[1]}`}/>
+                    <source src={`${url}`} type={`video/${checkMediaType(url)[1]}`}/>
                 </video>}
             </div>)}
         </Slider>

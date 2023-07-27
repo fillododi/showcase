@@ -17,7 +17,7 @@ const SupportPage = () => {
                     <li>
                         Canali di comunicazione:
                         <ul className=''>
-                            <li>Offriamo la possibilità di contattarci via e-mail a MAIL per ricevere supporto personalizzato.</li>
+                            <li>Offriamo la possibilità di contattarci via e-mail a support@showcasemantova.com per ricevere supporto personalizzato.</li>
                         </ul>
                     </li>
                     <li>
