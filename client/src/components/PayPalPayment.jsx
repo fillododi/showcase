@@ -4,7 +4,7 @@ import {Navigate} from "react-router-dom";
 
 const PayPalPayment = ({item, id}) => {
 
-    const serverUrl = `${import.meta.env.VITE_BASE_URL}/pay`
+    const serverUrl = `${import.meta.env.VITE_EXPRESS_URL}`
     const [success, setSuccess] = useState(false)
 
     const createOrder = (data) => {
