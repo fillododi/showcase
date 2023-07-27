@@ -21,8 +21,8 @@ export default function App() {
         intent: "capture"
     }
 
-    let {loading: loadingPosts, data: posts, error: errorPosts} = useFetch(`${import.meta.env.VITE_BASE_URL}/strapi/api/blogs?populate=*`)
-    let {loading: loadingClients, data: clients, error: errorClients} = useFetch(`${import.meta.env.VITE_BASE_URL}/strapi/api/clienti?populate=deep,3`)
+    let {loading: loadingPosts, data: posts, error: errorPosts} = useFetch(`${import.meta.env.VITE_STRAPI_URL}/api/blogs?populate=*`)
+    let {loading: loadingClients, data: clients, error: errorClients} = useFetch(`${import.meta.env.VITE_STRAPI_URL}/api/clienti?populate=deep,3`)
     if(loadingPosts) return <p>Caricando</p>
     if(errorPosts) return <p>a</p>
     return <ScrollToTop><Routes>

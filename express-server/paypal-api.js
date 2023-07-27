@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-const { CLIENT_ID, APP_SECRET, PAYPAL_URL, STRAPI_PORT, BASE_URL } = process.env;
+const { CLIENT_ID, APP_SECRET, PAYPAL_URL, STRAPI_URL, BASE_URL } = process.env;
 
 export async function createOrder(data) {
     const accessToken = await generateAccessToken();
@@ -43,7 +43,7 @@ export async function capturePayment(orderId, editId) {
     const entryData = new FormData()
     entryData.append("data", JSON.stringify({pagato: true}))
 try{
-    const dbResponse = await(fetch(`${BASE_URL}/strapi/api/summer-edits/${editId}`, {
+    const dbResponse = await(fetch(`${STRAPI_URL}/api/summer-edits/${editId}`, {
         method: 'PUT',
         body: entryData
     }))
