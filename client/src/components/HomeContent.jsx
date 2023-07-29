@@ -67,7 +67,7 @@ const HomeContent = ({posts, clients})=> {
                 <div className='grid grid-cols-3 md:grid-cols-5 gap-x-8 gap-y-8 pt-8'>
                     {
                         clients.data &&
-                        clients.data.map(client => <div className='items-center flex flex-col justify-center'>
+                        clients.data.map(client => <div className='items-center flex flex-col justify-between'>
                             <Link to={client.attributes.link_insta? client.attributes.link_insta: "#"} className='flex flex-col items-center justify-center w-[75%] gap-y-2'>
                                 <img src={`${client.attributes.logo.data.attributes.url}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300'/>
                                 <p className='text-center text-xs xs:text-base sm:text-lg'>{client.attributes.nome? client.attributes.nome: ""}</p>
@@ -80,7 +80,7 @@ const HomeContent = ({posts, clients})=> {
                 <h3 className='text-2xl sm:text-4xl text-center my-8'>I Nostri Lavori</h3>
                 <div className='grid grid-cols-2 xs:grid-cols-3 gap-8 px-4 text-black'>
                     {posts.data.slice(0).reverse().map((post)=>
-                        <div className='flex justify-center'>
+                        <div className='flex justify-between'>
                             <div className='w-full md:w-[80%] bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
                                 <Link to={`/post/${post.id}`} className='items-center'>
                                     <img className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.immagini.data[0].attributes.url}`}/>
