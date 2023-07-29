@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom"
 import {logo} from "../assets/index.js";
-import {/*videosummeredit*/, postervideosummeredit} from '../assets/index.js'
+import {/*videosummeredit,*/ postervideosummeredit} from '../assets/index.js'
 import './HomeContent/styles.css'
 import useWindowDimensions from "../hooks/useWindowDimensions.js";
 
