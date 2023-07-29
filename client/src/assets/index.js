@@ -7,5 +7,8 @@ import fotosummeredit from './fotosummeredit.jpg'
 import sfondosummeredit from './sfondosummeredit.mp4'
 import pacchetto50 from './pck50.png'
 import pacchetto80 from './pck80.png'
+import postersfondosummeredit from './postersfondosummeredit.jpeg'
+import postersummereditthumbnail from './postersummereditthumbnail.jpeg'
+import postervideosummeredit from './postervideosummeredit.jpeg'
 
-export {logo, menu, close, videosummeredit, summereditthumbnail, fotosummeredit, sfondosummeredit, pacchetto50, pacchetto80}
+export {logo, menu, close, videosummeredit, summereditthumbnail, fotosummeredit, sfondosummeredit, pacchetto50, pacchetto80, postervideosummeredit, postersummereditthumbnail, postersfondosummeredit}
