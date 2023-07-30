@@ -32,9 +32,9 @@ const Navbar = () => {
                 </ul>
             </div>
 
-            <div className='md:hidden'>
-                <img src={!showMenu? menu: close} id='menu' alt='menu' className='w-[28px] h-[28px] object-contain mr-10'/>
-            </div>
+            <button className='md:hidden bg-transparent border-transparent' id='menu'>
+                <img src={!showMenu? menu: close} alt='menu' className='w-[28px] h-[28px] object-contain mr-10'/>
+            </button>
         </div>
         <ul className={showMenu? 'flex flex-col md:hidden show-menu': 'flex flex-col'} id='mobile-menu'>
             <Link to={'/'}><li>Home</li></Link>
