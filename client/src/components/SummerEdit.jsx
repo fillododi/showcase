@@ -13,11 +13,19 @@ const SummerEdit = () => {
 
     return <div className='mt-[80px] '>
         <div className='relative flex justify-center overflow-hidden'>
-            <video src='http://d2r33wic133snl.cloudfront.net/summereditthumbnail.mp4'/*{summereditthumbnail}*/ poster={postersummereditthumbnail} preload="auto"  playsInline loop autoPlay muted className='h-screen md:h-auto md:w-auto md:min-w-full md:min-h-full max-w-none'></video>
+            <video poster={postersummereditthumbnail} preload="auto"  playsInline loop autoPlay muted className='h-screen md:h-auto md:w-auto md:min-w-full md:min-h-full max-w-none'>
+                <source src='http://d2r33wic133snl.cloudfront.net/summereditthumbnail.mp4'/*{summereditthumbnail}*/ type='video/mp4'></source>
+                <source src='http://d2r33wic133snl.cloudfront.net/summereditthumbnail.mov'/*{summereditthumbnail}*/ type='video/mov'></source>
+                <source src='http://d2r33wic133snl.cloudfront.net/summereditthumbnail.webm'/*{summereditthumbnail}*/ type='video/webm'></source>
+            </video>
             <button className='absolute py-2 px-4 rounded-4xl hover:bg-white top-[70%] mx-auto z-10 text-xs xs:text-sm sm:text-base ' onClick={handleScroll}>Vedi Pacchetti</button>
         </div>
         <div className='relative flex justify-center overflow-hidden'>
-            <video ref={ref} src='http://d2r33wic133snl.cloudfront.net/sfondosummeredit.mp4'/*{sfondosummeredit}*/ poster={postersfondosummeredit} preload="auto"  playsInline loop autoPlay muted className='h-screen sm:h-auto sm:w-auto sm:min-w-full sm:min-h-full max-w-none'></video>
+            <video ref={ref} poster={postersfondosummeredit} preload="auto"  playsInline loop autoPlay muted className='h-screen sm:h-auto sm:w-auto sm:min-w-full sm:min-h-full max-w-none'>
+                <source src='http://d2r33wic133snl.cloudfront.net/sfondosummeredit.mp4'/*{sfondosummeredit}*/ type='video/mp4'></source>
+                <source src='http://d2r33wic133snl.cloudfront.net/sfondosummeredit.mov'/*{sfondosummeredit}*/ type='video/mov'></source>
+                <source src='http://d2r33wic133snl.cloudfront.net/sfondosummeredit.webm'/*{sfondosummeredit}*/ type='video/webm'></source>
+            </video>
             <div className='absolute z-10 pt-16 md:pt-20 sm:pt-0'>
                 <div className='col-span-4 flex flex-col sm:flex-row gap-x-2 mb-64 justify-evenly gap-y-8 items-center'>
                     <div className='w-[40%] flex flex-col justify-evenly items-center gap-y-4 lg:gap-y-8'>
