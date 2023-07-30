@@ -38,18 +38,18 @@ const SummerEdit = () => {
                 <div className='col-span-4 flex flex-col sm:flex-row gap-x-2 mb-64 justify-evenly gap-y-8 items-center'>
                     <div className='w-[40%] flex flex-col justify-evenly items-center gap-y-4 lg:gap-y-8'>
                         <img src={pacchetto50} className='w-[50%]'/>
-                        <p className='text-sm sm:text-base md:text-xl text-center'>Edit Video</p>
-                        <p className='text-sm sm:text-lg md:text-3xl text-center'>50€</p>
-                        <p className='text-sm sm:text-base md:text-xl text-center'>Comprende 1 video e 1 traccia audio</p>
+                        <p className='text-sm sm:text-base md:text-xl text-center font-semibold' style={{fontFamily: 'Montserrat'}}>Edit Video</p>
+                        <p className='text-sm sm:text-lg md:text-3xl text-center font-semibold' style={{fontFamily: 'Montserrat'}}>50€</p>
+                        <p className='text-sm sm:text-base md:text-xl text-center font-semibold' style={{fontFamily: 'Montserrat'}}>Comprende 1 video e 1 traccia audio</p>
                         <Link to={`/purchasesummeredit/50`}>
                             <button className='rounded-xl hover:bg-white py-2 px-4 text-xs xs:text-sm sm:text-base'>Acquista Pacchetto</button>
                         </Link>
                     </div>
                     <div className='w-[40%] flex flex-col justify-evenly items-center gap-y-4 lg:gap-y-8'>
                         <img src={pacchetto80} className='w-[50%]'/>
-                        <p className='text-sm sm:text-base md:text-xl text-center'>Edit Video + Foto</p>
-                        <p className='text-sm sm:text-lg md:text-3xl text-center'>80€</p>
-                        <p className='text-sm sm:text-base md:text-xl text-center'>Comprende 1 video, fino a 8 foto e 1 traccia audio</p>
+                        <p className='text-sm sm:text-base md:text-xl text-center font-semibold' style={{fontFamily: 'Montserrat'}}>Edit Video + Foto</p>
+                        <p className='text-sm sm:text-lg md:text-3xl text-center font-semibold' style={{fontFamily: 'Montserrat'}}>80€</p>
+                        <p className='text-sm sm:text-base md:text-xl text-center font-semibold' style={{fontFamily: 'Montserrat'}}>Comprende 1 video, fino a 8 foto e 1 traccia audio</p>
                         <Link to={`/purchasesummeredit/80`}>
                             <button className='rounded-xl hover:bg-white py-2 px-4 text-xs xs:text-sm sm:text-base'>Acquista Pacchetto</button>
                         </Link>
