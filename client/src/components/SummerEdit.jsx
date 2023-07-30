@@ -42,7 +42,7 @@ const SummerEdit = () => {
                         <p className='text-sm sm:text-lg md:text-3xl text-center'>50€</p>
                         <p className='text-sm sm:text-base md:text-xl text-center'>Comprende 1 video e 1 traccia audio</p>
                         <Link to={`/purchasesummeredit/50`}>
-                            <button className='rounded-xl hover:bg-white xs:py-2 xs:px-4'>Acquista Pacchetto</button>
+                            <button className='rounded-xl hover:bg-white py-2 px-4 text-xs xs:text-sm sm:text-base'>Acquista Pacchetto</button>
                         </Link>
                     </div>
                     <div className='w-[40%] flex flex-col justify-evenly items-center gap-y-4 lg:gap-y-8'>
@@ -51,7 +51,7 @@ const SummerEdit = () => {
                         <p className='text-sm sm:text-lg md:text-3xl text-center'>80€</p>
                         <p className='text-sm sm:text-base md:text-xl text-center'>Comprende 1 video, fino a 8 foto e 1 traccia audio</p>
                         <Link to={`/purchasesummeredit/80`}>
-                            <button className='rounded-xl hover:bg-white xs:py-2 xs:px-4'>Acquista Pacchetto</button>
+                            <button className='rounded-xl hover:bg-white py-2 px-4 text-xs xs:text-sm sm:text-base'>Acquista Pacchetto</button>
                         </Link>
                     </div>
                 </div>
