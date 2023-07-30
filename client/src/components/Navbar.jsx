@@ -6,16 +6,7 @@ import './Navbar/styles.css'
 
 const Navbar = () => {
     const [showMenu, setShowMenu] = useState(false)
-
-    useEffect(()=>{
-        const menu = document.getElementById('menu')
-        const handleToggleMenu = ()=> setShowMenu(!showMenu)
-        menu.addEventListener('click', handleToggleMenu)
-
-        return ()=> {
-            menu.removeEventListener('click', handleToggleMenu)
-        }
-    }, [showMenu])
+    const handleToggleMenu = ()=> setShowMenu(!showMenu)
 
 
     return <div className='w-full h-[80px] z-[999] bg-[#cfcebe] fixed top-0 drop-shadow-lg'>
@@ -32,7 +23,7 @@ const Navbar = () => {
                 </ul>
             </div>
 
-            <button className='md:hidden bg-transparent border-transparent' id='menu'>
+            <button className='md:hidden bg-transparent border-transparent' id='menu' onClick={handleToggleMenu}>
                 <img src={!showMenu? menu: close} alt='menu' className='w-[28px] h-[28px] object-contain mr-10'/>
             </button>
         </div>
