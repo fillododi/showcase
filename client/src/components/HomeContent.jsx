@@ -36,7 +36,7 @@ const HomeContent = ({posts, clients})=> {
             }
         }
         video.addEventListener('timeupdate', handleVideoTimeUpdate)
-	video.addEventListener("load", ()=>video.play())
+	    video.addEventListener("load", ()=>video.play())
 
         return () => {
             window.removeEventListener('scroll', handleScroll)
@@ -59,12 +59,17 @@ const HomeContent = ({posts, clients})=> {
                 </p>
             </div>
             <div className='mt-2.5 mb-28 flex justify-center video-container'>
-                <video id='videosummeredit' preload="auto" poster={postervideosummeredit}  playsInline  muted autoPlay loop  className={`sm:rounded-2xl drop-shadow-3xl sm:w-2/3`}>
-                    <source  src='http://d2r33wic133snl.cloudfront.net/videosummeredit.mp4'/*{videosummeredit}*/ type='video/mp4'></source>
-                    <source  src='http://d2r33wic133snl.cloudfront.net/videosummeredit.mov'/*{videosummeredit}*/ type='video/mov'></source>
-                    <source  src='http://d2r33wic133snl.cloudfront.net/videosummeredit.webm'/*{videosummeredit}*/ type='video/webm'></source>
-                </video>
-                <Link to={'/summeredit'}><button id='summereditbutton' className={`overlay-button text-sm xs:text-base px-2 py-1 xs:px-4 xs:py-2  ${showButton? 'show': ''}`}>Scopri di più</button></Link>
+                {navigator.userAgent.search("Safari") >= 0?
+                    <img id='videosummeredit' src='http://d2r33wic133snl.cloudfront.net/videosummeredit.mp4' className='sm:rounded-2xl drop-shadow-3xl sm:w-2/3'/>
+                    :
+                    <video id='videosummeredit' preload="auto" poster={postervideosummeredit} playsInline muted autoPlay loop className={`sm:rounded-2xl drop-shadow-3xl sm:w-2/3`}>
+                        <source  src='http://d2r33wic133snl.cloudfront.net/videosummeredit.mp4'/*{videosummeredit}*/ type='video/mp4'></source>
+                        <source  src='http://d2r33wic133snl.cloudfront.net/videosummeredit.mov'/*{videosummeredit}*/ type='video/mov'></source>
+                        <source  src='http://d2r33wic133snl.cloudfront.net/videosummeredit.webm'/*{videosummeredit}*/ type='video/webm'></source>
+                    </video>
+                }
+
+                <Link to={'/summeredit'}><button id='summereditbutton' className={`overlay-button text-sm xs:text-base px-2 py-1 xs:px-4 xs:py-2  ${showButton || navigator.userAgent.search("Safari") >= 0 ? 'show': ''}`}>Scopri di più</button></Link>
             </div>
             <div className='my-[50px]'>
                 <h3 className='text-2xl sm:text-4xl text-center my-5'>I Nostri Collaboratori</h3>
