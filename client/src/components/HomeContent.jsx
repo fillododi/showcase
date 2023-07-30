@@ -59,7 +59,7 @@ const HomeContent = ({posts, clients})=> {
                 </p>
             </div>
             <div className='mt-2.5 mb-28 flex justify-center video-container'>
-                {navigator.userAgent.search("Safari") >= 0?
+                {navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0?
                     <img id='videosummeredit' src='http://d2r33wic133snl.cloudfront.net/videosummeredit.mp4' className='sm:rounded-2xl drop-shadow-3xl sm:w-2/3'/>
                     :
                     <video id='videosummeredit' preload="auto" poster={postervideosummeredit} playsInline muted autoPlay loop className={`sm:rounded-2xl drop-shadow-3xl sm:w-2/3`}>
