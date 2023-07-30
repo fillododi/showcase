@@ -24,7 +24,7 @@ const Navbar = () => {
             </div>
 
             <div className='md:hidden' onClick={handleToggleMenu}>
-                <img src={!showMenu? menu: close} onClick={handleToggleMenu}  alt='menu' className='w-[28px] h-[28px] object-contain mr-10'/>
+                <img src={!showMenu? menu: close} onClick={handleToggleMenu} user-action alt='menu' className='w-[28px] h-[28px] object-contain mr-10'/>
             </div>
         </div>
         <ul className={showMenu? 'flex flex-col md:hidden show-menu': 'flex flex-col'} id='mobile-menu'>
