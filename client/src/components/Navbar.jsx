@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom"
 import {logo, menu, close} from "../assets/index.js"
 
@@ -7,7 +7,16 @@ import './Navbar/styles.css'
 const Navbar = () => {
     const [showMenu, setShowMenu] = useState(false)
 
-    const handleToggleMenu = ()=> setShowMenu(!showMenu)
+    useEffect(()=>{
+        const menu = document.getElementById('menu')
+        const handleToggleMenu = ()=> setShowMenu(!showMenu)
+        menu.addEventListener('click', handleToggleMenu)
+
+        return ()=> {
+            menu.removeEventListener('click', handleToggleMenu)
+        }
+    }, [showMenu])
+
 
     return <div className='w-full h-[80px] z-[999] bg-[#cfcebe] fixed top-0 drop-shadow-lg'>
         <div className='flex justify-between items-center w-full h-full md:max-w-[1240px] mx-auto'>
@@ -23,9 +32,9 @@ const Navbar = () => {
                 </ul>
             </div>
 
-            <div className='md:hidden' onClick={handleToggleMenu}>
-                <img src={!showMenu? menu: close} onClick={handleToggleMenu} user-action alt='menu' className='w-[28px] h-[28px] object-contain mr-10'/>
-            </div>
+            <a className='md:hidden'>
+                <img src={!showMenu? menu: close} id='menu' alt='menu' className='w-[28px] h-[28px] object-contain mr-10'/>
+            </a>
         </div>
         <ul className={showMenu? 'flex flex-col md:hidden show-menu': 'flex flex-col'} id='mobile-menu'>
             <Link to={'/'}><li>Home</li></Link>
