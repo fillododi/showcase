@@ -69,7 +69,7 @@ const HomeContent = ({posts, clients})=> {
                     </video>
                 }
 
-                <Link to={'/summeredit'}><button id='summereditbutton' className={`overlay-button text-sm xs:text-base px-2 py-1 xs:px-4 xs:py-2  ${showButton || navigator.userAgent.search("Safari") >= 0 ? 'show': ''}`}>Scopri di più</button></Link>
+                <Link to={'/summeredit'}><button id='summereditbutton' className={`overlay-button text-sm xs:text-base px-2 py-1 xs:px-4 xs:py-2  ${showButton || (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) ? 'show': ''}`}>Scopri di più</button></Link>
             </div>
             <div className='my-[50px]'>
                 <h3 className='text-2xl sm:text-4xl text-center my-5'>I Nostri Collaboratori</h3>
