@@ -7,7 +7,11 @@ import './Navbar/styles.css'
 const Navbar = () => {
     const [showMenu, setShowMenu] = useState(false)
     const handleToggleMenu = () => {
-        setShowMenu(!showMenu)
+        if(showMenu === true){
+            setShowMenu(false)
+        } else {
+            setShowMenu(true)
+        }
     }
 
 
