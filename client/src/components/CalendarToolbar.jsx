@@ -1,6 +1,6 @@
 import React from "react";
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import {MdArrowBackIos, MdArrowForwardIos} from "react-icons/md/index";
+import {MdArrowBackIos, MdArrowForwardIos} from "react-icons/md";
 import {monthNames} from "../utils/datetime.jsx";
 
 const calendarToolbar = (view, onNavigate, time) => {

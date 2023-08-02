@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useEffect} from "react";
-import {FaChevronUp, FaChevronDown} from "react-icons/fa/index";
+import {FaChevronUp, FaChevronDown} from "react-icons/fa";
 import MultipleSlider from "./MultipleSlider.jsx";
 import useWindowDimensions from "../hooks/useWindowDimensions.js";
 
