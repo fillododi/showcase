@@ -3,7 +3,8 @@ import {Textarea, Input} from "@material-tailwind/react";
 import {useParams} from "react-router-dom";
 import {useDropzone} from "react-dropzone";
 import checkMediaType from "../utils/mediatypes.jsx";
-import {FiMusic, AiOutlinePlus} from "react-icons/all.js";
+import FiMusic from 'react-icons/fi/index'
+import AiOutlinePlus from 'react-icons/ai/index'
 import {PayPalPayment} from "./index.js";
 import useWindowDimensions from "../hooks/useWindowDimensions.js";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import {Navbar, Footer, PayPalPayment} from '../components'
-import {AiOutlineCheckCircle} from "react-icons/all.js";
+import {AiOutlineCheckCircle} from "react-icons/ai/index";
 
 const ThankYouPage = () => {
     return <div>

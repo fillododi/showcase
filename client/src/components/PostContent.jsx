@@ -3,7 +3,7 @@ import {useParams} from "react-router-dom";
 import {ReactMarkdown} from "react-markdown/lib/react-markdown"
 import {Carousel, IconButton} from "@material-tailwind/react";
 import checkMediaType from "../utils/mediatypes.jsx";
-import {FaChevronRight, FaChevronLeft} from "react-icons/all.js";
+import {FaChevronRight, FaChevronLeft} from "react-icons/fa/index";
 import useWindowDimensions from "../hooks/useWindowDimensions.js";
 
 const PostContent = ({posts}) => {
