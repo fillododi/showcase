@@ -3,7 +3,7 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import checkMediaType from "../utils/mediatypes.jsx";
-import {FaChevronLeft, FaChevronRight} from "react-icons/fa/index";
+import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
 import './MultipleSlider/styles.css'
 
 const MultipleSlider = ({urls, imageNumber}) => {
