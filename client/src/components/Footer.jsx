@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import axios from "axios";
 
 import {Link} from "react-router-dom"
-import {FaFacebook, FaInstagram, FaYoutube, FaTiktok, FaWhatsapp, FaEdge, FaEnvelope} from "react-icons/fa";
+import {FaFacebook, FaInstagram, FaYoutube, FaTiktok, FaWhatsapp, FaEdge, FaEnvelope} from "react-icons/fa/index";
 
 import { subscribeUser } from "@strapi-newsletter/react";
 
