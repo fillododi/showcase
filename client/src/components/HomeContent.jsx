@@ -84,9 +84,9 @@ const HomeContent = ({posts, clients})=> {
                                         :
                                         <video className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.immagini.data[0].attributes.url}`} muted preload="auto"/>
                                     }
-                                    <p className='text-center text-xs xs:text-base sm:text-lg'>{post.attributes.titolo? post.attributes.titolo: ""}</p>
                                 </Link>
                             </div>
+                            <p className='text-center text-base xs:text-lg sm:text-xl'>{post.attributes.titolo? post.attributes.titolo: ""}</p>
                         </div>
                     )}
                 </div>
