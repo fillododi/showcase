@@ -76,7 +76,7 @@ const HomeContent = ({posts, clients})=> {
                 <h3 className='text-2xl sm:text-4xl text-center my-8'>I Nostri Lavori</h3>
                 <div className='grid grid-cols-2 xs:grid-cols-3 gap-8 px-4 text-black'>
                     {posts.data.slice(0).reverse().map((post)=>
-                        <div className='flex justify-between'>
+                        <div className='flex justify-between flex-col'>
                             <div className='w-full md:w-[80%] bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
                                 <Link to={`/post/${post.id}`} className='items-center'>
                                     {checkMediaType(post.attributes.immagini.data[0].attributes.url) === "image" ?
