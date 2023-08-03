@@ -86,7 +86,7 @@ const HomeContent = ({posts, clients})=> {
                                     }
                                 </Link>
                             </div>
-                            <p className='text-center text-xs xs:text-base sm:text-lg'>{post.attributes.titolo? post.attributes.titolo: ""}</p>
+                            <p className='text-center text-base xs:text-lg sm:text-xl'>{post.attributes.titolo? post.attributes.titolo: ""}</p>
                         </div>
                     )}
                 </div>
