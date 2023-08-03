@@ -56,7 +56,7 @@ const Gallery = ({clients}) => {
                                              src={`${client.attributes.logo.data? client.attributes.logo.data.attributes.url: ""}`}/>
                                     </div>
                                     <div className='gap-x-8 flex flex-row md:w-1/2 justify-center md:justify-end'>
-                                        <p className='md:text-4xl ml-4 md:ml-0 md:text-right text-3xl my-auto text-gray-800t'>
+                                        <p className='md:text-4xl ml-4 md:ml-0 md:text-right text-3xl my-auto text-gray-800t' style={{fontFamily: 'Montserrat'}}>
                                             {client.attributes.nome}
                                         </p>
                                         <button className='md:mx-12 text-2xl border-0 text-gray-800 rounded-l hover:text-black' type="button" onClick={()=>handleDropDownChange(client)}>{openRow && openRow === client.id? <FaChevronUp/> : <FaChevronDown/>}</button>

@@ -54,7 +54,7 @@ const MultipleSlider = ({urls, imageNumber}) => {
         <Slider {...settings}>
             {urls.map(url => <div>
                 {checkMediaType(url) === "image" && <img className='mx-auto h-48' src={`${url}`}/>}
-                {checkMediaType(url)[0] === "video" && <video controls className='mx-auto h-48'>
+                {checkMediaType(url)[0] === "video" && <video controls preload='auto' className='mx-auto h-48'>
                     <source src={`${url}`} type={`video/${checkMediaType(url)[1]}`}/>
                 </video>}
             </div>)}
