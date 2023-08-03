@@ -18,7 +18,7 @@ const PostContent = ({posts}) => {
         <div className='max-w-[1240px] mx-auto'>
             <div className='gap-x-8 gap-y-8 px-4 pt-20 text-black'>
                 <div className='col-span-2 gap-x-8'>
-                    <h1 className='text-4xl mt-2 mb-8 text-center text-bold'>{post.attributes.titolo}</h1>
+                    <h1 className='text-4xl mt-2 mb-8 text-center text-bold' style={{fontFamily: 'Montserrat'}}>{post.attributes.titolo}</h1>
                     {width >= 1024?
                         <>
                         <Carousel
@@ -45,7 +45,7 @@ const PostContent = ({posts}) => {
                                 }
                             })}
                         </Carousel>
-                        <div className='pt-5 text-center text-xl'><ReactMarkdown className='line-break'>{post.attributes.testo}</ReactMarkdown></div>
+                        <div className='pt-5 text-center text-xl'><ReactMarkdown className='line-break' style={{fontFamily: 'Montserrat'}}>{post.attributes.testo}</ReactMarkdown></div>
                         </>
                         :
                             imagesURLs.length > 1 ? <>
@@ -73,7 +73,7 @@ const PostContent = ({posts}) => {
                                     })}
                                 </div>
                                     <div className='p-5 text-center text-xl'><ReactMarkdown
-                                        className='line-break'>{post.attributes.testo}</ReactMarkdown></div>
+                                        className='line-break' style={{fontFamily: 'Montserrat'}}>{post.attributes.testo}</ReactMarkdown></div>
                             </>
                                 :
                                 <>
@@ -90,7 +90,7 @@ const PostContent = ({posts}) => {
                                         })}
                                     </div>
                                     <div className='p-5 text-center text-xl'><ReactMarkdown
-                                        className='line-break'>{post.attributes.testo}</ReactMarkdown></div>
+                                        className='line-break' style={{fontFamily: 'Montserrat'}}>{post.attributes.testo}</ReactMarkdown></div>
                                 </>
                         }
                 </div>
