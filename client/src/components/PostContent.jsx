@@ -39,7 +39,7 @@ const PostContent = ({posts}) => {
                                     return <img className='w-full h-[48rem] object-cover' src={url}/>
                                 }
                                 if(checkMediaType(url)[0] === "video"){
-                                    return <video controls className='w-full h-[48rem] object-cover'>
+                                    return <video controls preload="auto" className='w-full h-[48rem] object-cover'>
                                         <source src={url}  type={`video/${checkMediaType(url)[1]}`}/>
                                     </video>
                                 }
@@ -60,20 +60,20 @@ const PostContent = ({posts}) => {
                                         <></>
                                 */}
 
-                                <div className='p-5 text-center text-xl'><ReactMarkdown
-                                    className='line-break'>{post.attributes.testo}</ReactMarkdown></div>
                                 <div className='flex flex-col justify-center gap-y-4'>
                                     {imagesURLs.map((url) => {
                                         if (checkMediaType(url) === "image") {
                                             return <img className='w-full object-contain' src={url}/>
                                         }
                                         if (checkMediaType(url)[0] === "video") {
-                                            return <video controls className='w-full object-contain'>
+                                            return <video controls preload="auto" className='w-full object-contain'>
                                                 <source src={url} type={`video/${checkMediaType(url)[1]}`}/>
                                             </video>
                                         }
                                     })}
                                 </div>
+                                    <div className='p-5 text-center text-xl'><ReactMarkdown
+                                        className='line-break'>{post.attributes.testo}</ReactMarkdown></div>
                             </>
                                 :
                                 <>
@@ -83,7 +83,7 @@ const PostContent = ({posts}) => {
                                                 return <img className='w-full object-contain' src={url}/>
                                             }
                                             if (checkMediaType(url)[0] === "video") {
-                                                return <video controls className='w-full object-contain'>
+                                                return <video controls preload="auto" className='w-full object-contain'>
                                                     <source src={url} type={`video/${checkMediaType(url)[1]}`}/>
                                                 </video>
                                             }

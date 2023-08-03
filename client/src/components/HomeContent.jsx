@@ -78,7 +78,11 @@ const HomeContent = ({posts, clients})=> {
                         <div className='flex justify-between'>
                             <div className='w-full md:w-[80%] bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
                                 <Link to={`/post/${post.id}`} className='items-center'>
-                                    <img className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.immagini.data[0].attributes.url}`}/>
+                                    {checkMediaType(post.attributes.immagini.data[0].attributes.url) === "image" ?
+                                        <img className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.immagini.data[0].attributes.url}`}/>
+                                        :
+                                        <video className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.immagini.data[0].attributes.url}`} muted preload="auto"/>
+                                    }
                                 </Link>
                             </div>
                         </div>
