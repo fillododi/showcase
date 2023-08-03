@@ -72,20 +72,6 @@ const HomeContent = ({posts, clients})=> {
                 <Link to={'/summeredit'}><button id='summereditbutton' className={`overlay-button text-sm xs:text-base px-2 py-1 xs:px-4 xs:py-2  ${showButton || (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) ? 'show': ''}`}>Scopri di più</button></Link>
             </div>
             <div className='my-[50px]'>
-                <h3 className='text-2xl sm:text-4xl text-center my-5'>I Nostri Collaboratori</h3>
-                <div className='grid grid-cols-3 md:grid-cols-5 gap-x-8 gap-y-8 pt-8'>
-                    {
-                        clients.data &&
-                        clients.data.map(client => <div className='items-center flex flex-col justify-between'>
-                            <Link to={client.attributes.link_insta? client.attributes.link_insta: "#"} className='flex flex-col items-center justify-center w-[75%] gap-y-2'>
-                                <img src={`${client.attributes.logo.data.attributes.url}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300'/>
-                                <p className='text-center text-xs xs:text-base sm:text-lg'>{client.attributes.nome? client.attributes.nome: ""}</p>
-                            </Link>
-                        </div>)
-                    }
-                </div>
-            </div>
-            <div className='my-8'>
                 <h3 className='text-2xl sm:text-4xl text-center my-8'>I Nostri Lavori</h3>
                 <div className='grid grid-cols-2 xs:grid-cols-3 gap-8 px-4 text-black'>
                     {posts.data.slice(0).reverse().map((post)=>
@@ -97,6 +83,20 @@ const HomeContent = ({posts, clients})=> {
                             </div>
                         </div>
                     )}
+                </div>
+            </div>
+            <div className='my-8'>
+                <h3 className='text-2xl sm:text-4xl text-center my-5'>I Nostri Collaboratori</h3>
+                <div className='grid grid-cols-3 md:grid-cols-5 gap-x-8 gap-y-8 pt-8'>
+                    {
+                        clients.data &&
+                        clients.data.map(client => <div className='items-center flex flex-col justify-between'>
+                            <Link to={client.attributes.link_insta? client.attributes.link_insta: "#"} className='flex flex-col items-center justify-center w-[75%] gap-y-2'>
+                                <img src={`${client.attributes.logo.data.attributes.url}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300'/>
+                                <p className='text-center text-xs xs:text-base sm:text-lg'>{client.attributes.nome? client.attributes.nome: ""}</p>
+                            </Link>
+                        </div>)
+                    }
                 </div>
             </div>
         </div>
