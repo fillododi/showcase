@@ -4,6 +4,7 @@ import {logo} from "../assets/index.js";
 import {/*videosummeredit,*/ postervideosummeredit} from '../assets/index.js'
 import './HomeContent/styles.css'
 import useWindowDimensions from "../hooks/useWindowDimensions.js";
+import checkMediaType from "../utils/mediatypes.jsx";
 
 const HomeContent = ({posts, clients})=> {
     useEffect(()=> {
