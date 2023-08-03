@@ -49,7 +49,7 @@ const PostContent = ({posts}) => {
                         </>
                         :
                             imagesURLs.length > 1 ? <>
-                                {checkMediaType(imagesURLs[1]) === "image"?
+                                {/*checkMediaType(imagesURLs[1]) === "image"?
                                     <img className='w-full object-cover h-36' src={imagesURLs[1]}/>
                                     :
                                     checkMediaType(imagesURLs[1])[0] === "video"?
@@ -58,7 +58,7 @@ const PostContent = ({posts}) => {
                                     </video>
                                         :
                                         <></>
-                                }
+                                */}
 
                                 <div className='p-5 text-center text-xl'><ReactMarkdown
                                     className='line-break'>{post.attributes.testo}</ReactMarkdown></div>
