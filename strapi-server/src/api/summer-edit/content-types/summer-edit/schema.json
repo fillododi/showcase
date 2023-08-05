@@ -31,6 +31,9 @@
     },
     "pagato": {
       "type": "boolean"
+    },
+    "indirizzo": {
+      "type": "string"
     }
   }
 }

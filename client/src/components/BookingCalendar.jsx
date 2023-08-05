@@ -13,6 +13,7 @@ import useWindowDimensions from "../hooks/useWindowDimensions.js";
 const BookingCalendar = () => {
     const [email, setEmail] = useState('')
     const [description, setDescription] = useState('')
+    const [address, setAddress] = useState('')
     const [prenotations, setPrenotations] = useState([])
     const [renderDate, setRenderDate] = useState(new Date())
     const [showModal, setShowModal] = useState(false)
@@ -51,6 +52,7 @@ const BookingCalendar = () => {
                 data: {
                     email: booking.email,
                     descrizione: booking.description,
+                    indirizzo: booking.indirizzo,
                     inizio: booking.startTime,
                     fine: booking.endTime,
                     accettata: 0
@@ -95,6 +97,9 @@ const BookingCalendar = () => {
     }
     const handleDescriptionChange = (e) => {
         setDescription(e.target.value)
+    }
+    const handleAddressChange = (e) => {
+        setAddress(e.target.value)
     }
     const handleNavigateWeek = (action) => {
         if(action == "PREV"){
@@ -300,13 +305,15 @@ const BookingCalendar = () => {
                 startTime: selectedSlots.start,
                 endTime: selectedSlots.end,
                 email: email,
-                description: description
+                description: description,
+                indirizzo: address,
             }
 
             requestBooking(booking)
             setSelectedSlots({start: null, end: null})
             setEmail('')
             setDescription('')
+            setAddress('')
             setShowModal(false)
         }
     }
@@ -392,6 +399,10 @@ const BookingCalendar = () => {
                             <div>
                                 <label className='font-bold'>Richieste:</label>
                                 <input className='block border border-gray-300 p-2 rounded' type="text" value={description} required onChange={handleDescriptionChange}/>
+                            </div>
+                            <div>
+                                <label className='font-bold'>Indirizzo:</label>
+                                <input className='block border border-gray-300 p-2 rounded' type="text" placeholder='Dove dobbiamo venire' value={description} required onChange={handleAddressChange}/>
                             </div>
                             <div className='flex flex-row gap-4 mt-4'>
                                 <button className='w-2/3 bg-blue-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded hover:text-white' type='submit'>Prenota</button>
