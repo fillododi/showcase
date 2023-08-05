@@ -79,11 +79,7 @@ const HomeContent = ({posts, clients})=> {
                         <div className='flex justify-between flex-col items-center'>
                             <div className='w-full md:w-[80%] bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
                                 <Link to={`/post/${post.id}`} className='items-center'>
-                                    {checkMediaType(post.attributes.immagini.data[0].attributes.url) === "image" ?
-                                        <img className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.immagini.data[0].attributes.url}`}/>
-                                        :
-                                        <video className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.immagini.data[0].attributes.url}`} muted preload="auto"/>
-                                    }
+                                    <img className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.thumbnail.data.attributes.url}`}/>
                                 </Link>
                             </div>
                             <p className='text-center text-base xs:text-lg sm:text-xl my-8'>{post.attributes.titolo? post.attributes.titolo: ""}</p>
