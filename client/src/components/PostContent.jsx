@@ -36,11 +36,11 @@ const PostContent = ({posts}) => {
                         >
                             {imagesURLs.map((url)=>{
                                 if(checkMediaType(url) === "image"){
-                                    return <img className='w-full object-cover h-[24rem]' src={url}/>
+                                    return <img className='w-full object-cover h-[24rem]' src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}/>
                                 }
                                 if(checkMediaType(url)[0] === "video"){
-                                    return <video controls preload="auto" className='w-full object-cover h-[24rem]' poster={`${post.attributes.thumbnail.data.attributes.url}`}>
-                                        <source src={url}  type={`video/${checkMediaType(url)[1]}`}/>
+                                    return <video controls preload="auto" className='w-full object-cover h-[24rem]' poster={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}>
+                                        <source src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}  type={`video/${checkMediaType(url)[1]}`}/>
                                     </video>
                                 }
                             })}
@@ -63,11 +63,11 @@ const PostContent = ({posts}) => {
                                 <div className='flex flex-col justify-center gap-y-4'>
                                     {imagesURLs.map((url) => {
                                         if (checkMediaType(url) === "image") {
-                                            return <img className='w-full object-contain' src={url}/>
+                                            return <img className='w-full object-contain' src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}/>
                                         }
                                         if (checkMediaType(url)[0] === "video") {
-                                            return <video controls preload="auto" className='w-full object-contain' poster={`${post.attributes.thumbnail.data.attributes.url}`}>
-                                                <source src={url} type={`video/${checkMediaType(url)[1]}`}/>
+                                            return <video controls preload="auto" className='w-full object-contain' poster={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}>
+                                                <source src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")} type={`video/${checkMediaType(url)[1]}`}/>
                                             </video>
                                         }
                                     })}
@@ -80,11 +80,11 @@ const PostContent = ({posts}) => {
                                     <div className='flex flex-col justify-center gap-y-4'>
                                         {imagesURLs.map((url) => {
                                             if (checkMediaType(url) === "image") {
-                                                return <img className='w-full object-contain' src={url}/>
+                                                return <img className='w-full object-contain' src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}/>
                                             }
                                             if (checkMediaType(url)[0] === "video") {
-                                                return <video controls preload="auto" className='w-full object-contain' poster={`${post.attributes.thumbnail.data.attributes.url}`}>
-                                                    <source src={url} type={`video/${checkMediaType(url)[1]}`}/>
+                                                return <video controls preload="auto" className='w-full object-contain' poster={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}>
+                                                    <source src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")} type={`video/${checkMediaType(url)[1]}`}/>
                                                 </video>
                                             }
                                         })}
