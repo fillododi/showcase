@@ -18,7 +18,7 @@ const Navbar = () => {
     return <div className='w-full h-[80px] z-[999] bg-[#cfcebe] fixed top-0 drop-shadow-lg'>
         <div className='flex justify-between items-center w-full h-full md:max-w-[1240px] mx-auto'>
             <div className='flex items-center'>
-                <Link to={'/'} className='px-0 mr-12'><img src={logo} alt='logo' className='ml-6 opacity-[85%] w-full h-[25px]'/></Link>
+                <Link to={'/'} className='px-0'><img src={logo} alt='logo' className='ml-6 opacity-[85%] h-[25px]'/></Link>
             </div>
             <div className='flex items-center'>
                 <ul className='hidden md:flex' id='big-screen-menu'>
