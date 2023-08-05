@@ -39,7 +39,7 @@ const PostContent = ({posts}) => {
                                     return <img className='w-full object-cover h-[24rem]' src={url}/>
                                 }
                                 if(checkMediaType(url)[0] === "video"){
-                                    return <video controls preload="auto" className='w-full object-cover h-[24rem]'>
+                                    return <video controls preload="auto" className='w-full object-cover h-[24rem]' poster={`${post.attributes.thumbnail.data.attributes.url}`}>
                                         <source src={url}  type={`video/${checkMediaType(url)[1]}`}/>
                                     </video>
                                 }
@@ -66,7 +66,7 @@ const PostContent = ({posts}) => {
                                             return <img className='w-full object-contain' src={url}/>
                                         }
                                         if (checkMediaType(url)[0] === "video") {
-                                            return <video controls preload="auto" className='w-full object-contain'>
+                                            return <video controls preload="auto" className='w-full object-contain' poster={`${post.attributes.thumbnail.data.attributes.url}`}>
                                                 <source src={url} type={`video/${checkMediaType(url)[1]}`}/>
                                             </video>
                                         }
@@ -83,7 +83,7 @@ const PostContent = ({posts}) => {
                                                 return <img className='w-full object-contain' src={url}/>
                                             }
                                             if (checkMediaType(url)[0] === "video") {
-                                                return <video controls preload="auto" className='w-full object-contain'>
+                                                return <video controls preload="auto" className='w-full object-contain' poster={`${post.attributes.thumbnail.data.attributes.url}`}>
                                                     <source src={url} type={`video/${checkMediaType(url)[1]}`}/>
                                                 </video>
                                             }
