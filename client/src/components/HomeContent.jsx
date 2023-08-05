@@ -79,10 +79,10 @@ const HomeContent = ({posts, clients})=> {
                         <div className='flex justify-between flex-col items-center'>
                             <div className='w-full md:w-[80%] bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
                                 <Link to={`/post/${post.id}`} className='items-center'>
-                                    <img className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.thumbnail.data.attributes.url}`}/>
+                                    <img className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}/>
                                 </Link>
                             </div>
-                            <p className='text-center text-base xs:text-lg sm:text-xl my-8'>{post.attributes.titolo? post.attributes.titolo: ""}</p>
+                            <p className='text-center text-base xs:text-lg sm:text-xl my-8 font-bold'>{post.attributes.titolo? post.attributes.titolo: ""}</p>
                         </div>
                     )}
                 </div>
@@ -94,8 +94,8 @@ const HomeContent = ({posts, clients})=> {
                         clients.data &&
                         clients.data.map(client => <div className='items-center flex flex-col justify-between'>
                             <Link to={client.attributes.link_insta? client.attributes.link_insta: "#"} className='flex flex-col items-center justify-center w-[75%] gap-y-2'>
-                                <img src={`${client.attributes.logo.data.attributes.url}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300'/>
-                                <p className='text-center text-xs xs:text-base sm:text-lg'>{client.attributes.nome? client.attributes.nome: ""}</p>
+                                <img src={`${client.attributes.logo.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300'/>
+                                <p className='text-center text-xs xs:text-base sm:text-lg font-bold'>{client.attributes.nome? client.attributes.nome: ""}</p>
                             </Link>
                         </div>)
                     }
