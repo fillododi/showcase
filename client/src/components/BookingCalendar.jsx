@@ -402,7 +402,7 @@ const BookingCalendar = () => {
                             </div>
                             <div>
                                 <label className='font-bold'>Indirizzo:</label>
-                                <input className='block border border-gray-300 p-2 rounded' type="text" placeholder='Dove dobbiamo venire' value={description} required onChange={handleAddressChange}/>
+                                <input className='block border border-gray-300 p-2 rounded' type="text" placeholder='Dove dobbiamo venire' value={address} required onChange={handleAddressChange}/>
                             </div>
                             <div className='flex flex-row gap-4 mt-4'>
                                 <button className='w-2/3 bg-blue-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded hover:text-white' type='submit'>Prenota</button>
