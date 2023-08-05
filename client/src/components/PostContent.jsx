@@ -17,12 +17,12 @@ const PostContent = ({posts}) => {
     return <div className='w-full pb-10  mt-[80px]'>
         <div className='max-w-[1240px] mx-auto'>
             <div className='gap-x-8 gap-y-8 px-4 pt-20 text-black'>
-                <div className='col-span-2 gap-x-8'>
+                <div className='col-span-2 gap-x-8 flex flex-col items-center'>
                     <h1 className='text-4xl mt-2 mb-8 text-center text-bold' style={{fontFamily: 'Montserrat'}}>{post.attributes.titolo}</h1>
                     {width >= 1024?
                         <>
                         <Carousel
-                            className='rounded-xl'
+                            className='rounded-xl w-[50%] h-[50%]'
                             prevArrow={({handlePrev})=>(<div className='!absolute top-2/4 -translate-y-2/4 left-4 flex h-48 items-center'>
                                 <IconButton onClick={handlePrev} className='text-3xl border-0 text-gray-900 bg-transparent hover:scale-110 hover:text-black hover:bg-transparent shadow-none hover:shadow-none'>
                                     <FaChevronLeft/>
@@ -36,10 +36,10 @@ const PostContent = ({posts}) => {
                         >
                             {imagesURLs.map((url)=>{
                                 if(checkMediaType(url) === "image"){
-                                    return <img className='w-full h-[48rem] object-cover' src={url}/>
+                                    return <img className='w-full object-cover h-[24rem]' src={url}/>
                                 }
                                 if(checkMediaType(url)[0] === "video"){
-                                    return <video controls preload="auto" className='w-full h-[48rem] object-cover'>
+                                    return <video controls preload="auto" className='w-full object-cover h-[24rem]'>
                                         <source src={url}  type={`video/${checkMediaType(url)[1]}`}/>
                                     </video>
                                 }
