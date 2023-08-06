@@ -3,6 +3,9 @@ import {Calendar, momentLocalizer} from "react-big-calendar";
 import Modal from 'react-modal'
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import './BookingCalendar/styles.css'
+
+import {FaPen, FaCaretUp, FaCaretDown} from "react-icons/fa";
+
 import moment from "moment/min/moment-with-locales";
 import {daysInWeekByDay} from "../utils/datetime.jsx";
 
@@ -17,6 +20,7 @@ const BookingCalendar = () => {
     const [prenotations, setPrenotations] = useState([])
     const [renderDate, setRenderDate] = useState(new Date())
     const [showModal, setShowModal] = useState(false)
+    const [modifyModal, setModifyModal] = useState(false)
     const [canCloseModal, setCanCloseModal] = useState(false)
     const [selectedSlots, setSelectedSlots] = useState({start: null, end: null})
     const [hoveredSlot, setHoveredSlot] = useState(null)
@@ -100,6 +104,20 @@ const BookingCalendar = () => {
     }
     const handleAddressChange = (e) => {
         setAddress(e.target.value)
+    }
+    const handleStartSlotChange = (e) => {
+        const date = new Date(selectedSlots.start)
+        const [hour, minute] = e.target.value.split(':')
+        date.setHours(hour)
+        date.setMinutes(minute)
+        setSelectedSlots({start: date, end: selectedSlots.end})
+    }
+    const handleEndSlotChange = (e) => {
+        const date = new Date(selectedSlots.end)
+        const [hour, minute] = e.target.value.split(':')
+        date.setHours(hour)
+        date.setMinutes(minute)
+        setSelectedSlots({start: selectedSlots.start, end: date})
     }
     const handleNavigateWeek = (action) => {
         if(action == "PREV"){
@@ -315,6 +333,7 @@ const BookingCalendar = () => {
             setDescription('')
             setAddress('')
             setShowModal(false)
+            setModifyModal(false)
         }
     }
 
@@ -324,7 +343,7 @@ const BookingCalendar = () => {
 
     const getModalStyle = () => {
         const modalWidth = 300
-        const modalHeight = 300
+        const modalHeight = 400
         return {
             content: {
                 margin: "auto",
@@ -340,7 +359,11 @@ const BookingCalendar = () => {
             setSelectedSlots({start: null, end: null})
             setEmail('')
             setDescription('')
+            setModifyModal(false)
         }
+    }
+    const handleModifyModal = () => {
+        setModifyModal(!modifyModal)
     }
 
     return <div className='container mx-auto p-4 max-w-[1240px] mt-[80px]'>
@@ -387,28 +410,79 @@ const BookingCalendar = () => {
                     <p>*Gli orari sono personalizzabili all'interno delle richieste</p>
                 </div>
                 <Modal isOpen={showModal} onRequestClose={handleCloseModal} contentLabel="Prenota" style={getModalStyle()}>
-                    <form className='grid grid-cols-1 content-around h-full' onSubmit={handleBookingCreation}>
-                            <div>
+                    <div className='grid grid-cols-1 content-around h-full'>
+                            <div className='flex flex-col gap-y-2 my-2'>
                                 <h2 className='font-bold'>Dettagli della prenotazione</h2>
-                                <p>{selectedSlots.start?.getHours()}:{selectedSlots.start?.getMinutes().toString().padStart(2, '0')} - {selectedSlots.end?.getHours()}:{selectedSlots.end?.getMinutes().toString().padStart(2, '0')}</p>
+                                {modifyModal?
+                                    <div className='gap-y-2 flex flex-col'>
+                                        <div className='flex flex-row gap-x-2'>
+                                            <p>{"Scegli l'orario iniziale: "}</p>
+                                            <select onChange={handleStartSlotChange} value={`${selectedSlots.start?.getHours()}:${selectedSlots.start?.getMinutes().toString().padStart(2, '0')}`}>
+                                                <option value='09:30'>09:30</option>
+                                                <option value='10:00'>10:00</option>
+                                                <option value='10:30'>10:30</option>
+                                                <option value='11:00'>11:00</option>
+                                                <option value='11:30'>11:30</option>
+                                                <option value='12:00'>12:00</option>
+                                                <option value='12:30'>12:30</option>
+                                                <option value='13:00'>13:00</option>
+                                                <option value='13:30'>13:30</option>
+                                                <option value='16:00'>16:00</option>
+                                                <option value='16:30'>16:30</option>
+                                                <option value='17:00'>17:00</option>
+                                                <option value='17:30'>17:30</option>
+                                                <option value='18:00'>18:00</option>
+                                                <option value='18:30'>18:30</option>
+                                            </select>
+                                        </div>
+                                        <div className='flex flex-row gap-x-2'>
+                                            <p>{"Scegli l'orario finale: "}</p>
+                                            <select onChange={handleEndSlotChange} value={`${selectedSlots.end?.getHours()}:${selectedSlots.end?.getMinutes().toString().padStart(2, '0')}`}>
+                                                <option value='09:30'>09:30</option>
+                                                <option value='10:00'>10:00</option>
+                                                <option value='10:30'>10:30</option>
+                                                <option value='11:00'>11:00</option>
+                                                <option value='11:30'>11:30</option>
+                                                <option value='12:00'>12:00</option>
+                                                <option value='12:30'>12:30</option>
+                                                <option value='13:00'>13:00</option>
+                                                <option value='13:30'>13:30</option>
+                                                <option value='14:00'>14:00</option>
+                                                <option value='16:30'>16:30</option>
+                                                <option value='17:00'>17:00</option>
+                                                <option value='17:30'>17:30</option>
+                                                <option value='18:00'>18:00</option>
+                                                <option value='18:30'>18:30</option>
+                                                <option value='19:00'>19:00</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    :
+                                    <div className='flex flex-row gap-x-2 items-center'>
+                                        <p>{`${selectedSlots.start?.getHours()}:${selectedSlots.start?.getMinutes().toString().padStart(2, '0')} - ${selectedSlots.end?.getHours()}:${selectedSlots.end?.getMinutes().toString().padStart(2, '0')}`}</p>
+                                        <button onClick={handleModifyModal} className='flex flex-row px-2 bg-blue-500 hover:text-blue-500 items-center text-center'><FaPen className='mr-2'></FaPen> Modifica</button>
+                                    </div>
+                                }
                             </div>
-                            <div>
-                                <label className='font-bold'>E-Mail:</label>
-                                <input className='block border border-gray-300 p-2 rounded' type="email" value={email} required onChange={handleEmailChange}/>
-                            </div>
-                            <div>
-                                <label className='font-bold'>Richieste:</label>
-                                <input className='block border border-gray-300 p-2 rounded' type="text" value={description} required onChange={handleDescriptionChange}/>
-                            </div>
-                            <div>
-                                <label className='font-bold'>Indirizzo:</label>
-                                <input className='block border border-gray-300 p-2 rounded' type="text" placeholder='Dove dobbiamo venire' value={address} required onChange={handleAddressChange}/>
-                            </div>
-                            <div className='flex flex-row gap-4 mt-4'>
-                                <button className='w-2/3 bg-blue-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded hover:text-white' type='submit'>Prenota</button>
-                                <button className='w-1/6 bg-red-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded hover:text-white'onClick={handleCloseModal}>X</button>
-                            </div>
-                    </form>
+                            <form onSubmit={handleBookingCreation}>
+                                <div>
+                                    <label className='font-bold'>E-Mail:</label>
+                                    <input className='block border border-gray-300 p-2 rounded' type="email" placeholder='Come dobbiamo contattarti' value={email} required onChange={handleEmailChange}/>
+                                </div>
+                                <div>
+                                    <label className='font-bold'>Richieste:</label>
+                                    <input className='block border border-gray-300 p-2 rounded' type="text" placeholder='Cosa dobbiamo fare' value={description} required onChange={handleDescriptionChange}/>
+                                </div>
+                                <div>
+                                    <label className='font-bold'>Indirizzo:</label>
+                                    <input className='block border border-gray-300 p-2 rounded' type="text" placeholder='Dove dobbiamo venire' value={address} required onChange={handleAddressChange}/>
+                                </div>
+                                <div className='flex flex-row gap-4 mt-4'>
+                                    <button className='w-2/3 bg-blue-500 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded hover:text-white' type='submit'>Prenota</button>
+                                    <button className='w-1/6 bg-red-500 hover:bg-red-500 text-white font-bold py-2 px-4 rounded hover:text-white' onClick={handleCloseModal}>X</button>
+                                </div>
+                            </form>
+                    </div>
                 </Modal>
             </div>
             : ''
