@@ -17,6 +17,7 @@ const HomeContent = ({posts, clients})=> {
     const [showButton, setShowButton] = useState(false)
 
     const {width, height} = useWindowDimensions()
+    const isNotSafariMac = !/Macintosh/i.test(navigator.userAgent)
 
     useEffect(()=>{
         const video = document.getElementById('videosummeredit')
@@ -48,16 +49,28 @@ const HomeContent = ({posts, clients})=> {
     return <div className="w-full bg-[#eee] py-[50px] mt-[80px]">
         <div className='max-w-[1240px] mx-auto'>
             <div className='logo-container flex justify-center'>
-                <img src={logo} alt='logo' id='logo'
-                     className='sm:ml-10 ss:ml-10 md:ml-3 w-[85%] xs:w-[70%] h-full my-24'
-                     style={{transform: `scale(${logoScale})`}}
-                />
+                {isNotSafariMac?
+                    <img src={logo} alt='logo' id='logo'
+                         className='sm:ml-10 ss:ml-10 md:ml-3 w-[85%] xs:w-[70%] h-full my-24'
+                         style={{transform: `scale(${logoScale})`}}
+                    />
+                    :
+                    <img src={logo} alt='logo' id='logo'
+                         className='sm:ml-10 ss:ml-10 md:ml-3 w-[85%] xs:w-[70%] h-full my-24'
+                    />
+                }
             </div>
 
             <div className='px-4 pt-4 pb-8 my-4 text-center text-container'>
-                <p className='text-xs sm:text-sm md:!text-2xl font-bold' style={{transform: `translateY(${textTranslation*(-1)}px) scale(${textScale})`, fontFamily: 'Montserrat'}}>
-                    Benvenuti nel nostro mondo di videomaker e fotografia! Siamo un team di giovani appassionati e talentuosi con oltre 6 anni di esperienza nel settore. La nostra missione è semplice: rendere accessibile a tutte le attività la possibilità di avere contenuti professionali e curati per le loro pagine social. Trasforma la tua presenza online in un vero spettacolo visivo con la creatività e la competenza di Showcase!
-                </p>
+                {isNotSafariMac?
+                    <p className='text-xs sm:text-sm md:!text-2xl font-bold' style={{transform: `translateY(${textTranslation*(-1)}px) scale(${textScale})`, fontFamily: 'Montserrat'}}>
+                        Benvenuti nel nostro mondo di videomaker e fotografia! Siamo un team di giovani appassionati e talentuosi con oltre 6 anni di esperienza nel settore. La nostra missione è semplice: rendere accessibile a tutte le attività la possibilità di avere contenuti professionali e curati per le loro pagine social. Trasforma la tua presenza online in un vero spettacolo visivo con la creatività e la competenza di Showcase!
+                    </p>
+                    :
+                    <p className='text-xs sm:text-sm md:!text-2xl font-bold' style={{fontFamily: 'Montserrat'}}>
+                        Benvenuti nel nostro mondo di videomaker e fotografia! Siamo un team di giovani appassionati e talentuosi con oltre 6 anni di esperienza nel settore. La nostra missione è semplice: rendere accessibile a tutte le attività la possibilità di avere contenuti professionali e curati per le loro pagine social. Trasforma la tua presenza online in un vero spettacolo visivo con la creatività e la competenza di Showcase!
+                    </p>
+                }
             </div>
             <div className='mt-2.5 mb-28 flex justify-center video-container'>
                 {navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0?
