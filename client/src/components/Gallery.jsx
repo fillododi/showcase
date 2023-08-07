@@ -70,7 +70,9 @@ const Gallery = ({clients}) => {
                                     </div>
                                 </div>
                                 <div id='row' className={openRow === client.id? 'openedRow mb-4 mt-8 md:mt-4': ''}>
-                                    <MultipleSlider imageNumber={width<768? 1: width<1024? 2: 3} urls={currentMedia}></MultipleSlider>
+                                    {openRow === client.id && 
+					<MultipleSlider imageNumber={width<768? 1: width<1024? 2: 3} urls={currentMedia}></MultipleSlider>
+				    }
                                 </div>
                                 <hr className='border-gray-400 mt-4 md:m-0'/>
                             </div>
