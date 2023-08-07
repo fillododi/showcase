@@ -43,7 +43,7 @@ const PostContent = ({posts}) => {
     const handlePlayVideo = (video) => {
         const videoList = document.getElementsByTagName("video")
         for(const vid of videoList){
-            if(vid !== video){
+            if(vid != video){
                 vid.pause()
             }
         }
