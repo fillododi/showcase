@@ -34,6 +34,18 @@ const PostContent = ({posts}) => {
         let imagesURLs = post.attributes.immagini.data.map(img=>`${img.attributes.url}`)
     }
 
+    const handlePlayVideo = (video) => {
+        stopAllVideos()
+        video.play()
+    }
+
+    const stopAllVideos = () => {
+        const videoList = document.getElementsByTagName("video")
+        for(const video of videoList){
+            video.pause()
+        }
+    }
+
 
     return <div className='w-full pb-10  mt-[80px]'>
         <div className='max-w-[1240px] mx-auto'>
@@ -45,12 +57,18 @@ const PostContent = ({posts}) => {
                         <Carousel
                             className='rounded-xl w-[50%] h-[50%] items-center'
                             prevArrow={({handlePrev})=>(<div className='!absolute top-2/4 -translate-y-2/4 left-4 flex h-48 items-center'>
-                                <IconButton onClick={handlePrev} className='text-3xl border-0 text-gray-900 bg-transparent hover:scale-110 hover:text-black hover:bg-transparent shadow-none hover:shadow-none'>
+                                <IconButton onClick={()=>{
+                                    stopAllVideos()
+                                    handlePrev()}
+                                } className='text-3xl border-0 text-gray-900 bg-transparent hover:scale-110 hover:text-black hover:bg-transparent shadow-none hover:shadow-none'>
                                     <FaChevronLeft/>
                                 </IconButton>
                             </div>)}
                             nextArrow={({handleNext})=>(<div className= '!absolute top-2/4 -translate-y-2/4 right-4 flex h-48 items-center'>
-                                <IconButton onClick={handleNext} className='text-3xl border-0 text-gray-900 bg-transparent hover:scale-110 hover:text-black hover:bg-transparent shadow-none hover:shadow-none'>
+                                <IconButton onClick={()=>{
+                                    stopAllVideos()
+                                    handleNext()}
+                                } className='text-3xl border-0 text-gray-900 bg-transparent hover:scale-110 hover:text-black hover:bg-transparent shadow-none hover:shadow-none'>
                                     <FaChevronRight/>
                                 </IconButton>
                             </div>)}
@@ -60,7 +78,7 @@ const PostContent = ({posts}) => {
                                     return <img className='w-full object-cover' src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}/>
                                 }
                                 if(checkMediaType(url)[0] === "video"){
-                                    return <video controls preload="auto" className='w-full object-cover' poster={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}>
+                                    return <video controls preload="auto" className='w-full object-cover' onPlaying={(e) => handlePlayVideo(e)} poster={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}>
                                         <source src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}  type={`video/${checkMediaType(url)[1]}`}/>
                                     </video>
                                 }
@@ -87,7 +105,7 @@ const PostContent = ({posts}) => {
                                             return <img className='w-full object-contain' src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}/>
                                         }
                                         if (checkMediaType(url)[0] === "video") {
-                                            return <video controls preload="auto" className='w-full object-contain' poster={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}>
+                                            return <video controls preload="auto" className='w-full object-contain' onPlaying={(e) => handlePlayVideo(e)} poster={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}>
                                                 <source src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")} type={`video/${checkMediaType(url)[1]}`}/>
                                             </video>
                                         }
@@ -104,7 +122,7 @@ const PostContent = ({posts}) => {
                                                 return <img className='w-full object-contain' src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}/>
                                             }
                                             if (checkMediaType(url)[0] === "video") {
-                                                return <video controls preload="auto" className='w-full object-contain' poster={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}>
+                                                return <video controls preload="auto" className='w-full object-contain' onPlaying={(e) => handlePlayVideo(e)} poster={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}>
                                                     <source src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")} type={`video/${checkMediaType(url)[1]}`}/>
                                                 </video>
                                             }

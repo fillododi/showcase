@@ -18,12 +18,12 @@ const MultipleSlider = ({urls, imageNumber}) => {
             slidesToShow: imageNumber,
             slidesToScroll: 1,
             prevArrow: <div className='flex h-48 items-center'>
-                <button className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
+                <button onClick={stopAllVideos} className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
                     <FaChevronLeft/>
                 </button>
             </div>,
             nextArrow: <div className= 'flex h-48 items-center'>
-                <button className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
+                <button onClick={stopAllVideos} className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
                     <FaChevronRight/>
                 </button>
             </div>
@@ -38,23 +38,36 @@ const MultipleSlider = ({urls, imageNumber}) => {
             slidesToShow: imageNumber,
             slidesToScroll: 1,
             prevArrow: <div className='flex h-48 items-center'>
-                <button className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:bg-[#f9f0c4]'>
+                <button onClick={stopAllVideos} className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:bg-[#f9f0c4]'>
                     <FaChevronLeft/>
                 </button>
             </div>,
             nextArrow: <div className= 'flex h-48 items-center'>
-                <button className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:bg-[#f9f0c4]'>
+                <button onClick={stopAllVideos} className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:bg-[#f9f0c4]'>
                     <FaChevronRight/>
                 </button>
             </div>
 
         }
     }
+
+    const handlePlayVideo = (video) => {
+        stopAllVideos()
+        video.play()
+    }
+
+    const stopAllVideos = () => {
+        const videoList = document.getElementsByTagName("video")
+        for(const video of videoList){
+            video.pause()
+        }
+    }
+
     return <div>
         <Slider {...settings}>
             {urls.map(url => <div>
                 {checkMediaType(url) === "image" && <img className='mx-auto h-48' src={`${url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}/>}
-                {checkMediaType(url)[0] === "video" && <video controls preload='auto' className='mx-auto h-48'>
+                {checkMediaType(url)[0] === "video" && <video controls preload='auto' className='mx-auto h-48' onPlaying={(e) => handlePlayVideo(e)}>
                     <source src={`${url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`} type={`video/${checkMediaType(url)[1]}`}/>
                 </video>}
             </div>)}
