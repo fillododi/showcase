@@ -16,7 +16,12 @@ const MultipleSlider = ({urls, imageNumber}) => {
         }
     }
     const handlePlayVideo = (video) => {
-        stopAllVideos()
+        const videoList = document.getElementsByTagName("video")
+        for(const vid of videoList){
+            if(vid !== video){
+                vid.pause()
+            }
+        }
         video.play()
     }
 
