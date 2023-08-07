@@ -22,7 +22,6 @@ const MultipleSlider = ({urls, imageNumber}) => {
                 vid.pause()
             }
         }
-        video.play()
     }
 
     if(urls.length >= imageNumber){
@@ -75,7 +74,7 @@ const MultipleSlider = ({urls, imageNumber}) => {
         <Slider {...settings}>
             {urls.map(url => <div>
                 {checkMediaType(url) === "image" && <img className='mx-auto h-48' src={`${url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}/>}
-                {checkMediaType(url)[0] === "video" && <video controls preload='auto' className='mx-auto h-48' onPlay={(e) => handlePlayVideo(e)}>
+                {checkMediaType(url)[0] === "video" && <video controls preload='auto' className='mx-auto h-48' onPlay={(e) => handlePlayVideo(e.target)}>
                     <source src={`${url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`} type={`video/${checkMediaType(url)[1]}`}/>
                 </video>}
             </div>)}
