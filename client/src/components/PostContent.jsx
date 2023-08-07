@@ -43,7 +43,7 @@ const PostContent = ({posts}) => {
                     {width >= 1024?
                         <>
                         <Carousel
-                            className='rounded-xl w-[50%] h-[50%]'
+                            className='rounded-xl w-[50%] h-[50%] items-center'
                             prevArrow={({handlePrev})=>(<div className='!absolute top-2/4 -translate-y-2/4 left-4 flex h-48 items-center'>
                                 <IconButton onClick={handlePrev} className='text-3xl border-0 text-gray-900 bg-transparent hover:scale-110 hover:text-black hover:bg-transparent shadow-none hover:shadow-none'>
                                     <FaChevronLeft/>
@@ -57,10 +57,10 @@ const PostContent = ({posts}) => {
                         >
                             {imagesURLs.map((url)=>{
                                 if(checkMediaType(url) === "image"){
-                                    return <img className='w-full object-cover h-[24rem]' src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}/>
+                                    return <img className='w-full object-cover' src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}/>
                                 }
                                 if(checkMediaType(url)[0] === "video"){
-                                    return <video controls preload="auto" className='w-full object-cover h-[24rem]' poster={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}>
+                                    return <video controls preload="auto" className='w-full object-cover' poster={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}>
                                         <source src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}  type={`video/${checkMediaType(url)[1]}`}/>
                                     </video>
                                 }
