@@ -17,6 +17,7 @@ const HomeContent = ({posts, clients})=> {
     const [showButton, setShowButton] = useState(false)
 
     const {width, height} = useWindowDimensions()
+    const isNotSafariMac = !/Macintosh/i.test(navigator.userAgent)
 
     useEffect(()=>{
         const video = document.getElementById('videosummeredit')
@@ -48,16 +49,28 @@ const HomeContent = ({posts, clients})=> {
     return <div className="w-full bg-[#eee] py-[50px] mt-[80px]">
         <div className='max-w-[1240px] mx-auto'>
             <div className='logo-container flex justify-center'>
-                <img src={logo} alt='logo' id='logo'
-                     className='sm:ml-10 ss:ml-10 md:ml-3 w-[85%] xs:w-[70%] h-full my-24'
-                     style={{transform: `scale(${logoScale})`}}
-                />
+                {isNotSafariMac?
+                    <img src={logo} alt='logo' id='logo'
+                         className='sm:ml-10 ss:ml-10 md:ml-3 w-[85%] xs:w-[70%] h-full my-24'
+                         style={{transform: `scale(${logoScale})`}}
+                    />
+                    :
+                    <img src={logo} alt='logo' id='logo'
+                         className='sm:ml-10 ss:ml-10 md:ml-3 w-[85%] xs:w-[70%] h-full my-24'
+                    />
+                }
             </div>
 
             <div className='px-4 pt-4 pb-8 my-4 text-center text-container'>
-                <p className='text-xs sm:text-sm md:!text-2xl font-bold' style={{transform: `translateY(${textTranslation*(-1)}px) scale(${textScale})`, fontFamily: 'Montserrat'}}>
-                    Benvenuti nel nostro mondo di videomaker e fotografia! Siamo un team di giovani appassionati e talentuosi con oltre 6 anni di esperienza nel settore. La nostra missione è semplice: rendere accessibile a tutte le attività la possibilità di avere contenuti professionali e curati per le loro pagine social. Trasforma la tua presenza online in un vero spettacolo visivo con la creatività e la competenza di Showcase!
-                </p>
+                {isNotSafariMac?
+                    <p className='text-xs sm:text-sm md:!text-2xl font-bold' style={{transform: `translateY(${textTranslation*(-1)}px) scale(${textScale})`, fontFamily: 'Montserrat'}}>
+                        Benvenuti nel nostro mondo di videomaker e fotografia! Siamo un team di giovani appassionati e talentuosi con oltre 6 anni di esperienza nel settore. La nostra missione è semplice: rendere accessibile a tutte le attività la possibilità di avere contenuti professionali e curati per le loro pagine social. Trasforma la tua presenza online in un vero spettacolo visivo con la creatività e la competenza di Showcase!
+                    </p>
+                    :
+                    <p className='text-xs sm:text-sm md:!text-2xl font-bold' style={{fontFamily: 'Montserrat'}}>
+                        Benvenuti nel nostro mondo di videomaker e fotografia! Siamo un team di giovani appassionati e talentuosi con oltre 6 anni di esperienza nel settore. La nostra missione è semplice: rendere accessibile a tutte le attività la possibilità di avere contenuti professionali e curati per le loro pagine social. Trasforma la tua presenza online in un vero spettacolo visivo con la creatività e la competenza di Showcase!
+                    </p>
+                }
             </div>
             <div className='mt-2.5 mb-28 flex justify-center video-container'>
                 {navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0?
@@ -79,7 +92,7 @@ const HomeContent = ({posts, clients})=> {
                         <div className='flex justify-between flex-col items-center'>
                             <div className='w-full md:w-[80%] bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
                                 <Link to={`/post/${post.id}`} className='items-center'>
-                                    <img className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}/>
+                                    <img className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.thumbnail.data.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}/>
                                 </Link>
                             </div>
                             <p className='text-center text-base xs:text-lg sm:text-xl my-8 font-bold'>{post.attributes.titolo? post.attributes.titolo: ""}</p>
@@ -94,7 +107,7 @@ const HomeContent = ({posts, clients})=> {
                         clients.data &&
                         clients.data.map(client => <div className='items-center flex flex-col justify-between'>
                             <Link to={client.attributes.link_insta? client.attributes.link_insta: "#"} className='flex flex-col items-center justify-center w-[75%] gap-y-2'>
-                                <img src={`${client.attributes.logo.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300'/>
+                                <img src={`${client.attributes.logo.data.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300'/>
                                 <p className='text-center text-xs xs:text-base sm:text-lg font-bold'>{client.attributes.nome? client.attributes.nome: ""}</p>
                             </Link>
                         </div>)

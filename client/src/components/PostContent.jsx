@@ -11,7 +11,28 @@ const PostContent = ({posts}) => {
     const {id} = useParams()
     let post = posts.data.filter(post=>post.id==id)
     post = post[0]
-    let imagesURLs = post.attributes.immagini.data.map(img=>`${img.attributes.url}`)
+    let imagesURLs = post.attributes.immagini.data
+    if(width <= 500){
+        imagesURLs = imagesURLs.map(img => {
+            if(checkMediaType(img.attributes.url) === 'image'){
+                return img.attributes.formats.medium.url
+            } //only images have different sizes, not videos
+            else {
+                return img.attributes.url
+            }
+        })
+    } else if(width <= 650 || width >= 1024) {
+        imagesURLs = imagesURLs.map(img => {
+            if(checkMediaType(img.attributes.url) === 'image'){
+                return img.attributes.formats.large.url
+            } //only images have different sizes, not videos
+            else {
+                return img.attributes.url
+            }
+        })
+    } else {
+        let imagesURLs = post.attributes.immagini.data.map(img=>`${img.attributes.url}`)
+    }
 
 
     return <div className='w-full pb-10  mt-[80px]'>

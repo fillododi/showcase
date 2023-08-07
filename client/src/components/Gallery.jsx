@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import {FaChevronUp, FaChevronDown} from "react-icons/fa";
 import MultipleSlider from "./MultipleSlider.jsx";
 import useWindowDimensions from "../hooks/useWindowDimensions.js";
+import checkMediaType from "../utils/mediatypes.jsx";
 
 import './Gallery/styles.css'
 
@@ -33,7 +34,13 @@ const Gallery = ({clients}) => {
             let newMedia = []
             client.attributes.posts.data.forEach(post =>
                 post.attributes.immagini.data.forEach(
-                    (img)=>newMedia.push(img.attributes.url)
+                    (img)=>{
+                        if(checkMediaType(img.attributes.url) === 'image') {
+                            newMedia.push(img.attributes.formats.small.url)
+                        } else {
+                            newMedia.push(img.attributes.url)
+                        }
+                    }
                 )
             )
             setCurrentMedia(newMedia)
@@ -53,7 +60,7 @@ const Gallery = ({clients}) => {
                                 <div className='flex flex-col md:flex-row gap-y-4 my-auto justify-stretch h-48 px-12 mb-4 md:m-0'>
                                     <div className='h-48 md:w-1/2 flex items-center justify-center'>
                                         <img className='col-span-3 rounded-full w-36 h-36 xs:w-48 xs:h-48 object-cover'
-                                             src={`${client.attributes.logo.data? client.attributes.logo.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net"): ""}`}/>
+                                             src={`${client.attributes.logo.data? client.attributes.logo.data.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net"): ""}`}/>
                                     </div>
                                     <div className='gap-x-8 flex flex-row md:w-1/2 justify-center md:justify-end'>
                                         <p className='md:text-4xl ml-4 md:ml-0 md:text-right text-3xl my-auto text-gray-800t' style={{fontFamily: 'Montserrat'}}>
