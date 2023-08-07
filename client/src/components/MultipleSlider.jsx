@@ -9,6 +9,17 @@ import './MultipleSlider/styles.css'
 const MultipleSlider = ({urls, imageNumber}) => {
     console.log(imageNumber)
     let settings = {}
+    const stopAllVideos = () => {
+        const videoList = document.getElementsByTagName("video")
+        for(const video of videoList){
+            video.pause()
+        }
+    }
+    const handlePlayVideo = (video) => {
+        stopAllVideos()
+        video.play()
+    }
+
     if(urls.length >= imageNumber){
         settings = {
             initialSlide: 0,
@@ -51,17 +62,9 @@ const MultipleSlider = ({urls, imageNumber}) => {
         }
     }
 
-    const handlePlayVideo = (video) => {
-        stopAllVideos()
-        video.play()
-    }
 
-    const stopAllVideos = () => {
-        const videoList = document.getElementsByTagName("video")
-        for(const video of videoList){
-            video.pause()
-        }
-    }
+
+
 
     return <div>
         <Slider {...settings}>

@@ -34,17 +34,18 @@ const PostContent = ({posts}) => {
         let imagesURLs = post.attributes.immagini.data.map(img=>`${img.attributes.url}`)
     }
 
-    const handlePlayVideo = (video) => {
-        stopAllVideos()
-        video.play()
-    }
-
     const stopAllVideos = () => {
         const videoList = document.getElementsByTagName("video")
         for(const video of videoList){
             video.pause()
         }
     }
+    const handlePlayVideo = (video) => {
+        stopAllVideos()
+        video.play()
+    }
+
+
 
 
     return <div className='w-full pb-10  mt-[80px]'>
