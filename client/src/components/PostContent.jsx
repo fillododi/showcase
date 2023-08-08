@@ -31,7 +31,7 @@ const PostContent = ({posts}) => {
             }
         })
     } else {
-        let imagesURLs = post.attributes.immagini.data.map(img=>`${img.attributes.url}`)
+        imagesURLs = imagesURLs.map(img=>`${img.attributes.url}`)
     }
 
     const stopAllVideos = () => {
@@ -77,6 +77,7 @@ const PostContent = ({posts}) => {
                                     <FaChevronRight/>
                                 </IconButton>
                             </div>)}
+                            navigation={}
                         >
                             {imagesURLs.map((url)=>{
                                 if(checkMediaType(url) === "image"){

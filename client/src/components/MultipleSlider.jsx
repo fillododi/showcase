@@ -5,9 +5,12 @@ import "slick-carousel/slick/slick-theme.css"
 import checkMediaType from "../utils/mediatypes.jsx";
 import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
 import './MultipleSlider/styles.css'
+import useWindowDimensions from "../hooks/useWindowDimensions.js";
+
 
 const MultipleSlider = ({urls, imageNumber}) => {
     console.log(imageNumber)
+    const {width, height} = useWindowDimensions()
     let settings = {}
     const stopAllVideos = () => {
         const videoList = document.getElementsByTagName("video")
@@ -27,7 +30,7 @@ const MultipleSlider = ({urls, imageNumber}) => {
     if(urls.length >= imageNumber){
         settings = {
             initialSlide: 0,
-            dots: true,
+            dots: width >= 1024,
             infinite: true,
             speed: 500,
             slidesToShow: imageNumber,
@@ -47,7 +50,7 @@ const MultipleSlider = ({urls, imageNumber}) => {
     } else {
         settings = {
             initialSlide: 0,
-            dots: true,
+            dots: width >= 1024,
             infinite: false,
             speed: 500,
             slidesToShow: imageNumber,
