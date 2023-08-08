@@ -1,9 +1,10 @@
 import React from "react";
 import Slider from "react-slick"
+import Dot from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import checkMediaType from "../utils/mediatypes.jsx";
-import {FaChevronLeft, FaChevronRight} from "react-icons/fa";
+import {FaChevronLeft, FaChevronRight, FaCircle} from "react-icons/fa";
 import './MultipleSlider/styles.css'
 import useWindowDimensions from "../hooks/useWindowDimensions.js";
 
@@ -28,29 +29,53 @@ const MultipleSlider = ({urls, imageNumber}) => {
     }
 
     if(urls.length >= imageNumber){
-        settings = {
-            initialSlide: 0,
-            dots: width >= 1024,
-            infinite: true,
-            speed: 500,
-            slidesToShow: imageNumber,
-            slidesToScroll: 1,
-            prevArrow: <div className='flex h-48 items-center'>
-                <button onClick={stopAllVideos} className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
-                    <FaChevronLeft/>
-                </button>
-            </div>,
-            nextArrow: <div className= 'flex h-48 items-center'>
-                <button onClick={stopAllVideos} className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
-                    <FaChevronRight/>
-                </button>
-            </div>
+	if(width >= 1024){
 
-        }
+	        settings = {
+        	    initialSlide: 0,
+            	    dots: urls.length <= 8,
+		    infinite: true,
+            	    speed: 500,
+            	    slidesToShow: imageNumber,
+            	    slidesToScroll: 1,
+            	    prevArrow: <div className='flex h-48 items-center'>
+                	<button onClick={stopAllVideos} className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
+                    		<FaChevronLeft/>
+                	</button>
+            	    </div>,
+            	    nextArrow: <div className= 'flex h-48 items-center'>
+                	<button onClick={stopAllVideos} className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
+                    	    	<FaChevronRight/>
+                	</button>
+            	    </div>
+
+        	}
+ 	} else {
+		settings = {
+                    initialSlide: 0,
+                    dots: false,
+                    infinite: true,
+                    speed: 500,
+                    slidesToShow: imageNumber,
+                    slidesToScroll: 1,
+                    prevArrow: <div className='flex h-48 items-center'>
+                        <button onClick={stopAllVideos} className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
+                                <FaChevronLeft/>
+                        </button>
+                    </div>,
+                    nextArrow: <div className= 'flex h-48 items-center'>
+                        <button onClick={stopAllVideos} className='text-xl border-0 text-gray-800 bg-[#eee] hover:scale-110 hover:text-black hover:[#f9f0c4]'>
+                                <FaChevronRight/>
+                        </button>
+                    </div>
+
+                }
+
+	}
     } else {
         settings = {
             initialSlide: 0,
-            dots: width >= 1024,
+            dots: false, 
             infinite: false,
             speed: 500,
             slidesToShow: imageNumber,
@@ -67,6 +92,7 @@ const MultipleSlider = ({urls, imageNumber}) => {
             </div>
 
         }
+	
     }
 
 
