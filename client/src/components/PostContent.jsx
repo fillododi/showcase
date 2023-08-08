@@ -77,7 +77,7 @@ const PostContent = ({posts}) => {
                                     <FaChevronRight/>
                                 </IconButton>
                             </div>)}
-                            navigation={}
+                            navigation={()=><></>}
                         >
                             {imagesURLs.map((url)=>{
                                 if(checkMediaType(url) === "image"){
