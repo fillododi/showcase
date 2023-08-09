@@ -81,10 +81,10 @@ const PostContent = ({posts}) => {
                         >
                             {imagesURLs.map((url)=>{
                                 if(checkMediaType(url) === "image"){
-                                    return <img className='w-full object-cover' src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}/>
+                                    return <img className='w-full' src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}/>
                                 }
                                 if(checkMediaType(url)[0] === "video"){
-                                    return <video controls preload="auto" className='w-full object-cover' onPlay={(e) => handlePlayVideo(e.target)} poster={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}>
+                                    return <video controls preload="auto" className='w-full' onPlay={(e) => handlePlayVideo(e.target)} poster={`${post.attributes.thumbnail.data.attributes.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}>
                                         <source src={url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}  type={`video/${checkMediaType(url)[1]}`}/>
                                     </video>
                                 }
