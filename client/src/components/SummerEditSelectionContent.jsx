@@ -132,7 +132,7 @@ const SummerEditSelectionContent = () => {
                 <div className='flex flex-col gap-y-4'>
                     <p className='font-bold text-xl'>File(s) selezionati:</p>
                     <div className={`${width < 1240? 'grid grid-cols-2 sm:!grid-cols-4': 'grid grid-cols-3 xl:grid-cols-5'} gap-y-8'`}>
-                        {selectedFiles.map(file => <div className='rounded-lg border border-gray-400 w-[8rem] h-[8rem] overflow-hidden flex items-center justify-center'>
+                        {selectedFiles.map(file => <div className='rounded-lg border border-gray-400 w-[8rem] h-[8rem] overflow-hidden flex items-center justify-center my-8'>
                             {checkMediaType(file.name) === 'image' && <img src={file.preview} className='object-cover' onLoad={()=>{URL.revokeObjectURL(file.preview)}}/>}
                             {checkMediaType(file.name)[0] === 'video' &&
                                 (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0?
