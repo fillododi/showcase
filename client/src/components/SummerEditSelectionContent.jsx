@@ -100,7 +100,7 @@ const SummerEditSelectionContent = () => {
             }
         })
 
-        return <div {...getRootProps({className:'dropzone rounded-lg border border-gray-400 w-[8rem] h-[8rem] border-dashed flex items-center justify-center hover:border-solid'})}>
+        return <div {...getRootProps({className:'my-8 dropzone rounded-lg border border-gray-400 w-[8rem] h-[8rem] border-dashed flex items-center justify-center hover:border-solid'})}>
             <input {...getInputProps()}></input>
             <AiOutlinePlus className='text-6xl m-auto'/>
         </div>
