@@ -52,6 +52,7 @@ const SummerEditSelectionContent = () => {
                 alert('Inserisci massimo 8 foto')
             } else {
                 setCheckout(true)
+                selectedFiles.map(file => {URL.revokeObjectURL(file.preview)})
                 requestEdit(selectedFiles)
             }
         }
@@ -133,17 +134,17 @@ const SummerEditSelectionContent = () => {
                     <p className='font-bold text-xl'>File(s) selezionati:</p>
                     <div className={`${width < 1240? 'grid grid-cols-2 sm:!grid-cols-4': 'grid grid-cols-3 xl:grid-cols-5'} gap-y-8'`}>
                         {selectedFiles.map(file => <div className='rounded-lg border border-gray-400 w-[8rem] h-[8rem] overflow-hidden flex items-center justify-center my-8'>
-                            {checkMediaType(file.name) === 'image' && <img src={file.preview} className='object-cover' onLoad={()=>{URL.revokeObjectURL(file.preview)}}/>}
+                            {checkMediaType(file.name) === 'image' && <img src={file.preview} className='object-cover'/>}
                             {checkMediaType(file.name)[0] === 'video' &&
                                 (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0?
-                                        <img className='object-cover' onLoad={()=>{URL.revokeObjectURL(file.preview)}} src={file.preview}/>
+                                        <img className='object-cover' src={file.preview}/>
                                         :
-                                        <video className='object-cover' autoPlay loop muted onLoad={()=>{URL.revokeObjectURL(file.preview)}}>
+                                        <video className='object-cover' autoPlay loop muted >
                                             <source src={file.preview}  type={`video/${checkMediaType(file.name)[1]}`}/>
                                         </video>
                                 )
                             }
-                            {checkMediaType(file.name) === 'audio' && <FiMusic className='text-6xl m-auto' onLoad={()=>{URL.revokeObjectURL(file.preview)}}/>}
+                            {checkMediaType(file.name) === 'audio' && <FiMusic className='text-6xl m-auto'/>}
                         </div>)}
                         {(selectedFiles.length < 2 && type === '50' || selectedFiles.length < 10 && type === '80') && <MiniDropzone/>}
                     </div>
