@@ -14,10 +14,10 @@ const SummerEdit = () => {
     return <div className='mt-[80px] '>
         <div className='relative flex justify-center overflow-hidden'>
             {navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0?
-                <img src='https://d2r33wic133snl.cloudfront.net/summereditthumbnail.mp4' className='h-screen md:h-auto md:w-auto md:min-w-full md:min-h-full max-w-none'/>
+                <img src='https://d2r33wic133snl.cloudfront.net/summereditbg1.mp4' className='h-screen md:h-auto md:w-auto md:min-w-full md:min-h-full max-w-none'/>
                 :
                 <video poster={postersummereditthumbnail} preload="auto"  playsInline loop autoPlay muted className='h-screen md:h-auto md:w-auto md:min-w-full md:min-h-full max-w-none'>
-                    <source src='https://d2r33wic133snl.cloudfront.net/summereditthumbnail.mp4'/*{summereditthumbnail}*/ type='video/mp4'></source>
+                    <source src='https://d2r33wic133snl.cloudfront.net/summereditbg1.mp4'/*{summereditthumbnail}*/ type='video/mp4'></source>
                     <source src='https://d2r33wic133snl.cloudfront.net/summereditthumbnail.mov'/*{summereditthumbnail}*/ type='video/mov'></source>
                     <source src='https://d2r33wic133snl.cloudfront.net/summereditthumbnail.webm'/*{summereditthumbnail}*/ type='video/webm'></source>
                 </video>
@@ -26,10 +26,10 @@ const SummerEdit = () => {
         </div>
         <div className='relative flex justify-center overflow-hidden'>
             {navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0?
-                <img ref={ref} src='https://d2r33wic133snl.cloudfront.net/sfondosummeredit.mp4' className='h-screen sm:h-auto sm:w-auto sm:min-w-full sm:min-h-full max-w-none'/>
+                <img ref={ref} src='https://d2r33wic133snl.cloudfront.net/summereditbg2.mp4' className='h-screen sm:h-auto sm:w-auto sm:min-w-full sm:min-h-full max-w-none'/>
                 :
                 <video ref={ref} poster={postersfondosummeredit} preload="auto"  playsInline loop autoPlay muted className='h-screen sm:h-auto sm:w-auto sm:min-w-full sm:min-h-full max-w-none'>
-                    <source src='https://d2r33wic133snl.cloudfront.net/sfondosummeredit.mp4'/*{sfondosummeredit}*/ type='video/mp4'></source>
+                    <source src='https://d2r33wic133snl.cloudfront.net/summereditbg2.mp4'/*{sfondosummeredit}*/ type='video/mp4'></source>
                     <source src='https://d2r33wic133snl.cloudfront.net/sfondosummeredit.mov'/*{sfondosummeredit}*/ type='video/mov'></source>
                     <source src='https://d2r33wic133snl.cloudfront.net/sfondosummeredit.webm'/*{sfondosummeredit}*/ type='video/webm'></source>
                 </video>

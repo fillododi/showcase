@@ -12,6 +12,7 @@ import PrivacyPage from "./pages/PrivacyPage.jsx";
 import RefundPage from "./pages/RefundPage.jsx";
 import SupportPage from "./pages/SupportPage.jsx";
 import {CookieConsent} from "react-cookie-consent";
+import Navbar from "./components/Navbar.jsx";
 
 export default function App() {
 
@@ -23,7 +24,7 @@ export default function App() {
 
     let {loading: loadingPosts, data: posts, error: errorPosts} = useFetch(`${import.meta.env.VITE_STRAPI_URL}/api/blogs?populate=*`)
     let {loading: loadingClients, data: clients, error: errorClients} = useFetch(`${import.meta.env.VITE_STRAPI_URL}/api/clienti?populate=deep,3`)
-    if(loadingPosts) return <p>Caricando</p>
+    if(loadingPosts) return <Navbar/>
     if(errorPosts) return <p>a</p>
     return <ScrollToTop><Routes>
         <Route path='/' element={<Homepage posts={posts? posts: ""} clients={clients? clients: ""}/>}></Route>

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Textarea, Input} from "@material-tailwind/react";
+import {Textarea, Input, Checkbox} from "@material-tailwind/react";
 import {useParams} from "react-router-dom";
 import {useDropzone} from "react-dropzone";
 import checkMediaType from "../utils/mediatypes.jsx";
@@ -100,7 +100,7 @@ const SummerEditSelectionContent = () => {
             }
         })
 
-        return <div {...getRootProps({className:'dropzone rounded-lg border border-gray-400 w-[8rem] h-[8rem] border-dashed flex items-center justify-center hover:border-solid'})}>
+        return <div {...getRootProps({className:'my-8 dropzone rounded-lg border border-gray-400 w-[8rem] h-[8rem] border-dashed flex items-center justify-center hover:border-solid'})}>
             <input {...getInputProps()}></input>
             <AiOutlinePlus className='text-6xl m-auto'/>
         </div>
@@ -131,12 +131,18 @@ const SummerEditSelectionContent = () => {
                 :
                 <div className='flex flex-col gap-y-4'>
                     <p className='font-bold text-xl'>File(s) selezionati:</p>
-                    <div className={`${width < 1240? 'grid grid-cols-1 xs:grid-cols-2 sm:!grid-cols-4': 'grid grid-cols-3 xl:grid-cols-5'} gap-y-8'`}>
-                        {selectedFiles.map(file => <div className='rounded-lg border border-gray-400 w-[8rem] h-[8rem] overflow-hidden flex items-center justify-center'>
+                    <div className={`${width < 1240? 'grid grid-cols-2 sm:!grid-cols-4': 'grid grid-cols-3 xl:grid-cols-5'} gap-y-8'`}>
+                        {selectedFiles.map(file => <div className='rounded-lg border border-gray-400 w-[8rem] h-[8rem] overflow-hidden flex items-center justify-center my-8'>
                             {checkMediaType(file.name) === 'image' && <img src={file.preview} className='object-cover' onLoad={()=>{URL.revokeObjectURL(file.preview)}}/>}
-                            {checkMediaType(file.name)[0] === 'video' && <video className='object-cover' autoPlay loop muted onLoad={()=>{URL.revokeObjectURL(file.preview)}}>
-                                <source src={file.preview}  type={`video/${checkMediaType(file.name)[1]}`}/>
-                            </video>}
+                            {checkMediaType(file.name)[0] === 'video' &&
+                                (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0?
+                                        <img className='object-cover' onLoad={()=>{URL.revokeObjectURL(file.preview)}} src={file.preview}/>
+                                        :
+                                        <video className='object-cover' autoPlay loop muted onLoad={()=>{URL.revokeObjectURL(file.preview)}}>
+                                            <source src={file.preview}  type={`video/${checkMediaType(file.name)[1]}`}/>
+                                        </video>
+                                )
+                            }
                             {checkMediaType(file.name) === 'audio' && <FiMusic className='text-6xl m-auto' onLoad={()=>{URL.revokeObjectURL(file.preview)}}/>}
                         </div>)}
                         {(selectedFiles.length < 2 && type === '50' || selectedFiles.length < 10 && type === '80') && <MiniDropzone/>}
@@ -181,6 +187,9 @@ const SummerEditSelectionContent = () => {
                                 <label className='font-bold text-xl'>Inserisci le tue richieste:</label>
                                 <Textarea label='Scrivi qui quello che dobbiamo fare' className='border-gray-400' type='text' required value={description} onChange={handleDescriptionChange}/>
                             </div>
+                            <div className='ml-14'>
+                                <Checkbox label='Ho letto e accettato i termini della politica di servizio' required></Checkbox>
+                            </div>
                             <div className='ml-16'>
                                 <Dropzone/>
                             </div>
@@ -203,6 +212,9 @@ const SummerEditSelectionContent = () => {
                                 </div>
                             </div>
                             <div className='flex flex-col'>
+                                <div className='mt-4'>
+                                    <Checkbox label='Ho letto e accettato i termini della politica di servizio' required></Checkbox>
+                                </div>
                                 <div>
                                     <Dropzone/>
                                 </div>

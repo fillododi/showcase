@@ -74,10 +74,10 @@ const HomeContent = ({posts, clients})=> {
             </div>
             <div className='mt-2.5 mb-28 flex justify-center video-container'>
                 {navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0?
-                    <img id='videosummeredit' src='https://d2r33wic133snl.cloudfront.net/videosummeredit.mp4' className='sm:rounded-2xl drop-shadow-3xl sm:w-2/3'/>
+                    <img id='videosummeredit' src='https://d2r33wic133snl.cloudfront.net/videohomepage.mp4' className='sm:rounded-2xl drop-shadow-3xl sm:w-2/3'/>
                     :
                     <video id='videosummeredit' preload="auto" poster={postervideosummeredit} playsInline muted autoPlay loop className={`sm:rounded-2xl drop-shadow-3xl sm:w-2/3`}>
-                        <source  src='https://d2r33wic133snl.cloudfront.net/videosummeredit.mp4'/*{videosummeredit}*/ type='video/mp4'></source>
+                        <source  src='https://d2r33wic133snl.cloudfront.net/videohomepage.mp4'/*{videosummeredit}*/ type='video/mp4'></source>
                         <source  src='https://d2r33wic133snl.cloudfront.net/videosummeredit.mov'/*{videosummeredit}*/ type='video/mov'></source>
                         <source  src='https://d2r33wic133snl.cloudfront.net/videosummeredit.webm'/*{videosummeredit}*/ type='video/webm'></source>
                     </video>
@@ -92,7 +92,7 @@ const HomeContent = ({posts, clients})=> {
                         <div className='flex justify-between flex-col items-center'>
                             <div className='w-full md:w-[80%] bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
                                 <Link to={`/post/${post.id}`} className='items-center'>
-                                    <img className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.thumbnail.data.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}/>
+                                    <img className='w-full rounded-full object-cover aspect-square' src={`${post.attributes.thumbnail.data?.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}/>
                                 </Link>
                             </div>
                             <p className='text-center text-base xs:text-lg sm:text-xl my-8 font-bold'>{post.attributes.titolo? post.attributes.titolo: ""}</p>
@@ -107,7 +107,7 @@ const HomeContent = ({posts, clients})=> {
                         clients.data &&
                         clients.data.map(client => <div className='items-center flex flex-col justify-between'>
                             <Link to={client.attributes.link_insta? client.attributes.link_insta: "#"} className='flex flex-col items-center justify-center w-[75%] gap-y-2'>
-                                <img src={`${client.attributes.logo.data.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300'/>
+                                <img src={`${client.attributes.logo.data.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300' loading='lazy'/>
                                 <p className='text-center text-xs xs:text-base sm:text-lg font-bold'>{client.attributes.nome? client.attributes.nome: ""}</p>
                             </Link>
                         </div>)
