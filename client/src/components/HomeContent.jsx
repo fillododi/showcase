@@ -107,7 +107,7 @@ const HomeContent = ({posts, clients})=> {
                         clients.data &&
                         clients.data.map(client => <div className='items-center flex flex-col justify-between'>
                             <Link to={client.attributes.link_insta? client.attributes.link_insta: "#"} className='flex flex-col items-center justify-center w-[75%] gap-y-2'>
-                                <img src={`${client.attributes.logo.data.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300'/>
+                                <img src={`${client.attributes.logo.data.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`} className='object-contain rounded-full hover:scale-110 hover:drop-shadow-xl duration-300' loading='lazy'/>
                                 <p className='text-center text-xs xs:text-base sm:text-lg font-bold'>{client.attributes.nome? client.attributes.nome: ""}</p>
                             </Link>
                         </div>)
