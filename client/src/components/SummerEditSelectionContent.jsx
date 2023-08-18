@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Textarea, Input} from "@material-tailwind/react";
+import {Textarea, Input, Checkbox} from "@material-tailwind/react";
 import {useParams} from "react-router-dom";
 import {useDropzone} from "react-dropzone";
 import checkMediaType from "../utils/mediatypes.jsx";
@@ -180,6 +180,9 @@ const SummerEditSelectionContent = () => {
                             <div className='flex flex-col ml-16 gap-y-4'>
                                 <label className='font-bold text-xl'>Inserisci le tue richieste:</label>
                                 <Textarea label='Scrivi qui quello che dobbiamo fare' className='border-gray-400' type='text' required value={description} onChange={handleDescriptionChange}/>
+                            </div>
+                            <div className='ml-14'>
+                                <Checkbox label='Ho letto e accettato i termini della politica di servizio' required></Checkbox>
                             </div>
                             <div className='ml-16'>
                                 <Dropzone/>
