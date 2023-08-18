@@ -206,6 +206,9 @@ const SummerEditSelectionContent = () => {
                                 </div>
                             </div>
                             <div className='flex flex-col'>
+                                <div className='mt-4'>
+                                    <Checkbox label='Ho letto e accettato i termini della politica di servizio' required></Checkbox>
+                                </div>
                                 <div>
                                     <Dropzone/>
                                 </div>
