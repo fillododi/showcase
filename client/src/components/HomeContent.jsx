@@ -88,11 +88,11 @@ const HomeContent = ({posts, clients})=> {
             <div className='my-[50px]'>
                 <div className='flex justify-between flex-col items-center'>
                     <div className='w-full md:w-[80%] bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
-                        <Link to={`/post/${posts.data.slice(0).reverse.id}`} className='items-center'>
-                            <img className='w-full rounded-full object-cover aspect-square' src={`${posts.data.slice(0).reverse.attributes.thumbnail.data?.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}/>
+                        <Link to={`/post/${posts.data.slice(0).reverse[0].id}`} className='items-center'>
+                            <img className='w-full rounded-full object-cover aspect-square' src={`${posts.data.slice(0).reverse[0].attributes.thumbnail.data?.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}/>
                         </Link>
                     </div>
-                    <p className='text-center text-base xs:text-lg sm:text-xl my-8 font-bold'>{posts.data.slice(0).reverse.attributes.titolo? posts.data.slice(0).reverse.attributes.titolo: ""}</p>
+                    <p className='text-center text-base xs:text-lg sm:text-xl my-8 font-bold'>{posts.data.slice(0).reverse[0].attributes.titolo? posts.data.slice(0).reverse[0].attributes.titolo: ""}</p>
                 </div>
             </div>
             <div className='my-[50px]'>
