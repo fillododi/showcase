@@ -86,6 +86,16 @@ const HomeContent = ({posts, clients})=> {
                 <Link to={'/summeredit'}><button id='summereditbutton' className={`overlay-button text-sm xs:text-base px-2 py-1 xs:px-4 xs:py-2  ${showButton || (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0) ? 'show': ''}`}>Scopri di più</button></Link>
             </div>
             <div className='my-[50px]'>
+                <div className='flex justify-between flex-col items-center'>
+                    <div className='w-full md:w-[80%] bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
+                        <Link to={`/post/${posts.data.slice(0).reverse.id}`} className='items-center'>
+                            <img className='w-full rounded-full object-cover aspect-square' src={`${posts.data.slice(0).reverse.attributes.thumbnail.data?.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}/>
+                        </Link>
+                    </div>
+                    <p className='text-center text-base xs:text-lg sm:text-xl my-8 font-bold'>{posts.data.slice(0).reverse.attributes.titolo? posts.data.slice(0).reverse.attributes.titolo: ""}</p>
+                </div>
+            </div>
+            <div className='my-[50px]'>
                 <h3 className='text-2xl sm:text-4xl text-center my-8'>Gallery</h3>
                 <div className='grid grid-cols-2 xs:grid-cols-3 gap-8 px-4 pt-8 text-black'>
                     {posts.data.slice(0).reverse().map((post)=>
