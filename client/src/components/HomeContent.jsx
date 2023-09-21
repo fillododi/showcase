@@ -87,10 +87,10 @@ const HomeContent = ({posts, clients})=> {
             </div>
             <div className='my-[50px] w-[50%] flex flex-row items-center justify-center mx-auto'>
                 <div className='flex justify-between flex-col items-center'>
-                    <p className='text-center text-lg xs:text-xl sm:text-4xl my-8'>{posts.data.slice(0).reverse()[0].attributes.titolo? posts.data.slice(0).reverse()[0].attributes.titolo: ""}</p>
+                    <p className='text-center text-lg xs:text-xl sm:text-4xl my-8'>{posts.data.slice(0)[0].attributes.titolo? posts.data.slice(0)[0].attributes.titolo: ""}</p>
                     <div className='w-full md:w-[80%] bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
-                        <Link to={`/post/${posts.data.slice(0).reverse()[0].id}`} className='items-center'>
-                            <img className='w-full rounded-full object-cover aspect-square' src={`${posts.data.slice(0).reverse()[0].attributes.thumbnail.data?.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}/>
+                        <Link to={`/post/${posts.data.slice(0)[0].id}`} className='items-center'>
+                            <img className='w-full rounded-full object-cover aspect-square' src={`${posts.data.slice(0)[0].attributes.thumbnail.data?.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}/>
                         </Link>
                     </div>
                 </div>
@@ -98,7 +98,7 @@ const HomeContent = ({posts, clients})=> {
             <div className='my-[50px]'>
                 <h3 className='text-2xl sm:text-4xl text-center my-8'>Gallery</h3>
                 <div className='grid grid-cols-2 xs:grid-cols-3 gap-8 px-4 pt-8 text-black'>
-                    {posts.data.slice(0).reverse().map((post)=>
+                    {posts.data.slice(0).map((post)=>
                         <div className='flex justify-between flex-col items-center'>
                             <div className='w-full md:w-[80%] bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
                                 <Link to={`/post/${post.id}`} className='items-center'>
