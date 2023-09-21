@@ -87,7 +87,7 @@ const HomeContent = ({posts, clients})=> {
             </div>
             <div className='my-[50px] w-[50%] flex flex-row items-center justify-center mx-auto'>
                 <div className='flex justify-between flex-col items-center'>
-                    <p className='text-center text-lg xs:text-xl sm:text-4xl my-8'>{posts.data.slice(0)[0].attributes.titolo? posts.data.slice(0)[0].attributes.titolo: ""}</p>
+                    <h6 className='text-2xl sm:text-4xl text-center my-8'>{posts.data.slice(0)[0].attributes.titolo? posts.data.slice(0)[0].attributes.titolo: ""}</h6>
                     <div className='w-full md:w-[80%] bg-white drop-shadow-md rounded-full items-center hover:scale-110 hover:drop-shadow-xl duration-300'>
                         <Link to={`/post/${posts.data.slice(0)[0].id}`} className='items-center'>
                             <img className='w-full rounded-full object-cover aspect-square' src={`${posts.data.slice(0)[0].attributes.thumbnail.data?.attributes.formats.small.url.replace("showcase-static.s3.eu-south-1.amazonaws.com","d2r33wic133snl.cloudfront.net")}`}/>
