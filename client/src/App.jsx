@@ -22,7 +22,7 @@ export default function App() {
         intent: "capture"
     }
 
-    let {loading: loadingPosts, data: posts, error: errorPosts} = useFetch(`${import.meta.env.VITE_STRAPI_URL}/api/blogs?populate=*`)
+    let {loading: loadingPosts, data: posts, error: errorPosts} = useFetch(`${import.meta.env.VITE_STRAPI_URL}/api/blogs?sort=createdAt:desc&populate=*`)
     let {loading: loadingClients, data: clients, error: errorClients} = useFetch(`${import.meta.env.VITE_STRAPI_URL}/api/clienti?populate=deep,3`)
     if(loadingPosts) return <Navbar/>
     if(errorPosts) return <p>a</p>
